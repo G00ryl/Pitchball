@@ -14,6 +14,7 @@ namespace Pitchball.Domain.Models
         public bool IsActive { get; private set; }
         public DateTime OpeningHours { get; private set; }
         public DateTime ClosingHours { get; private set; }
+        public ICollection<Comment> Comments { get; set; }
 
         public Pitch() : base() { }
 

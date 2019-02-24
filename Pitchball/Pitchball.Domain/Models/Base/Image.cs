@@ -9,7 +9,7 @@ namespace Pitchball.Domain.Models.Base
     /// </summary>
     public abstract class Image : Entity
     {
-        public string ImageContent { get; set; }
+        public string ImageContent { get; protected set; }
 
         public Image() : base() { }
 
@@ -21,7 +21,7 @@ namespace Pitchball.Domain.Models.Base
         public virtual void Update(string content)
         {
             ImageContent = content;
-            base.Update();
+            Update();
         }
     }
 }

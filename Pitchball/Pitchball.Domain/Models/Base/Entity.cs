@@ -9,9 +9,9 @@ namespace Pitchball.Domain.Models.Base
     /// </summary>
     public class Entity
     {
-        public int Id { get; private set; }
-        public DateTime CreatedAt { get; private set; }
-        public DateTime UpdatedAt { get; private set; }
+        public int Id { get; protected set; }
+        public DateTime CreatedAt { get; protected set; }
+        public DateTime UpdatedAt { get; protected set; }
 
         public Entity()
         {
@@ -21,7 +21,6 @@ namespace Pitchball.Domain.Models.Base
 
         public void Update()
         {
-            CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }
     }
