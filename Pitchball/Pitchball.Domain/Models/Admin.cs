@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Pitchball.Domain.Models
 {
+    /// <summary>
+    /// Represends an admin model for Entity Framework.
+    /// </summary>
     public class Admin : Account
     {
         public Admin() : base() { }

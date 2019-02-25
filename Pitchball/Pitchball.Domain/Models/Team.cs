@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Pitchball.Domain.Models
 {
+    /// <summary>
+    /// Represends a team model for Entity Framework.
+    /// </summary>
     public class Team : Entity
     {
         public string Name { get; private set; }

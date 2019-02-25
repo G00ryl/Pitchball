@@ -34,17 +34,51 @@ namespace Pitchball.Infrastructure.Data
             }
 
 
-            #region Images
+            #region Accounts
+            modelBuilder.Entity<Account>()
+                .HasMany(x => x.Comments)
+                .WithOne(y => y.Creator)
+                .IsRequired(false);
+
             modelBuilder.Entity<Account>()
                 .HasOne(x => x.AccountImage)
                 .WithOne(y => y.Account)
                 .HasForeignKey<AccountImage>(y => y.AccountRef)
                 .IsRequired(false);
 
+            modelBuilder.Entity<Captain>()
+                .HasMany(x => x.Reservations)
+                .WithOne(y => y.Captain)
+                .IsRequired(false);
+            #endregion
+
+            #region Team
+            modelBuilder.Entity<Team>()
+                .HasMany(x => x.Members)
+                .WithOne(y => y.Team)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Team>()
+                .HasOne(x => x.Captain)
+                .WithOne(x => x.Team)
+                .HasForeignKey<Captain>(y => y.TeamRef);
+
             modelBuilder.Entity<Team>()
                 .HasOne(x => x.TeamImage)
                 .WithOne(y => y.Team)
                 .HasForeignKey<TeamImage>(y => y.TeamRef)
+                .IsRequired(false);
+            #endregion
+
+            #region Pitch
+            modelBuilder.Entity<Pitch>()
+                .HasMany(x => x.Comments)
+                .WithOne(y => y.Pitch)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Pitch>()
+                .HasMany(x => x.Reservations)
+                .WithOne(y => y.Pitch)
                 .IsRequired(false);
 
             modelBuilder.Entity<Pitch>()

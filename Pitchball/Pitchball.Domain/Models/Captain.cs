@@ -5,10 +5,15 @@ using System.Text;
 
 namespace Pitchball.Domain.Models
 {
+    /// <summary>
+    /// Represends a captain model for Entity Framework.
+    /// </summary>
     public class Captain : Account
     {
         public int TeamRef { get; private set; }
+
         public virtual Team Team { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
 
         public Captain() : base() { }
 

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Pitchball.Domain.Models
 {
+    /// <summary>
+    /// Represends a reservation model for Entity Framework.
+    /// </summary>
     public class Reservation : Entity
     {
         public string Name { get; private set; }

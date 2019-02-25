@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Pitchball.Domain.Models
 {
+    /// <summary>
+    /// Represends a user model for Entity Framework.
+    /// </summary>
     public class User : Account
     {
         public Team Team { get; set; }

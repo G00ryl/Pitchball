@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Pitchball.Domain.Models
 {
+    /// <summary>
+    /// Represends a team's image model for Entity Framework.
+    /// </summary>
     public class TeamImage : Image
     {
         public int? TeamRef { get; private set; }
