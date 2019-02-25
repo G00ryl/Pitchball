@@ -8,9 +8,9 @@ namespace Pitchball.Domain.Models
     /// <summary>
     /// Represends a pitch's image model for Entity Framework.
     /// </summary>
-    class PitchImage : Image
+    public class PitchImage : Image
     {
-        public int? UserRef { get; private set; }
+        public int? PitchRef { get; private set; }
         public virtual Pitch Pitch { get; set; }
 
         public PitchImage() : base() { }

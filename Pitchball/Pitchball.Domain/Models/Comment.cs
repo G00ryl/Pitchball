@@ -11,8 +11,8 @@ namespace Pitchball.Domain.Models
     public class Comment : Entity
     {
         public string Content { get; private set; }
-        public Pitch Pitch { get; set; }
-        public Account Creator { get; set; }
+        public virtual Pitch Pitch { get; set; }
+        public virtual Account Creator { get; set; }
 
         public Comment() : base() { }
 

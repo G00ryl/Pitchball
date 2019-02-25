@@ -16,7 +16,8 @@ namespace Pitchball.Domain.Models.Base
         public byte[] Salt { get; protected set; }
         public byte[] PasswordHash { get; protected set; }
         public string Role { get; protected set; }
-        public ICollection<Comment> Comments { get; set; }
+        public virtual AccountImage AccountImage { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
         public Account() : base() { }
 

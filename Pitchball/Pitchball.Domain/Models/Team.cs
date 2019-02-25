@@ -8,7 +8,8 @@ namespace Pitchball.Domain.Models
     public class Team : Entity
     {
         public string Name { get; private set; }
-        public Captain Captain { get; set; }
-        public ICollection<User> Members { get; set; }
+        public virtual Captain Captain { get; set; }
+        public virtual TeamImage TeamImage { get; set; }
+        public virtual ICollection<User> Members { get; set; }
     }
 }

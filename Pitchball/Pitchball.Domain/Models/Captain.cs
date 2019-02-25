@@ -8,7 +8,7 @@ namespace Pitchball.Domain.Models
     public class Captain : Account
     {
         public int TeamRef { get; private set; }
-        public Team Team { get; set; }
+        public virtual Team Team { get; set; }
 
         public Captain() : base() { }
 
