@@ -1,0 +1,20 @@
+﻿using Pitchball.Domain.Models.Base;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Pitchball.Domain.Models
+{
+    /// <summary>
+    /// Represends a pitch's image model for Entity Framework.
+    /// </summary>
+    public class PitchImage : Image
+    {
+        public int? PitchRef { get; private set; }
+        public virtual Pitch Pitch { get; set; }
+
+        public PitchImage() : base() { }
+
+        public PitchImage(string content) : base(content) { }
+    }
+}
