@@ -11,9 +11,8 @@ A football pitch reservation system.
 ## Team
 We are university students and enthusiasts of .NET.
 Our team consists of:
-<td><iframe src="http://githubbadge.appspot.com/G00ryl" style="border: 0;height: 108px;width: 200px;overflow: hidden;" frameBorder="0"></iframe></td>
-<td><iframe src="http://githubbadge.appspot.com/MadTiger2409" style="border: 0;height: 108px;width: 200px;overflow: hidden;" frameBorder="0"></iframe></td>
-
+* [Dawid G.](https://github.com/G00ryl)
+* [Michał B.](https://github.com/MadTiger2409)
 
 ## Technologies
 * [Bootstrap v4.2.1](https://getbootstrap.com/docs/4.2/getting-started/download/)
