@@ -1,0 +1,49 @@
+﻿@{
+	ViewData["Title"] = "Login";
+}
+<head>
+	<link rel="stylesheet" href="~/css/Login.css" />
+</head>
+<body>
+	
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<form method="post">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Login/Email</label>
+								<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Example@mail.pl">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Hasło</label>
+								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Hasło">
+							</div>
+							<div class="d-flex">
+								<div class="mr-auto p-2">
+								<button type="submit" class="btn btn-success">ZALOGUJ SIĘ</button>
+								<div class="text-center">
+									<hr />
+									<small>Zalogowanie się oznaczą akceptację <a href="@Url.Action("regulations", "Home")">Regulaminu serwsisu Pitchball</a></small>
+								</div>
+								</div>
+								<div class="p-2">
+									<a href="@Url.Action("contact", "Home")">Zapomiałeś hasła?</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<h2 class="card-title">Nie masz jeszcze konta?</h2>
+						<p class="card-text">Kliknij poniżej by się zarejstrować!</p>
+						<a href="@Url.Action("register", "Home")" class="btn btn-success">ZAREJESTRUJ SIĘ!</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+</body>

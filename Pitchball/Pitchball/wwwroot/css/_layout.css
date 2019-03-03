@@ -10,10 +10,12 @@ body {
 {	
 	padding:0.1px;
 	font-size:20px;
-	
+}
+.navbar-brand {
+	margin-left: 1%;
 }
 .body-content {
-	margin-top:5%;
+	margin-top: 5%;
 }
 
 footer {
@@ -38,4 +40,8 @@ footer {
 }
 .carousel-item img {
 	width: 100%;
+}
+.logo 
+{
+color:seagreen;
 }

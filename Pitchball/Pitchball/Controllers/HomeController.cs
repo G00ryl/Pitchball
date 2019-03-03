@@ -29,7 +29,26 @@ namespace Pitchball.Controllers
 			return View();
 		}
 
+		[HttpGet]
 		public IActionResult Privacy()
+		{
+			return View();
+		}
+
+		[HttpGet]
+		public IActionResult Regulations()
+		{
+			return View();
+		}
+
+		[HttpGet]
+		public IActionResult Register()
+		{
+			return View();
+		}
+
+		[HttpGet]
+		public IActionResult Login()
 		{
 			return View();
 		}
