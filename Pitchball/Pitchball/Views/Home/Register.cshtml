@@ -1,1 +1,89 @@
-﻿
+﻿@{
+	ViewData["Title"] = "Login";
+}
+<head>
+	<link rel="stylesheet" href="~/css/Register.css" />
+</head>
+
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header text-success">
+				<b><h2>Załóż konto</h2></b>
+			</div>
+			<div class="card-body">
+				<form method="post">
+					<div class="form-row">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample">
+							<label class="custom-control-label" for="defaultInline1">Zawodnik</label>
+						</div>
+
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
+							<label class="custom-control-label" for="defaultInline2">Kapitan</label>
+
+						</div>
+					</div>
+					<hr />
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="inputLogin">Login</label>
+							<input type="text" class="form-control" id="inputAddress" placeholder="Login" required>
+						</div>
+						<div class="form-group col-md-6"></div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="inputEmail4">Imię</label>
+							<input type="text" class="form-control" id="inputEmail4" placeholder="Jan" required>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="inputPassword4">Nazwisko</label>
+							<input type="text" class="form-control" id="inputPassword4" placeholder="Kowalski" required>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="inputPassword">Hasło</label>
+							<input type="password" class="form-control" id="inputPassword" placeholder="Hasło" required>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="inputConfirmPassword">Potwierdź hasło:</label>
+							<input type="password" class="form-control" id="inputPassword4" placeholder="Powtórz hasło" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="inputEmail">Email</label>
+							<input type="email" class="form-control" id="inputEmail" placeholder="example@mail.com" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="inputTeam">Drużyna</label><br />
+							<select class="custom-select my-1 mr-sm-2 col-md-6" id="inlineFormCustomSelectPref">
+								<option selected>Wybierz drużynę</option>
+
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Data urodzenia</label>
+						<input type="date" class="form-control" id="exampleInputDOB1" placeholder="Date of Birth" required>
+					</div>
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="customCheck1" required>
+						<label class="custom-control-label" for="customCheck1"><b>Oświadczam, że znam i akceptuję postanowienia
+						<a href="@Url.Action("regulations", "Home")">Regulaminu Pitchball.</a></b></label>
+					</div>
+					<br />
+
+					<button type="submit" class="btn btn-success">ZAREJESTRUJ</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

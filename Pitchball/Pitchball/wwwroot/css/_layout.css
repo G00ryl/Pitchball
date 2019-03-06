@@ -1,7 +1,7 @@
 ﻿
 body {
-	background-color:lightcyan;
-	margin-top:0.9%;
+	background-color: #E8E8E8;
+	margin-top: 0.9%;
 	padding-top: 50px;
 	padding-bottom: 20px;
 }
@@ -36,7 +36,7 @@ footer {
 .cardio{
 	text-align:center;
 	padding:10px;
-	background-color:seagreen;
+	background-color:white;
 }
 .carousel-item img {
 	width: 100%;
@@ -44,4 +44,8 @@ footer {
 .logo 
 {
 color:seagreen;
+}
+.card {
+	margin: 3%;
+	background-color: white;
 }

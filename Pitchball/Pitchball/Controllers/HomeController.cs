@@ -10,11 +10,13 @@ namespace Pitchball.Controllers
 {
 	public class HomeController : Controller
 	{
+		[HttpGet]
 		public IActionResult Index()
 		{
 			return View();
 		}
 
+		[HttpGet]
 		public IActionResult About()
 		{
 			ViewData["Message"] = "Your application description page.";
@@ -22,6 +24,7 @@ namespace Pitchball.Controllers
 			return View();
 		}
 
+		[HttpGet]
 		public IActionResult Contact()
 		{
 			ViewData["Message"] = "Your contact page.";
