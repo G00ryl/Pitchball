@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Couchbase.Extensions.Session;
 using Microsoft.AspNetCore.Mvc;
 using Pitchball.Models;
 
@@ -13,7 +14,13 @@ namespace Pitchball.Controllers
 		[HttpGet]
 		public IActionResult Index()
 		{
-			return View();
+            HttpContext.Session.SetObject("55", new
+            {
+                Login = "Wolfy",
+                Role = "User",
+            });
+
+            return View();
 		}
 
 		[HttpGet]

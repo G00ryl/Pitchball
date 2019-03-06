@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Couchbase.Extensions.Caching;
+using Couchbase.Extensions.DependencyInjection;
+using Couchbase.Extensions.Session;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,8 +36,25 @@ namespace Pitchball
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
-
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddCouchbase(opt =>
+            {
+                opt.Servers = new List<Uri> { new Uri("http://localhost:8091") };
+                opt.UseSsl = false;
+                opt.Username = "PitchballSession";
+                opt.Password = "Pitchball1234!";
+                opt.Buckets = new List<Couchbase.Configuration.Client.BucketDefinition> { new Couchbase.Configuration.Client.BucketDefinition() { Name = "PitchballSession" } };
+            });
+
+            services.AddDistributedCouchbaseCache("PitchballSession", opt => { });
+
+            services.AddCouchbaseSession(opt =>
+            {
+                opt.Cookie.Name = ".Pitchball";
+                opt.Cookie.MaxAge = new TimeSpan(5, 0, 0, 0);
+                opt.IdleTimeout = new TimeSpan(6, 0, 0);
+            });
 
             #region DatabaseSettings
             services.AddDbContext<PitchContext>(options => options
@@ -59,6 +79,7 @@ namespace Pitchball
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
+            app.UseSession();
 
 			app.UseMvc(routes =>
 			{
