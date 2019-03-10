@@ -16,6 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Pitchball.Infrastructure.Data;
 using Pitchball.Infrastructure.Extensions;
 using Pitchball.Infrastructure.Extensions.Interfaces;
+using Pitchball.Infrastructure.Services;
+using Pitchball.Infrastructure.Services.Interfaces;
 
 namespace Pitchball
 {
@@ -64,6 +66,12 @@ namespace Pitchball
             services.AddDbContext<PitchContext>(options => options
                 .UseSqlServer(Configuration.GetConnectionString("PitchballDatabase"),
                     c => c.MigrationsAssembly("Pitchball")).EnableSensitiveDataLogging(false));
+            #endregion
+
+            #region Services
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITeamService, TeamService>();
             #endregion
 
             #region Extensions

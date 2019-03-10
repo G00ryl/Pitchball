@@ -17,7 +17,8 @@ namespace Pitchball.Domain.Models
 
         public Captain() : base() { }
 
-        public Captain(string name, string surname, string login, byte[] salt, byte[] passwordHash) : base(name, surname, login, salt, passwordHash)
+        public Captain(string name, string surname, string login, string email, byte[] salt, byte[] passwordHash)
+            : base(name, surname, login, email, salt, passwordHash)
         {
             Role = "Captain";
         }

@@ -12,7 +12,8 @@ namespace Pitchball.Domain.Models
     {
         public Admin() : base() { }
 
-        public Admin(string name, string surname, string login, byte[] salt, byte[] passwordHash) : base(name, surname, login, salt, passwordHash)
+        public Admin(string name, string surname, string login, string email, byte[] salt, byte[] passwordHash)
+            : base(name, surname, login, email, salt, passwordHash)
         {
             Role = "Admin";
         }

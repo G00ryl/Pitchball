@@ -21,11 +21,12 @@ namespace Pitchball.Domain.Models.Base
 
         public Account() : base() { }
 
-        public Account(string name, string surname, string login, byte[] salt, byte[] passwordHash) : base()
+        public Account(string name, string surname, string login, string email, byte[] salt, byte[] passwordHash) : base()
         {
             Name = name;
             Surname = surname;
             Login = login;
+            Email = email;
             Salt = salt;
             PasswordHash = passwordHash;
         }

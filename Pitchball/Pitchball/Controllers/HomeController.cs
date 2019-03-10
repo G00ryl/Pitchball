@@ -5,12 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Couchbase.Extensions.Session;
 using Microsoft.AspNetCore.Mvc;
+using Pitchball.Infrastructure.Commands.Account;
+using Pitchball.Infrastructure.Extensions.Exceptions;
+using Pitchball.Infrastructure.Services.Interfaces;
 using Pitchball.Models;
 
 namespace Pitchball.Controllers
 {
 	public class HomeController : Controller
 	{
+        private readonly IUserService _userService;
+
+        public HomeController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
 		[HttpGet]
 		public IActionResult Index()
 		{
@@ -45,13 +55,54 @@ namespace Pitchball.Controllers
 			return View();
 		}
 
-		[HttpGet]
+        #region Registration
+        [HttpGet]
 		public IActionResult Register()
 		{
 			return View();
 		}
 
-		[HttpGet]
+        [HttpGet]
+        public IActionResult RegisterUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterUser(CreateAccount command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            try
+            {
+                await _userService.AddAsync(command);
+
+                ViewBag.ShowSuccess = true;
+                ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
+
+                return View();
+            }
+            catch (CorruptedOperationException ex)
+            {
+                ViewBag.ShowError = true;
+                ViewBag.ErrorMessage = ex.Message;
+
+                return View();
+            }
+            catch (Exception)
+            {
+                ViewBag.ShowError = true;
+                ViewBag.ErrorMessage = "Coś poszło nie tak.";
+
+                return View();
+            }
+        }
+        #endregion
+
+        [HttpGet]
 		public IActionResult Login()
 		{
 			return View();

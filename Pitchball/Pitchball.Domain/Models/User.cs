@@ -14,7 +14,8 @@ namespace Pitchball.Domain.Models
 
         public User() : base() { }
 
-        public User(string name, string surname, string login, byte[] salt, byte[] passwordHash) : base(name, surname, login, salt, passwordHash)
+        public User(string name, string surname, string login, string email, byte[] salt, byte[] passwordHash)
+            : base(name, surname, login, email, salt, passwordHash)
         {
             Role = "User";
         }
