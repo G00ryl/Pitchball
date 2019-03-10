@@ -14,6 +14,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pitchball.Infrastructure.Data;
+using Pitchball.Infrastructure.Extensions;
+using Pitchball.Infrastructure.Extensions.Interfaces;
 
 namespace Pitchball
 {
@@ -38,6 +40,7 @@ namespace Pitchball
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            #region Couchbase
             services.AddCouchbase(opt =>
             {
                 opt.Servers = new List<Uri> { new Uri("http://localhost:8091") };
@@ -55,11 +58,16 @@ namespace Pitchball
                 opt.Cookie.MaxAge = new TimeSpan(5, 0, 0, 0);
                 opt.IdleTimeout = new TimeSpan(6, 0, 0);
             });
+            #endregion
 
             #region DatabaseSettings
             services.AddDbContext<PitchContext>(options => options
                 .UseSqlServer(Configuration.GetConnectionString("PitchballDatabase"),
                     c => c.MigrationsAssembly("Pitchball")).EnableSensitiveDataLogging(false));
+            #endregion
+
+            #region Extensions
+            services.AddScoped<IPasswordManager, PasswordManager>();
             #endregion
         }
 

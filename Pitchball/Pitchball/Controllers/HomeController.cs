@@ -14,12 +14,6 @@ namespace Pitchball.Controllers
 		[HttpGet]
 		public IActionResult Index()
 		{
-            HttpContext.Session.SetObject("55", new
-            {
-                Login = "Wolfy",
-                Role = "User",
-            });
-
             return View();
 		}
 
