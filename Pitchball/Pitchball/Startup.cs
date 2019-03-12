@@ -72,6 +72,7 @@ namespace Pitchball
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITeamService, TeamService>();
+            services.AddScoped<ICaptainService, CaptainService>();
             #endregion
 
             #region Extensions

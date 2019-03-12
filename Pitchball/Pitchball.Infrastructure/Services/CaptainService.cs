@@ -1,5 +1,5 @@
 ﻿using Pitchball.Domain.Models;
-using Pitchball.Infrastructure.Commands.Account;
+using Pitchball.Infrastructure.Commands.Captain;
 using Pitchball.Infrastructure.Data;
 using Pitchball.Infrastructure.Data.QueryExtenions;
 using Pitchball.Infrastructure.Extensions.Exceptions;
@@ -12,23 +12,34 @@ using System.Threading.Tasks;
 
 namespace Pitchball.Infrastructure.Services
 {
-    public class UserService : IUserService
+    public class CaptainService : ICaptainService
     {
         private readonly PitchContext _context;
         private readonly IPasswordManager _passwordManager;
+        private readonly ITeamService _teamService;
 
-        public async Task AddAsync(CreateAccount command)
+        public CaptainService(PitchContext context, IPasswordManager passwordManager, ITeamService teamService)
+        {
+            _context = context;
+            _passwordManager = passwordManager;
+            _teamService = teamService;
+        }
+
+        public async Task AddWIthTeamAsync(CreateCaptainWithTeam command)
         {
             byte[] salt, passwordHash;
 
+            var team = await _teamService.AddAsync(command.Team);
+
             if (await _context.Accounts.ExistsInDatabaseAsync(command.Login, command.Email))
-                throw new CorruptedOperationException("User already exists.");
+                throw new CorruptedOperationException("Captain already exists.");
 
             _passwordManager.CalculatePasswordHash(command.Password, out passwordHash, out salt);
 
-            var user = new User(command.Name, command.Surname, command.Login, command.Email, salt, passwordHash);
+            var captain = new Captain(command.Name, command.Surname, command.Login, command.Email, salt, passwordHash);
+            team.Captain = captain;
 
-            await _context.Users.AddAsync(user);
+            await _context.Captains.AddAsync(captain);
             await _context.SaveChangesAsync();
         }
     }
