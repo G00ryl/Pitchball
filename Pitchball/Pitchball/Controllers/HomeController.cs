@@ -15,15 +15,6 @@ namespace Pitchball.Controllers
 {
 	public class HomeController : Controller
 	{
-        private readonly IUserService _userService;
-        private readonly ICaptainService _captainService;
-
-        public HomeController(IUserService userService, ICaptainService captainService)
-        {
-            _userService = userService;
-            _captainService = captainService;
-        }
-
 		[HttpGet]
 		public IActionResult Index()
 		{
@@ -58,91 +49,23 @@ namespace Pitchball.Controllers
 			return View();
 		}
 
+        #region Registration
         [HttpGet]
 		public IActionResult Register()
 		{
 			return View();
 		}
 
-        #region User Registration
         [HttpGet]
         public IActionResult RegisterUser()
         {
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> RegisterUserAsync(CreateAccount command)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            try
-            {
-                await _userService.AddAsync(command);
-
-                ViewBag.ShowSuccess = true;
-                ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
-
-                return View();
-            }
-            catch (CorruptedOperationException ex)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = ex.Message;
-
-                return View();
-            }
-            catch (Exception)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = "Coś poszło nie tak.";
-
-                return View();
-            }
-        }
-        #endregion
-
-        #region Captain Registration
         [HttpGet]
         public IActionResult RegisterCaptainWithTeam()
         {
             return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> RegisterCaptainWithTeamAsync(CreateCaptainWithTeam command)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            try
-            {
-                await _captainService.AddWIthTeamAsync(command);
-
-                ViewBag.ShowSuccess = true;
-                ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
-
-                return View();
-            }
-            catch (CorruptedOperationException ex)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = ex.Message;
-
-                return View();
-            }
-            catch (Exception)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = "Coś poszło nie tak.";
-
-                return View();
-            }
         }
         #endregion
 
