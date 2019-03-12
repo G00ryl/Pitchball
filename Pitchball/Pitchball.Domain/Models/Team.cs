@@ -14,5 +14,10 @@ namespace Pitchball.Domain.Models
         public virtual Captain Captain { get; set; }
         public virtual TeamImage TeamImage { get; set; }
         public virtual ICollection<User> Members { get; set; }
+
+        public Team(string name) : base()
+        {
+            Name = name;
+        }
     }
 }
