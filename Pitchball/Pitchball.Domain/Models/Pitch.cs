@@ -32,8 +32,9 @@ namespace Pitchball.Domain.Models
 			Lighting = lighting;
         }
 
-        public void Update(string address, bool isActive, string lighting)
+        public void Update(string name, string address, bool isActive, string lighting)
         {
+			Name = name;
             Address = address;
             IsActive = isActive;
 			Lighting = lighting;
