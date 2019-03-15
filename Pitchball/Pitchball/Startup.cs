@@ -47,7 +47,7 @@ namespace Pitchball
             {
                 opt.Servers = new List<Uri> { new Uri("http://localhost:8091") };
                 opt.UseSsl = false;
-                opt.Username = "G0ryl";
+                opt.Username = "PitchballSession";
                 opt.Password = "Pitchball1234!";
                 opt.Buckets = new List<Couchbase.Configuration.Client.BucketDefinition> { new Couchbase.Configuration.Client.BucketDefinition() { Name = "PitchballSession" } };
             });
