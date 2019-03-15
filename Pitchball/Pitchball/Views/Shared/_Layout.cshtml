@@ -43,14 +43,20 @@
     </nav>
 
 
-    <div class="container-fluid body-content">
+    <div class="container-fluid body-content" id="container">
         @*<partial name="_CookieConsentPartial" />*@
+        @if(ViewBag.ShowSuccess == true)
+        {
         <div class="alert alert-success" role="alert">
-            This is a success alert—check it out!
+            @ViewBag.SuccessMessage
         </div>
+        }
+        @if (ViewBag.ShowError == true)
+        {
         <div class="alert alert-danger" role="alert">
-            This is a danger alert—check it out!
+            @ViewBag.ErrorMessage
         </div>
+        }
 
         @RenderBody()
     </div>
@@ -59,6 +65,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
-	
-
 </html>
