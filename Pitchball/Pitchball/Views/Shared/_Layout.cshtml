@@ -31,14 +31,27 @@
                     <a class="nav-link" href="@Url.Action("contact", "Home")"><b>Contact</b></a>
                 </li>
             </ul>
-            <ul class="navbar-nav  ">
-                <li class="nav-">
-                    <a class="nav-link text-success" href="@Url.Action("login", "Home")">
-                        <b>Zaloguj się</b><img src="~/images/Account.png" />
+            <ul class="navbar-nav">
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <b>Konto</b><img src="~/images/Account.png" />
                     </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item" href="@Url.Action("Login", "Home")">Zaloguj</a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="@Url.Action("Register", "Home")">Zarejestruj</a>
+
+                    </div>
+
                 </li>
             </ul>
-
+            
         </div>
     </nav>
 
