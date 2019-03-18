@@ -7,9 +7,10 @@ body {
     background-image: url(../images/layout/pitch-grass.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-size: cover;
     height: 100%;
     margin: 0;
-    overflow:no-display;
+    overflow: no-display;
 }
 .navbar {	
 	font-size:20px;
@@ -23,13 +24,6 @@ body {
     background-attachment: fixed;
     min-height: 100%;
     padding-top: 5%;
-}
-.cardio {
-	text-align:center;
-	padding:10px;
-}
-.carousel-item img {
-	width: 100%;
 }
 .logo {
     color:seagreen;
