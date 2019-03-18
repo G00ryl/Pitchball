@@ -6,6 +6,8 @@
 	border: none;
 	background-color: white;
 	opacity: 0.7;
+	flex-wrap: wrap;
+	flex: initial;
 }
 ul {
 	display: inline-table;
@@ -28,4 +30,13 @@ img
 	opacity:0.9;
 	color:white;
 }
-h1
+h1{
+	font-size:58px;
+	font-weight:bolder;
+}
+.row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}

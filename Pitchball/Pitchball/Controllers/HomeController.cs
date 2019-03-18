@@ -44,18 +44,6 @@ namespace Pitchball.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult RegisterChoose()
-		{
-			return View();
-		}
-
-		[HttpGet]
-		public IActionResult CaptainRegister()
-		{
-			return View();
-		}
-
-		[HttpGet]
 		public IActionResult Regulations()
 		{
 			return View();
@@ -67,21 +55,20 @@ namespace Pitchball.Controllers
 		{
 			return View();
 		}
+		[HttpGet]
+		public IActionResult RegisterChoose()
+		{
+			return View();
+		}
 
-        [HttpGet]
-        public IActionResult RegisterUser()
-        {
-            return View();
-        }
+		[HttpGet]
+		public IActionResult CaptainRegister()
+		{
+			return View();
+		}
+		#endregion
 
-        [HttpGet]
-        public IActionResult RegisterCaptainWithTeam()
-        {
-            return View();
-        }
-        #endregion
-
-        [HttpGet]
+		[HttpGet]
 		public IActionResult Login()
 		{
 			return View();
