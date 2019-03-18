@@ -44,6 +44,18 @@ namespace Pitchball.Controllers
 		}
 
 		[HttpGet]
+		public IActionResult RegisterChoose()
+		{
+			return View();
+		}
+
+		[HttpGet]
+		public IActionResult CaptainRegister()
+		{
+			return View();
+		}
+
+		[HttpGet]
 		public IActionResult Regulations()
 		{
 			return View();
