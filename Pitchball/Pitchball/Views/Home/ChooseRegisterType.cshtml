@@ -1,0 +1,43 @@
+﻿
+<link rel="stylesheet" href="~/css/ChooseRegisterType.css" />
+<div class=" text-white text-center ">
+	<h1>WYBIERZ RODZAJ KONTA</h1>
+</div>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="card image">
+				<div>
+					<a class="nav-link text-dark text-center " href="@Url.Action("RegisterUser", "Home")">
+						<big><big></big><b><h1>ZAWODNIK</h1></b></big></big><br />
+						<img src="~/images/Player.png" />
+						<div>
+							<ul>
+								<h2>Możliwości konta:</h2>
+								<li>Dołączenie do drużyny do której przynależysz w rozgrywkach</li>
+								<li>Przeglądanie rezerwacji wybranych boisk</li>
+								<li>Komentowanie i wymienianie swoich poglądów odnośnie wybranego boiska</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="card image  ">
+				<div>
+					<a class="nav-link text-dark text-center" href="@Url.Action("RegisterCaptainWithTeam", "Home")">
+						<big><b><h1>KAPITAN</h1></b></big><br />
+						<img src="~/images/Captain.png" />
+						<div>
+							<ul>
+								<h2>Możliwości konta:</h2>
+								<li>Utworzenie drużyny której kapitanem jesteś w rozgrywkach</li>
+								<li>Rezerwowanie boisk na wybrany dzień i godzinę</li>
+								<li>Zarządzanie zawodnikami w klubie</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
