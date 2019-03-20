@@ -1,0 +1,10 @@
+﻿.cardio {
+    text-align: center;
+    padding: 10px;
+}
+
+.carousel-inner {
+    max-height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
