@@ -1,78 +1,82 @@
 ﻿@model Pitchball.Infrastructure.Commands.Account.CreateAccount
 
 @{
-	ViewData["Title"] = "User Registration";
+    ViewData["Title"] = "User Registration";
 }
-<head>
-	<link rel="stylesheet" href="~/css/RegisterUser.css" />
-</head>
+@section Styles{
+    <link rel="stylesheet" href="~/css/RegisterUser.css" />
 
+}
 
 <div class="row">
-	<div class="col-md-12">
-		<div class="card">
-			<div class="card-header text-success">
-				<b><h2>Zawodnik</h2></b>
-			</div>
-			<div class="card-body">
-				<form method="post">
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label for="inputLogin">Login</label>
-							<input type="text" class="form-control" id="inputAddress" placeholder="Login" required>
-						</div>
-						<div class="form-group col-md-6"></div>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label for="inputEmail4">Imię</label>
-							<input type="text" class="form-control" id="inputEmail4" placeholder="Jan" required>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="inputPassword4">Nazwisko</label>
-							<input type="text" class="form-control" id="inputPassword4" placeholder="Kowalski" required>
-						</div>
-					</div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header text-success">
+                <b><h2>Zawodnik</h2></b>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-action="RegisterUserAsync" asp-controller="Account">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputLogin">Login</label>
+                            <input type="text" asp-for="Login" class="form-control" id="login" placeholder="Login" required>
+                        </div>
+                        <div class="form-group col-md-6"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Imię</label>
+                            <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Jan" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Nazwisko</label>
+                            <input type="text" asp-for="Surname" class="form-control" id="surname" placeholder="Kowalski" required>
+                        </div>
+                    </div>
 
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label for="inputPassword">Hasło</label>
-							<input type="password" class="form-control" id="inputPassword" placeholder="Hasło" required>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="inputConfirmPassword">Potwierdź hasło:</label>
-							<input type="password" class="form-control" id="inputPassword4" placeholder="Powtórz hasło" required>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label for="inputEmail">Email</label>
-							<input type="email" class="form-control" id="inputEmail" placeholder="example@mail.com" required>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label for="inputTeam">Drużyna</label><br />
-							<select class="custom-select my-1 mr-sm-2 col-md-6" id="inlineFormCustomSelectPref">
-								<option selected>Wybierz drużynę</option>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword">Hasło</label>
+                            <input type="password" asp-for="Password" class="form-control" id="password" placeholder="Hasło" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputConfirmPassword">Potwierdź hasło:</label>
+                            <input type="password" asp-for="ConfirmPassword" class="form-control" id="confirmPassword" placeholder="Powtórz hasło" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" asp-for="Email" class="form-control" id="email" placeholder="example@mail.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputTeam">Drużyna</label><br />
+                            <select class="custom-select my-1 mr-sm-2 col-md-6" id="inlineFormCustomSelectPref">
+                                <option selected>Wybierz drużynę</option>
 
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label>Data urodzenia</label>
-						<input type="date" class="form-control" id="exampleInputDOB1" placeholder="Date of Birth" required>
-					</div>
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" id="customCheck1" required>
-						<label class="custom-control-label" for="customCheck1"><b>Oświadczam, że znam i akceptuję postanowienia
-						<a href="@Url.Action("regulations", "Home")">Regulaminu Pitchball.</a></b></label>
-					</div>
-					<br />
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Data urodzenia</label>
+                        <input type="date" class="form-control" id="exampleInputDOB1" placeholder="Date of Birth" required>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                        <label class="custom-control-label" for="customCheck1">
+                            <b>
+                                Oświadczam, że znam i akceptuję postanowienia
+                                <a href="@Url.Action("regulations", "Home")">Regulaminu Pitchball.</a>
+                            </b>
+                        </label>
+                    </div>
+                    <br />
 
-					<button type="submit" class="btn btn-success">ZAREJESTRUJ</button>
-				</form>
-			</div>
-		</div>
-	</div>
+                    <button type="submit" class="btn btn-success">ZAREJESTRUJ</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

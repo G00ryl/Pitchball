@@ -63,7 +63,7 @@ namespace Pitchball.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View("../Home/RegisterUser");
             }
 
             try
@@ -73,21 +73,21 @@ namespace Pitchball.Controllers
                 ViewBag.ShowSuccess = true;
                 ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
 
-                return View();
+                return View("../Home/RegisterUser");
             }
             catch (CorruptedOperationException ex)
             {
                 ViewBag.ShowError = true;
                 ViewBag.ErrorMessage = ex.Message;
 
-                return View();
+                return View("../Home/RegisterUser");
             }
             catch (Exception)
             {
                 ViewBag.ShowError = true;
                 ViewBag.ErrorMessage = "Coś poszło nie tak.";
 
-                return View();
+                return View("../Home/RegisterUser");
             }
         }
         #endregion

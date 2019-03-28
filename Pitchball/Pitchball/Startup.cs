@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Couchbase.Extensions.Caching;
 using Couchbase.Extensions.DependencyInjection;
 using Couchbase.Extensions.Session;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,11 +15,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pitchball.Infrastructure.Commands.Account;
 using Pitchball.Infrastructure.Data;
 using Pitchball.Infrastructure.Extensions;
 using Pitchball.Infrastructure.Extensions.Interfaces;
 using Pitchball.Infrastructure.Services;
 using Pitchball.Infrastructure.Services.Interfaces;
+using Pitchball.Validators.Account;
 
 namespace Pitchball
 {
@@ -40,7 +44,13 @@ namespace Pitchball
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddFluentValidation(fv =>
+                {
+                    fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                    fv.ImplicitlyValidateChildProperties = true;
+                });
 
             #region Couchbase
             //services.AddCouchbase(opt =>
@@ -77,6 +87,10 @@ namespace Pitchball
 
             #region Extensions
             services.AddScoped<IPasswordManager, PasswordManager>();
+            #endregion
+
+            #region Validators
+            services.AddTransient<IValidator<CreateAccount>, CreateAccountValidator>();
             #endregion
         }
 
