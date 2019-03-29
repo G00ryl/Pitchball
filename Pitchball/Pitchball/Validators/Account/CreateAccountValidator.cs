@@ -13,10 +13,12 @@ namespace Pitchball.Validators.Account
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
-                .Length(2, 80);
+                .Length(2, 80)
+                .WithName("Imię");
             RuleFor(x => x.Surname)
                 .NotEmpty()
-                .Length(2, 80);
+                .Length(2, 80)
+                .WithName("Nazwisko");
             RuleFor(x => x.Login)
                 .NotEmpty()
                 .Length(5, 50);
@@ -25,10 +27,12 @@ namespace Pitchball.Validators.Account
                 .EmailAddress();
             RuleFor(x => x.Password)
                 .NotEmpty()
-                .Length(8, 50);
+                .Length(8, 50)
+                .WithName("Hasło");
             RuleFor(x => x.ConfirmPassword)
                 .NotEmpty()
-                .Equal(x => x.Password);
+                .Equal(x => x.Password)
+                .WithName("Powtórz hasło");
         }
     }
 }

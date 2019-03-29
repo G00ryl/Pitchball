@@ -23,7 +23,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100%;
-    padding-top: 5%;
+    padding-top: 1%;
 }
 .logo {
     color:seagreen;
@@ -42,4 +42,8 @@ body {
 
 .form-control {
     background: rgba(246, 243, 243, 0.79);
+}
+
+.alert {
+    margin: 0 3% 0 3%;
 }

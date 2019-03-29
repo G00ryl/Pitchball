@@ -25,8 +25,20 @@ namespace Pitchball.Controllers
         }
 
         #region Registration
-        [HttpPost]
-        public async Task<IActionResult> RegisterCaptainWithTeamAsync(CreateCaptainWithTeam command)
+        [HttpGet("register/type/player")]
+        public IActionResult RegisterUser()
+        {
+            return View();
+        }
+
+        [HttpGet("register/type/captain")]
+        public IActionResult RegisterCaptainWithTeam()
+        {
+            return View();
+        }
+
+        [HttpPost("register/type/captain")]
+        public async Task<IActionResult> RegisterCaptainWithTeam(CreateCaptainWithTeam command)
         {
             if (!ModelState.IsValid)
             {
@@ -39,13 +51,7 @@ namespace Pitchball.Controllers
 
                 ViewBag.ShowSuccess = true;
                 ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
-
-                return View();
-            }
-            catch (CorruptedOperationException ex)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = ex.Message;
+                ModelState.Clear();
 
                 return View();
             }
@@ -58,12 +64,12 @@ namespace Pitchball.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> RegisterUserAsync(CreateAccount command)
+        [HttpPost("register/type/player")]
+        public async Task<IActionResult> RegisterUser(CreateAccount command)
         {
             if (!ModelState.IsValid)
             {
-                return View("../Home/RegisterUser");
+                return View(command);
             }
 
             try
@@ -72,22 +78,16 @@ namespace Pitchball.Controllers
 
                 ViewBag.ShowSuccess = true;
                 ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
+                ModelState.Clear();
 
-                return View("../Home/RegisterUser");
-            }
-            catch (CorruptedOperationException ex)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = ex.Message;
-
-                return View("../Home/RegisterUser");
+                return View();
             }
             catch (Exception)
             {
                 ViewBag.ShowError = true;
                 ViewBag.ErrorMessage = "Coś poszło nie tak.";
 
-                return View("../Home/RegisterUser");
+                return View();
             }
         }
         #endregion
@@ -113,13 +113,6 @@ namespace Pitchball.Controllers
 
                 ViewBag.ShowSuccess = true;
                 ViewBag.SuccessMessage = "Zalogowano pomyślnie";
-
-                return View();
-            }
-            catch (CorruptedOperationException ex)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = ex.Message;
 
                 return View();
             }
