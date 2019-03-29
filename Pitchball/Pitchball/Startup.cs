@@ -16,12 +16,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pitchball.Infrastructure.Commands.Account;
+using Pitchball.Infrastructure.Commands.Captain;
 using Pitchball.Infrastructure.Data;
 using Pitchball.Infrastructure.Extensions;
 using Pitchball.Infrastructure.Extensions.Interfaces;
 using Pitchball.Infrastructure.Services;
 using Pitchball.Infrastructure.Services.Interfaces;
 using Pitchball.Validators.Account;
+using Pitchball.Validators.Captain;
 
 namespace Pitchball
 {
@@ -90,6 +92,7 @@ namespace Pitchball
 
             #region Validators
             services.AddTransient<IValidator<CreateAccount>, CreateAccountValidator>();
+            services.AddTransient<IValidator<CreateCaptainWithTeam>, CreateCaptainWithTeamValidator>();
             #endregion
         }
 

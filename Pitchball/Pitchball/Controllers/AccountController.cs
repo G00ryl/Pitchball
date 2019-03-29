@@ -38,7 +38,7 @@ namespace Pitchball.Controllers
         }
 
         [HttpPost("register/type/captain")]
-        public async Task<IActionResult> RegisterCaptainWithTeam(CreateCaptainWithTeam command)
+        public async Task<IActionResult> RegisterCaptainWithTeamAsync(CreateCaptainWithTeam command)
         {
             if (!ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace Pitchball.Controllers
         }
 
         [HttpPost("register/type/player")]
-        public async Task<IActionResult> RegisterUser(CreateAccount command)
+        public async Task<IActionResult> RegisterUserAsync(CreateAccount command)
         {
             if (!ModelState.IsValid)
             {
@@ -92,7 +92,13 @@ namespace Pitchball.Controllers
         }
         #endregion
 
-        [HttpPost]
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(LoginAccount command)
         {
             if (!ModelState.IsValid)
