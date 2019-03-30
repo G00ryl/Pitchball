@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Pitchball.Infrastructure\Pitchball.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validators\Team\" />
+  </ItemGroup>
+
 </Project>

@@ -37,39 +37,12 @@ namespace Pitchball.Controllers
             return View();
         }
 
-        [HttpPost("register/type/captain")]
-        public async Task<IActionResult> RegisterCaptainWithTeamAsync(CreateCaptainWithTeam command)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            try
-            {
-                await _captainService.AddWIthTeamAsync(command);
-
-                ViewBag.ShowSuccess = true;
-                ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
-                ModelState.Clear();
-
-                return View();
-            }
-            catch (Exception)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = "Coś poszło nie tak.";
-
-                return View();
-            }
-        }
-
         [HttpPost("register/type/player")]
         public async Task<IActionResult> RegisterUserAsync(CreateAccount command)
         {
             if (!ModelState.IsValid)
             {
-                return View(command);
+                return View("RegisterUser", command);
             }
 
             try
@@ -80,14 +53,41 @@ namespace Pitchball.Controllers
                 ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
                 ModelState.Clear();
 
-                return View();
+                return View("RegisterUser");
             }
             catch (Exception)
             {
                 ViewBag.ShowError = true;
                 ViewBag.ErrorMessage = "Coś poszło nie tak.";
 
-                return View();
+                return View("RegisterUser");
+            }
+        }
+
+        [HttpPost("register/type/captain")]
+        public async Task<IActionResult> RegisterCaptainWithTeamAsync(CreateCaptainWithTeam command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("RegisterCaptainWithTeam", command);
+            }
+
+            try
+            {
+                await _captainService.AddWIthTeamAsync(command);
+
+                ViewBag.ShowSuccess = true;
+                ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
+                ModelState.Clear();
+
+                return View("RegisterCaptainWithTeam");
+            }
+            catch (Exception)
+            {
+                ViewBag.ShowError = true;
+                ViewBag.ErrorMessage = "Coś poszło nie tak.";
+
+                return View("RegisterCaptainWithTeam");
             }
         }
         #endregion

@@ -9,7 +9,6 @@ namespace Pitchball.Infrastructure.Commands.Captain
 {
     public class CreateCaptainWithTeam : CreateAccount
     {
-        [Required]
         public CreateTeam Team { get; set; }
     }
 }
