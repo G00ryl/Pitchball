@@ -33,10 +33,6 @@ namespace Pitchball.Validators.Captain
                 .NotEmpty()
                 .Equal(x => x.Password)
                 .WithName("Powtórz hasło");
-            RuleFor(x => x.Team.Name)
-                .NotEmpty()
-                .Length(5, 150)
-                .WithName("Nazwa drużyny");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Pitchball.Infrastructure.Commands.Account.LoginAccount
+@{
 	ViewData["Title"] = "Login";
 }
 <head>
@@ -13,11 +14,13 @@
 						<form method="post">
 							<div class="form-group">
 								<label for="exampleInputEmail1">Login/Email</label>
-								<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Example@mail.com">
+								<input asp-for="LoginOrEmail" type="text" class="form-control" id="loginOrEmail" aria-describedby="emailHelp" placeholder="Login / example@mail.com">
+                                <span asp-validation-for="LoginOrEmail" class="text-danger"></span>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword1">Hasło</label>
-								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Hasło">
+								<input asp-for="Password" type="password" class="form-control" id="password" placeholder="Hasło">
+                                <span asp-validation-for="Password" class="text-danger"></span>
 							</div>
 							<div class="d-flex">
 								<div class="mr-auto p-2">

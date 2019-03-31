@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Couchbase.Extensions.Session;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pitchball.Infrastructure.Commands.Account;
 using Pitchball.Infrastructure.Commands.Captain;
-using Pitchball.Infrastructure.Extensions.Exceptions;
 using Pitchball.Infrastructure.Services.Interfaces;
 
 namespace Pitchball.Controllers
@@ -92,7 +91,7 @@ namespace Pitchball.Controllers
         }
         #endregion
 
-        [HttpGet]
+        [HttpGet("login")]
         public IActionResult Login()
         {
             return View();
@@ -103,31 +102,28 @@ namespace Pitchball.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View("Login", command);
             }
 
             try
             {
                 var account = await _accountService.LoginAsync(command);
 
-                HttpContext.Session.SetObject("sesion", new
-                {
-                    Login = account.Login,
-                    Email = account.Email,
-                    Rolle = account.Role
-                });
+                HttpContext.Session.SetString("Login", account.Login);
+                HttpContext.Session.SetString("Email", account.Email);
+                HttpContext.Session.SetString("Role", account.Role);
 
                 ViewBag.ShowSuccess = true;
                 ViewBag.SuccessMessage = "Zalogowano pomyślnie";
 
-                return View();
+                return View("Login");
             }
             catch (Exception)
             {
                 ViewBag.ShowError = true;
                 ViewBag.ErrorMessage = "Coś poszło nie tak.";
 
-                return View();
+                return View("Login");
             }
         }
     }

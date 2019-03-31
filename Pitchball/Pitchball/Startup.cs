@@ -25,6 +25,7 @@ using Pitchball.Infrastructure.Services;
 using Pitchball.Infrastructure.Services.Interfaces;
 using Pitchball.Validators.Account;
 using Pitchball.Validators.Captain;
+using Pitchball.Validators.Team;
 
 namespace Pitchball
 {
@@ -94,6 +95,8 @@ namespace Pitchball
             #region Validators
             services.AddTransient<IValidator<CreateAccount>, CreateAccountValidator>();
             services.AddTransient<IValidator<CreateCaptainWithTeam>, CreateCaptainWithTeamValidator>();
+            services.AddTransient<IValidator<CreateTeam>, CreateTeamValidator>();
+            services.AddTransient<IValidator<LoginAccount>, LoginAccountValidator>();
             #endregion
         }
 
