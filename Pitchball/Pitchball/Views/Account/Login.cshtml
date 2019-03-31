@@ -11,7 +11,7 @@
 			<div class="col-md-6">
 				<div class="card">
 					<div class="card-body">
-						<form method="post">
+						<form asp-action="LoginAsync" asp-controller="Account" method="post">
 							<div class="form-group">
 								<label for="exampleInputEmail1">Login/Email</label>
 								<input asp-for="LoginOrEmail" type="text" class="form-control" id="loginOrEmail" aria-describedby="emailHelp" placeholder="Login / example@mail.com">

@@ -56,23 +56,23 @@ namespace Pitchball
                 });
 
             #region Couchbase
-            //services.AddCouchbase(opt =>
-            //{
-            //    opt.Servers = new List<Uri> { new Uri("http://localhost:8091") };
-            //    opt.UseSsl = false;
-            //    opt.Username = "PitchballSession";
-            //    opt.Password = "Pitchball1234!";
-            //    opt.Buckets = new List<Couchbase.Configuration.Client.BucketDefinition> { new Couchbase.Configuration.Client.BucketDefinition() { Name = "PitchballSession" } };
-            //});
+            services.AddCouchbase(opt =>
+            {
+                opt.Servers = new List<Uri> { new Uri("http://localhost:8091") };
+                opt.UseSsl = false;
+                opt.Username = "PitchballSession";
+                opt.Password = "Pitchball1234!";
+                opt.Buckets = new List<Couchbase.Configuration.Client.BucketDefinition> { new Couchbase.Configuration.Client.BucketDefinition() { Name = "PitchballSession" } };
+            });
 
-            //services.AddDistributedCouchbaseCache("PitchballSession", opt => { });
+            services.AddDistributedCouchbaseCache("PitchballSession", opt => { });
 
-            //services.AddCouchbaseSession(opt =>
-            //{
-            //    opt.Cookie.Name = ".Pitchball";
-            //    opt.Cookie.MaxAge = new TimeSpan(5, 0, 0, 0);
-            //    opt.IdleTimeout = new TimeSpan(6, 0, 0);
-            //});
+            services.AddCouchbaseSession(opt =>
+            {
+                opt.Cookie.Name = ".Pitchball";
+                opt.Cookie.MaxAge = new TimeSpan(5, 0, 0, 0);
+                opt.IdleTimeout = new TimeSpan(6, 0, 0);
+            });
             #endregion
 
             #region DatabaseSettings
@@ -116,9 +116,9 @@ namespace Pitchball
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
-            //app.UseSession();
+            app.UseSession();
 
-			app.UseMvc(routes =>
+            app.UseMvc(routes =>
 			{
 				routes.MapRoute(
 					name: "default",
