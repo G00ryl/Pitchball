@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Couchbase.Extensions.Session;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pitchball.Infrastructure.Commands.Account;
 using Pitchball.Infrastructure.Commands.Captain;
-using Pitchball.Infrastructure.Extensions.Exceptions;
 using Pitchball.Infrastructure.Services.Interfaces;
 
 namespace Pitchball.Controllers
@@ -25,45 +25,24 @@ namespace Pitchball.Controllers
         }
 
         #region Registration
-        [HttpPost]
-        public async Task<IActionResult> RegisterCaptainWithTeamAsync(CreateCaptainWithTeam command)
+        [HttpGet("register/type/player")]
+        public IActionResult RegisterUser()
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            try
-            {
-                await _captainService.AddWIthTeamAsync(command);
-
-                ViewBag.ShowSuccess = true;
-                ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
-
-                return View();
-            }
-            catch (CorruptedOperationException ex)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = ex.Message;
-
-                return View();
-            }
-            catch (Exception)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = "Coś poszło nie tak.";
-
-                return View();
-            }
+            return View();
         }
 
-        [HttpPost]
+        [HttpGet("register/type/captain")]
+        public IActionResult RegisterCaptainWithTeam()
+        {
+            return View();
+        }
+
+        [HttpPost("register/type/player")]
         public async Task<IActionResult> RegisterUserAsync(CreateAccount command)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View("RegisterUser", command);
             }
 
             try
@@ -72,63 +51,80 @@ namespace Pitchball.Controllers
 
                 ViewBag.ShowSuccess = true;
                 ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
+                ModelState.Clear();
 
-                return View();
-            }
-            catch (CorruptedOperationException ex)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = ex.Message;
-
-                return View();
+                return View("RegisterUser");
             }
             catch (Exception)
             {
                 ViewBag.ShowError = true;
                 ViewBag.ErrorMessage = "Coś poszło nie tak.";
 
-                return View();
+                return View("RegisterUser");
+            }
+        }
+
+        [HttpPost("register/type/captain")]
+        public async Task<IActionResult> RegisterCaptainWithTeamAsync(CreateCaptainWithTeam command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("RegisterCaptainWithTeam", command);
+            }
+
+            try
+            {
+                await _captainService.AddWIthTeamAsync(command);
+
+                ViewBag.ShowSuccess = true;
+                ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
+                ModelState.Clear();
+
+                return View("RegisterCaptainWithTeam");
+            }
+            catch (Exception)
+            {
+                ViewBag.ShowError = true;
+                ViewBag.ErrorMessage = "Coś poszło nie tak.";
+
+                return View("RegisterCaptainWithTeam");
             }
         }
         #endregion
 
-        [HttpPost]
+        [HttpGet("login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(LoginAccount command)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View("Login", command);
             }
 
             try
             {
                 var account = await _accountService.LoginAsync(command);
 
-                HttpContext.Session.SetObject("sesion", new
-                {
-                    Login = account.Login,
-                    Email = account.Email,
-                    Rolle = account.Role
-                });
+                HttpContext.Session.SetString("Login", account.Login);
+                HttpContext.Session.SetString("Email", account.Email);
+                HttpContext.Session.SetString("Role", account.Role);
 
                 ViewBag.ShowSuccess = true;
                 ViewBag.SuccessMessage = "Zalogowano pomyślnie";
 
-                return View();
-            }
-            catch (CorruptedOperationException ex)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = ex.Message;
-
-                return View();
+                return View("Login");
             }
             catch (Exception)
             {
                 ViewBag.ShowError = true;
                 ViewBag.ErrorMessage = "Coś poszło nie tak.";
 
-                return View();
+                return View("Login");
             }
         }
     }

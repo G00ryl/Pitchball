@@ -49,30 +49,11 @@ namespace Pitchball.Controllers
 			return View();
 		}
 
-        #region Registration
-        [HttpGet]
-		public IActionResult RegisterUser()
-		{
-			return View();
-		}
-		[HttpGet]
-		public IActionResult ChooseRegisterType()
-		{
-			return View();
-		}
-
-		[HttpGet]
-		public IActionResult RegisterCaptainWithTeam()
-		{
-			return View();
-		}
-		#endregion
-
-		[HttpGet]
-		public IActionResult Login()
-		{
-			return View();
-		}
+        [HttpGet("register/type")]
+        public IActionResult ChooseRegisterType()
+        {
+            return View();
+        }
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()

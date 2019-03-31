@@ -1,0 +1,84 @@
+﻿@model Pitchball.Infrastructure.Commands.Captain.CreateCaptainWithTeam
+@{
+	ViewData["Title"] = "Captain Registration";
+}
+@section Styles{ 
+    <link rel="stylesheet" href="~/css/RegisterCaptainWithTeam.css" />
+}
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header text-success">
+					<b><h2>Kapitan</h2></b>
+				</div>
+				<div class="card-body">
+					<form method="post" asp-action="RegisterCaptainWithTeamAsync" asp-controller="Account">
+						<h4 class="text-success">Dane Osobowe</h4>
+						<hr />
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputLogin">Login</label>
+								<input asp-for="Login" type="text" class="form-control" id="login" placeholder="Login">
+                                <span asp-validation-for="Login" class="text-danger"></span>
+							</div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail">Email</label>
+                                <input asp-for="Email" type="email" class="form-control" id="email" placeholder="example@mail.com">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+						</div>
+                        <hr />
+						<div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Imię</label>
+                                <input asp-for="Name" type="text" class="form-control" id="name" placeholder="Jan">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Nazwisko</label>
+                                <input asp-for="Surname" type="text" class="form-control" id="surname" placeholder="Kowalski">
+                                <span asp-validation-for="Surname" class="text-danger"></span>
+                            </div>
+						</div>
+                        <hr />
+						<div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword">Hasło</label>
+                                <input asp-for="Password" type="password" class="form-control" id="password" placeholder="Hasło">
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputConfirmPassword">Potwierdź hasło:</label>
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Hasło">
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+						</div>
+						<hr />
+
+						<h4 class="text-success">Dane Drużyny</h4>
+						<hr />
+
+                        <div class="form-group">
+                            <label>Nazwa drużyny</label>
+                            <input asp-for="Team.Name" type="text" class="form-control" id="teamName" placeholder="Nazwa drużyny">
+                            <small><small>Po utworzeniu konta, w panelu użytkownika można dokonać edycji drużyny.</small></small>
+                            <br />
+                            <span asp-validation-for="Team.Name" class="text-danger"></span>
+                        </div>
+						<hr />
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="customCheck1" required>
+							<label class="custom-control-label" for="customCheck1">
+									Oświadczam, że znam i akceptuję postanowienia
+									<a href="@Url.Action("regulations", "Home")"><b>Regulaminu Pitchball</b>.</a>
+							</label>
+						</div>
+						<br />
+						<button type="submit" class="btn btn-success">ZAREJESTRUJ</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>

@@ -17,6 +17,12 @@ namespace Pitchball.Infrastructure.Services
         private readonly PitchContext _context;
         private readonly IPasswordManager _passwordManager;
 
+        public UserService(PitchContext context, IPasswordManager passwordManager)
+        {
+            _context = context;
+            _passwordManager = passwordManager;
+        }
+
         public async Task AddAsync(CreateAccount command)
         {
             byte[] salt, passwordHash;
