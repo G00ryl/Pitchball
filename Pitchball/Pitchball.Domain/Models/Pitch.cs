@@ -16,7 +16,6 @@ namespace Pitchball.Domain.Models
 		public string Surface { get; private set; }
 		public string Lighting { get; private set; }
 		
-
 		public virtual PitchImage PitchImage { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
@@ -32,11 +31,12 @@ namespace Pitchball.Domain.Models
 			Lighting = lighting;
         }
 
-        public void Update(string name, string address, bool isActive, string lighting)
+        public void Update(string name, string address, bool isActive, string surface, string lighting)
         {
 			Name = name;
             Address = address;
             IsActive = isActive;
+            Surface = surface;
 			Lighting = lighting;
             Update();
         }

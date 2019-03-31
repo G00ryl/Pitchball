@@ -86,6 +86,17 @@ namespace Pitchball.Infrastructure.Data
                 .WithOne(y => y.Pitch)
                 .HasForeignKey<PitchImage>(y => y.PitchRef)
                 .IsRequired(false);
+
+            modelBuilder.Entity<Pitch>()
+                .HasData(new
+                {
+                    Id = 1,
+                    Name = "Boisko Orlik Stadion Ludowy",
+                    Address = " ul.Kresowa 1 , Sosnowiec",
+                    IsActive = true,
+                    Surface = "Sztuczna trawa",
+                    Lighting = "Tak, płatne"
+                });
             #endregion
         }
     }
