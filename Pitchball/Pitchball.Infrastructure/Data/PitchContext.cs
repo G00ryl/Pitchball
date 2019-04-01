@@ -92,10 +92,21 @@ namespace Pitchball.Infrastructure.Data
                 {
                     Id = 1,
                     Name = "Boisko Orlik Stadion Ludowy",
-                    Address = " ul.Kresowa 1 , Sosnowiec",
+                    Street = "Kresowa 1",
+                    City = "Sosnowiec",
                     IsActive = true,
                     Surface = "Sztuczna trawa",
                     Lighting = "Tak, płatne"
+                },
+                new
+                {
+                    Id = 2,
+                    Name = "Boisko Orlik KKS Czarni Sosnowiec",
+                    Street = "Mireckiego 31",
+                    City = "Sosnowiec",
+                    IsActive = true,
+                    Surface = "Sztuczna trawa",
+                    Lighting = "Tak, darmowe"
                 });
             #endregion
         }

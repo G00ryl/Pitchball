@@ -15,8 +15,10 @@ namespace Pitchball.Domain.Models
         public bool IsActive { get; private set; }
 		public string Surface { get; private set; }
 		public string Lighting { get; private set; }
-		
-		public virtual PitchImage PitchImage { get; set; }
+        public string Street { get; private set; }
+        public string City { get; private set; }
+
+        public virtual PitchImage PitchImage { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
 
