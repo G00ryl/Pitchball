@@ -88,26 +88,16 @@ namespace Pitchball.Infrastructure.Data
                 .IsRequired(false);
 
             modelBuilder.Entity<Pitch>()
-                .HasData(new
-                {
-                    Id = 1,
-                    Name = "Boisko Orlik Stadion Ludowy",
-                    Street = "Kresowa 1",
-                    City = "Sosnowiec",
-                    IsActive = true,
-                    Surface = "Sztuczna trawa",
-                    Lighting = "Tak, płatne"
-                },
-                new
-                {
-                    Id = 2,
-                    Name = "Boisko Orlik KKS Czarni Sosnowiec",
-                    Street = "Mireckiego 31",
-                    City = "Sosnowiec",
-                    IsActive = true,
-                    Surface = "Sztuczna trawa",
-                    Lighting = "Tak, darmowe"
-                });
+                .HasData(
+                new { Id = 1, Name = "Boisko Orlik Stadion Ludowy", Street = "Kresowa 1", City = "Sosnowiec", IsActive = true, Surface = "Sztuczna trawa", Lighting = "Płatne" },
+                new { Id = 2, Name = "Boisko Orlik KKS Czarni Sosnowiec", Street = "Mireckiego 31", City = "Sosnowiec", IsActive = true, Surface = "Sztuczna trawa", Lighting = "Darmowe" },
+                new { Id = 3, Name = "Boisko Orlik ZSO nr 12", Street = "Jasieńskiego 2A", City = "Sosnowiec", Surface = "Sztuczna trawa", Lighting = "Darmowe" },
+                new { Id = 4, Name = "Boisko VI LO \"Korczak\"", Street = "Czeladzka 43", City = "Sosnowiec", IsActive = true, Surface = "Tartan", Lighting = "Brak" },
+                new { Id = 5, Name = "Boisko ZSO nr 5", Street = "Bohaterów Monte Cassino 46", City = "Sosnowiec", IsActive = true, Surface = "Tartan", Lighting = "Brak" },
+                new { Id = 6, Name = "Boisko Orlik Gimnazjum nr 9", Street = "Kalagi 9A", City = "Sosnowiec", IsActive = true, Surface = "Sztuczna trawa", Lighting = "Darmowe" },
+                new { Id = 7, Name = "Boisko Szkoła Podstawowa nr 4", Street = "Kościelna 9", City = "Sosnowiec", IsActive = true, Surface = "Beton / asfalt", Lighting = "Darmowe" },
+                new { Id = 8, Name = "Boisko Orlik ZS nr 2 \"Manhattan\"", Street = "Piłsudskiego 24", City = "Dąbrowa Górnicza ", IsActive = true, Surface = "Sztuczna trawa", Lighting = "Darmowe" }
+                );
             #endregion
         }
     }
