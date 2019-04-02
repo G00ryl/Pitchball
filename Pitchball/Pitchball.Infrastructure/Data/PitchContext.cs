@@ -96,7 +96,20 @@ namespace Pitchball.Infrastructure.Data
                 new { Id = 5, Name = "Boisko ZSO nr 5", Street = "Bohaterów Monte Cassino 46", City = "Sosnowiec", IsActive = true, Surface = "Tartan", Lighting = "Brak" },
                 new { Id = 6, Name = "Boisko Orlik Gimnazjum nr 9", Street = "Kalagi 9A", City = "Sosnowiec", IsActive = true, Surface = "Sztuczna trawa", Lighting = "Darmowe" },
                 new { Id = 7, Name = "Boisko Szkoła Podstawowa nr 4", Street = "Kościelna 9", City = "Sosnowiec", IsActive = true, Surface = "Beton / asfalt", Lighting = "Darmowe" },
-                new { Id = 8, Name = "Boisko Orlik ZS nr 2 \"Manhattan\"", Street = "Piłsudskiego 24", City = "Dąbrowa Górnicza ", IsActive = true, Surface = "Sztuczna trawa", Lighting = "Darmowe" }
+                new { Id = 8, Name = "Boisko Orlik ZS nr 2 \"Manhattan\"", Street = "Piłsudskiego 24", City = "Dąbrowa Górnicza", IsActive = true, Surface = "Sztuczna trawa", Lighting = "Darmowe" },
+                new { Id = 9, Name = "Boisko Orlik \"Na Gwiezdnej\"", Street = "11 Listopada", City = "Sosnowiec", IsActive = true, Surface = "Sztuczna trawa", Lighting = "Darmowe" },
+                new { Id = 10, Name = "Boisko na Klimontowie", Street = "Henryka Dobrzańskiego-Hubala 124", City = "Sosnowiec", IsActive = true, Surface = "Naturalna trawa", Lighting = "Brak" },
+                new { Id = 11, Name = "Boisko Orlik ZSO nr 10 \"JULIUSZ\"", Street = "Czołgistów 12", City = "Sosnowiec", IsActive = true, Surface = "Sztuczna trawa", Lighting = "Darmowe" },
+                new { Id = 12, Name = "Boisko ZSO nr 8 \"POGOŃ\"", Street = "Hutnicza 6b", City = "Sosnowiec", IsActive = true, Surface = "Beton / asfalt", Lighting = "Brak" },
+                new { Id = 13, Name = "Boisko Orlik ZSO nr 14", Street = "Stefana Kisielewskiego 4B", City = "Sosnowiec", IsActive = true, Surface = "Sztuczna trawa", Lightng = "Darmowe" },
+                new { Id = 14, Name = "Boisko Orlik Szkoła Podstawowa nr 29", Street = "Zagłębiowska 25", City = "Sosnowiec", IsActive = true, Surface = "Tartan", Lightng = "Darmowe" },
+                new { Id = 15, Name = "Boisko Orlik SP nr 19 im. Marii Skłodowskiej-Curie", Street = "Składowa 5", City = "Sosnowiec", IsActive = true, Surface = "Tartan", Lightng = "Darmowe" },
+                new { Id = 16, Name = "Boisko Orlik SP nr 20 \"ADAMIECKIEGO\"", Street = "Adamieckiego 12", City = "Dąbrowa Górnicza", IsActive = true, Surface = "Sztuczna trawa", Lightng = "Darmowe" },
+                new { Id = 17, Name = "Boisko Orlik Zespół Szkół nr 3", Street = "Morcinka 4", City = "Dąbrowa Górnicza", IsActive = true, Surface = "Sztuczna trawa", Lightng = "Darmowe" },
+                new { Id = 18, Name = "Boisko \"Elektronik\"", Street = "Jagiellońska 10", City = "Sosnowiec", IsActive = true, Surface = "Tartan", Lightng = "Darmowe" },
+                new { Id = 19, Name = "Boisko Orlik SP nr 3", Street = "Stanisława Staszica 47", City = "Czeladź", IsActive = true, Surface = "Sztuczna trawa", Lightng = "Darmowe" },
+                new { Id = 20, Name = "Boisko Orlik Gimnazjum nr 4", Street = "Stanisława Wyspiańskiego 1", City = "Dąbrowa Górnicza", IsActive = true, Surface = "Sztuczna trawa", Lightng = "Płatne" },
+                new { Id = 21, Name = "Boisko Orlik \"KASPRZAK\" SP nr 12 im. Stanisława Staszica", Street = "Tysiąclecia 25", City = "Dąbrowa Górnicza", IsActive = true, Surface = "Sztuczna trawa", Lightng = "Darmowe" }
                 );
             #endregion
         }
