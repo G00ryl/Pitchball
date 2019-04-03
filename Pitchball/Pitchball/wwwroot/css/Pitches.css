@@ -12,3 +12,14 @@ a {
 }
 body {
 }
+.thead-dark {
+	opacity: 0.9;
+}
+@media screen and (max-width: 900px) {
+	.table {
+		font-size: 15px;
+	}
+	.hidden{
+		display:none;
+	}
+}
