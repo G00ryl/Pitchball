@@ -1,0 +1,25 @@
+﻿
+.table {
+	opacity: 0.9;
+	font-size: 20px;
+	font-weight: bold;
+	border:1px solid;
+	color: black
+}
+
+a {
+	color: black;
+}
+body {
+}
+.thead-dark {
+	opacity: 0.9;
+}
+@media screen and (max-width: 900px) {
+	.table {
+		font-size: 15px;
+	}
+	.hidden{
+		display:none;
+	}
+}
