@@ -22,6 +22,18 @@ namespace Pitchball.Controllers
 		}
 
 		[HttpGet]
+		public IActionResult Pitch()
+		{
+			return View();
+		}
+
+		[HttpGet]
+		public IActionResult Pitches()
+		{
+			return View();
+		}
+
+		[HttpGet]
 		public IActionResult About()
 		{
 			ViewData["Message"] = "Your application description page.";

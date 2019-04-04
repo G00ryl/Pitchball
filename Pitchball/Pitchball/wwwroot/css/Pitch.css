@@ -1,0 +1,15 @@
+﻿body {
+}
+.card{
+	opacity:0.9;
+}
+.card-img {
+margin:1%;
+border:2px solid;
+}
+.informations{
+font-size:22px;
+}
+a {
+	color: black;
+}
