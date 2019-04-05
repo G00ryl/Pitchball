@@ -11,7 +11,6 @@ namespace Pitchball.Domain.Models
     public class Pitch : Entity
     {
 		public string Name { get; private set; }
-		public string Address { get; private set; }
         public bool IsActive { get; private set; }
 		public string Surface { get; private set; }
 		public string Lighting { get; private set; }
@@ -24,22 +23,24 @@ namespace Pitchball.Domain.Models
 
         public Pitch() : base() { }
 
-        public Pitch(string name, string address, bool isActive, string surface, string lighting) : base()
+        public Pitch(string name, bool isActive, string surface, string lighting, string street, string city) : base()
         {
 			Name = name;
-            Address = address;
             IsActive = isActive;
 			Surface = surface;
 			Lighting = lighting;
+            Street = street;
+            City = city;
         }
 
-        public void Update(string name, string address, bool isActive, string surface, string lighting)
+        public void Update(string name, bool isActive, string surface, string lighting, string street, string city)
         {
 			Name = name;
-            Address = address;
             IsActive = isActive;
             Surface = surface;
 			Lighting = lighting;
+            Street = street;
+            City = city;
             Update();
         }
     }
