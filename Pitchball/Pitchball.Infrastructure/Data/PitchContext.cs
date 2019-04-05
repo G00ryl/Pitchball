@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Pitchball.Domain.Extensions;
 using Pitchball.Domain.Models;
 using Pitchball.Domain.Models.Base;
 using System;
@@ -115,6 +116,16 @@ namespace Pitchball.Infrastructure.Data
                 new { Id = 24, Name = "Obiekty Sportowo - Rekreacyjne OSIR", Street = "Sportowa 4", City = "Będzin", IsActive = true, Surface = "Sztuczna trawa", Lightng = "Płatne" },
                 new { Id = 25, Name = "Szkoła Podstawowa nr 22", Street = "Zwycięstwa 44", City = "Dąbrowa Górnicza", IsActive = true, Surface = "Sztuczna trawa", Lightng = "Darmowe" },
                 new { Id = 26, Name = "Szkoła Podstawowa nr 30 im. E. Zawidzkiej", Street = "Jaworowa 6", City = "Dąbrowa Górnicza", IsActive = true, Surface = "Sztuczna trawa", Lightng = "Darmowe" }
+                );
+
+            modelBuilder.Entity<PitchImage>()
+                .HasData(
+                new { Id = 1, PitchRef = 1, Content = PitchImagesRoot.ToByteArray(PitchImagesRoot.Pitch01) },
+                new { Id = 2, PitchRef = 2, Content = PitchImagesRoot.ToByteArray(PitchImagesRoot.Pitch02) },
+                new { Id = 3, PitchRef = 3, Content = PitchImagesRoot.ToByteArray(PitchImagesRoot.Pitch03) },
+                new { Id = 4, PitchRef = 4, Content = PitchImagesRoot.ToByteArray(PitchImagesRoot.Pitch04) },
+                new { Id = 5, PitchRef = 5, Content = PitchImagesRoot.ToByteArray(PitchImagesRoot.Pitch05) },
+                new { Id = 6, PitchRef = 6, Content = PitchImagesRoot.ToByteArray(PitchImagesRoot.Pitch06) }
                 );
             #endregion
         }
