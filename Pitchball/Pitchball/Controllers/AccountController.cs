@@ -98,6 +98,7 @@ namespace Pitchball.Controllers
             return View();
         }
 
+
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(LoginAccount command)
         {
@@ -127,5 +128,10 @@ namespace Pitchball.Controllers
                 return View("Login");
             }
         }
-    }
+		[HttpGet("UserPanel")]
+		public IActionResult UserPanel()
+		{
+			return View();
+		}
+	}
 }

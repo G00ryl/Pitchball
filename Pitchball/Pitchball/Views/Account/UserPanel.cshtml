@@ -1,0 +1,56 @@
+﻿@model Pitchball.Infrastructure.Commands.Account.CreateAccount
+
+@{
+	ViewData["Title"] = "User Panel";
+}
+@section Styles{
+	<link rel="stylesheet" href="~/css/UserPanel.css" />
+
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header text-success">
+				<b><h2>Moje Konto</h2></b>
+			</div>
+			<div class="card-body">
+				<form method="post" asp-controller="Account">
+					<div class="form-row">
+						<div class="form-group col-md-6 text-center">
+							<img src="~/images/Avatar.png" style="max-height:300px; max-width:300px;" alt="Alternate Text" /><br />
+							<p>
+								<small>Na zdjęciu musi być widoczna dobrze twoja twarz.</small><br />
+								<input type="file" name="accountImg" value="Wybierz plik" />
+						</div>
+						<div class="form-group col-md-6">
+							<div class="card-header text-center"><h3>Dane Osobowe</h3></div>
+							<label for="inputLogin">Imie</label>
+							<input type="text" asp-for="Name" class="form-control" id="name" value="Jan" disabled>
+							<label for="inputEmail">Nazwisko</label>
+							<input type="email" asp-for="Surname" class="form-control" id="surname" value="Kowalski" disabled>
+							<label for="inputLogin">Login</label>
+							<input type="text" asp-for="Login" class="form-control" id="login" value="admin123" disabled>
+							<label for="inputEmail">Adres e-mail</label>
+							<input type="email" asp-for="Email" class="form-control" id="email" value="admin@exapmle.pl" disabled>
+						</div>
+					</div>
+					<hr />
+					<div class="card-header text-center"><h3>Zmiana hasła</h3>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="inputEmail4">Stare hasło</label>
+							<input type="text" asp-for="Name" class="form-control" id="oldpassword" placeholder="Old password">
+							
+						</div>
+					</div>
+					<hr />
+					<br />
+
+					<button type="submit" class="btn btn-success">ZAREJESTRUJ</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
