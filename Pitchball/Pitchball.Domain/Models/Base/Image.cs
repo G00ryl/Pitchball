@@ -9,16 +9,16 @@ namespace Pitchball.Domain.Models.Base
     /// </summary>
     public abstract class Image : Entity
     {
-        public string ImageContent { get; protected set; }
+        public byte[] ImageContent { get; protected set; }
 
         public Image() : base() { }
 
-        public Image(string content) : base()
+        public Image(byte[] content) : base()
         {
             ImageContent = content;
         }
 
-        public virtual void Update(string content)
+        public virtual void Update(byte[] content)
         {
             ImageContent = content;
             Update();
