@@ -98,6 +98,11 @@ namespace Pitchball.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult UserPanelEdit()
+        {
+            return View();
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(LoginAccount command)

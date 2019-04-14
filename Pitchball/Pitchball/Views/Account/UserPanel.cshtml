@@ -36,15 +36,17 @@
                                 <label for="inputEmail">Adres e-mail</label>
                                 <input type="email" asp-for="Email" class="form-control" id="email" value="admin@exapmle.pl" disabled>
                                 <br />
-                                <a href="@Url.Action("userPanelEdit", "Home")" class=" text-center btn btn-info" style="" role="button">Edytuj profil</a>
+                                <a href="@Url.Action("UserPanelEdit", "Account")" class=" text-center btn btn-info" style="" role="button">Edytuj profil</a>
                             </div>
-                        </div
+                        </div>
                     <hr />
+                   
                     <div class="row">
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-8 text-center">
                             <h2>Moje rezerwacje:</h2>
+                            <br />
                             <div class="table-responsive-sm">
                                 <table class="table table-light">
                                     <thead class="thead-dark">
