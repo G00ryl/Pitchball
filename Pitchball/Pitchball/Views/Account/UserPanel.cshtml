@@ -1,0 +1,98 @@
+﻿@model Pitchball.Infrastructure.Commands.Account.CreateAccount
+
+@{
+	ViewData["Title"] = "User Panel";
+}
+@section Styles{
+	<link rel="stylesheet" href="~/css/UserPanel.css" />
+
+}
+
+
+    <div class="card">
+        <div class="card-header text-success">
+            <b><h2>Moje Konto</h2></b>
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+
+                <div class="form-group col-lg-2 text-left">
+                    <img src="~/images/Avatar.png" class=" img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
+                    <div style="line-height:10%;">
+                        <label for="inputName&SurName"><h4><b><big>Jan Kowalski</big></b></h4></label><br />
+                        <label for="inputLogin">
+                            <p><i><big>JanKol</big></i></p>
+                        </label><br />
+                    </div>
+                    <a href="@Url.Action("UserPanelEdit", "Account")" class=" text-center btn-lg btn-block  btn btn-info" style="" role="button">Edytuj profil</a>
+                </div>
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="container"> 
+                            <ul class="nav nav-tabs " role="tablist">
+                                <li class="nav-item  ">
+                                    <a class="nav-link text-dark active" data-toggle="tab" href="#reservations"><big><b>Moje rezerwacje</b></big></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" data-toggle="tab" href="#comments"><big><b>Moje komentarze</b></big></a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div id="reservations" class="container tab-pane active">
+                                    <br />
+                                    <div class="table-responsive-sm">
+                                        <table class="table table-light">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th scope="col">Lp.</th>
+                                                    <th class="hidden" scope="col">Zdjęcie obiektu</th>
+                                                    <th scope="col">Nazwa obiektu</th>
+                                                    <th scope="col">Adres</th>
+                                                    <th scope="col">Dzień</th>
+                                                    <th scope="col">Godzina od</th>
+                                                    <th scope="col">Godzina do</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="table-row">
+                                                    <th scope="row">1</th>
+                                                    <td class="hidden"><img src="~/images/BoiskoKresowa.jpg" /></td>
+                                                    <td>Boisko Orlik Stadion Ludowy - ul.Kresowa 1</td>
+                                                    <td>ul.Kresowa 1</td>
+                                                    <td>29.04.2019</td>
+                                                    <td>13:30</td>
+                                                    <td>15:00</td>
+                                                </tr>
+
+                                                <tr class="table-active">
+                                                    <th scope="row">2</th>
+                                                    <td class="hidden"><img src="~/images/boiskoczarni.jpg" /></td>
+                                                    <td>Boisko Orlik KKS Czarni Sosnowiec</td>
+                                                    <td>ul.Mireckiego 31</td>
+                                                    <td>21.04.2019</td>
+                                                    <td>19:30</td>
+                                                    <td>21:00</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="comments" class="container tab-pane fade">
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <br>
+    </div>
+	

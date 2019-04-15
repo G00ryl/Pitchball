@@ -1,0 +1,15 @@
+﻿body {
+}
+
+.imges {
+    max-height: 300px;
+    max-width: 300px;
+}
+@media screen and (max-width: 900px) {
+    .table {
+        font-size: 15px;
+    }
+
+    .hidden {
+        display: none;
+    }
