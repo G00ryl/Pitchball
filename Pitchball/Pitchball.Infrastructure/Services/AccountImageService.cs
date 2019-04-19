@@ -20,6 +20,7 @@ namespace Pitchball.Infrastructure.Services
         public AccountImageService(PitchContext context, IAccountService accountService)
         {
             _context = context;
+            _accountService = accountService;
         }
 
         public async Task AddAsync(int parentId, IFormFile image)
