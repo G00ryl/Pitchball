@@ -86,6 +86,19 @@ namespace Pitchball
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITeamService, TeamService>();
             services.AddScoped<ICaptainService, CaptainService>();
+            services.AddScoped<AccountImageService>();
+
+            services.AddScoped<Func<string, IImageService>>(serviceProvider => key =>
+            {
+                switch (key)
+                {
+                    case "account":
+                        return serviceProvider.GetService<AccountImageService>();
+
+                    default:
+                        return null;
+                }
+            });
             #endregion
 
             #region Extensions
@@ -97,6 +110,7 @@ namespace Pitchball
             services.AddTransient<IValidator<CreateCaptainWithTeam>, CreateCaptainWithTeamValidator>();
             services.AddTransient<IValidator<CreateTeam>, CreateTeamValidator>();
             services.AddTransient<IValidator<LoginAccount>, LoginAccountValidator>();
+            services.AddTransient<IValidator<UpdateAccount>, UpdateAccountValidator>();
             #endregion
         }
 
@@ -116,7 +130,7 @@ namespace Pitchball
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
-            app.UseSession();
+            //app.UseSession();
 
             app.UseMvc(routes =>
 			{

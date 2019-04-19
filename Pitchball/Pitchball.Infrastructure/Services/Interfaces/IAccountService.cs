@@ -10,5 +10,7 @@ namespace Pitchball.Infrastructure.Services.Interfaces
     public interface IAccountService
     {
         Task<Account> LoginAsync(LoginAccount command);
+        Task<Account> GetAsync(int id);
+        Task ChangePasswordAsync(int id, UpdateAccount command);
     }
 }

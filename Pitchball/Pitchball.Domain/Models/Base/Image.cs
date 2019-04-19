@@ -10,17 +10,20 @@ namespace Pitchball.Domain.Models.Base
     public abstract class Image : Entity
     {
         public byte[] ImageContent { get; protected set; }
+        public string ImageType { get; protected set; }
 
         public Image() : base() { }
 
-        public Image(byte[] content) : base()
+        public Image(byte[] content, string type) : base()
         {
             ImageContent = content;
+            ImageType = type;
         }
 
-        public virtual void Update(byte[] content)
+        public virtual void Update(byte[] content, string type)
         {
             ImageContent = content;
+            ImageType = type;
             Update();
         }
     }

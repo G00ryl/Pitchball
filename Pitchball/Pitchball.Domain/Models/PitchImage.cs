@@ -15,6 +15,6 @@ namespace Pitchball.Domain.Models
 
         public PitchImage() : base() { }
 
-        public PitchImage(byte[] content) : base(content) { }
+        public PitchImage(byte[] content, string type) : base(content, type) { }
     }
 }

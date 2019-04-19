@@ -38,5 +38,24 @@ namespace Pitchball.Infrastructure.Services
 
             return account;
         }
+
+        public async Task<Account> GetAsync(int id)
+        {
+            var account = await _context.Accounts.GetById(id).Include(x => x.AccountImage).SingleOrDefaultAsync();
+
+            if (account == null)
+                throw new CorruptedOperationException("Account doesn't exist");
+
+            return account;
+        }
+
+        public async Task ChangePasswordAsync(int id, UpdateAccount command)
+        {
+            var account = await GetAsync(id);
+
+            _passwordManager.CalculatePasswordHash(command.NewPassword, out byte[] passwordHash, account.Salt);
+
+            account.Update(account.Name, account.Surname, passwordHash);
+        }
     }
 }

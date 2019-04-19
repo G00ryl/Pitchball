@@ -31,10 +31,11 @@ namespace Pitchball.Domain.Models.Base
             PasswordHash = passwordHash;
         }
 
-        public void Update(string name, string surname)
+        public void Update(string name, string surname, byte[] passwordHash)
         {
             Name = name;
             Surname = surname;
+            PasswordHash = passwordHash;
             Update();
         }
     }

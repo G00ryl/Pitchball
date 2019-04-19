@@ -25,12 +25,10 @@ namespace Pitchball.Infrastructure.Services
 
         public async Task AddAsync(CreateAccount command)
         {
-            byte[] salt, passwordHash;
-
             if (await _context.Accounts.ExistsInDatabaseAsync(command.Login, command.Email))
                 throw new CorruptedOperationException("User already exists.");
 
-            _passwordManager.CalculatePasswordHash(command.Password, out passwordHash, out salt);
+            _passwordManager.CalculatePasswordHash(command.Password, out byte[] passwordHash, out byte[] salt);
 
             var user = new User(command.Name, command.Surname, command.Login, command.Email, salt, passwordHash);
 

@@ -116,6 +116,7 @@ namespace Pitchball.Controllers
             {
                 var account = await _accountService.LoginAsync(command);
 
+                HttpContext.Session.SetString("Id", account.Id.ToString());
                 HttpContext.Session.SetString("Login", account.Login);
                 HttpContext.Session.SetString("Email", account.Email);
                 HttpContext.Session.SetString("Role", account.Role);
