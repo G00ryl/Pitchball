@@ -130,7 +130,7 @@ namespace Pitchball
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
-            //app.UseSession();
+            app.UseSession();
 
             app.UseMvc(routes =>
 			{
