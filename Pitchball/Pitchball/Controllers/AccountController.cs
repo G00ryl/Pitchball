@@ -134,10 +134,5 @@ namespace Pitchball.Controllers
                 return View("Login");
             }
         }
-		[HttpGet("UserPanel")]
-		public IActionResult UserPanel()
-		{
-			return View();
-		}
 	}
 }
