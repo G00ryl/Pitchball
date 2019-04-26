@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Pitchball.Attributes;
 
 namespace Pitchball.Controllers
 {
-    [Route("pitch")]
+    [Route("pitches")]
     public class PitchController : Controller
     {
-        [HttpGet("list")]
+        [HttpGet("all")]
         public IActionResult Pitches()
+        {
+            return View();
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Pitch(int id)
         {
             return View();
         }

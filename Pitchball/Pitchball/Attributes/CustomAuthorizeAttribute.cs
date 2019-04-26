@@ -12,7 +12,7 @@ namespace Pitchball.Attributes
     {
         public string Role { get; set; }
 
-        public CustomAuthorizeAttribute(string role)
+        public CustomAuthorizeAttribute(string role = null)
         {
             Role = role;
         }
@@ -21,7 +21,7 @@ namespace Pitchball.Attributes
         {
             var role = context.HttpContext.Session.GetString("Role");
 
-            if (!Role.ToLowerInvariant().Contains(role.ToLowerInvariant()))
+            if (string.IsNullOrEmpty(role) || (!string.IsNullOrEmpty(role) && !Role.ToLowerInvariant().Contains(role.ToLowerInvariant())))
                 context.Result = new RedirectToActionResult("Index", "Home", null);
         }
     }

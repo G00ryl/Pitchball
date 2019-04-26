@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Pitchball.Attributes;
 using Pitchball.Infrastructure.Services.Interfaces;
 using Pitchball.Infrastructure.ViewModels.Account;
 
@@ -21,6 +22,7 @@ namespace Pitchball.Controllers
             _imageService = serviceAccessor("account");
         }
 
+        [CustomAuthorize("User")]
         [HttpGet("me")]
         public IActionResult Profile()
         {
@@ -28,6 +30,7 @@ namespace Pitchball.Controllers
             return View("UserPanel");
         }
 
+        [CustomAuthorize("User")]
         [HttpGet("me/edit")]
         public IActionResult EditProfile()
         {
@@ -42,7 +45,8 @@ namespace Pitchball.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpPost("password")]
+        [CustomAuthorize("User")]
+        [HttpPost("me/edit/password")]
         public async Task<IActionResult> UpdatePasswordAsync(AccountSettingsViewModel viewModel)
         {
             var id = int.Parse(HttpContext.Session.GetString("Id"));
@@ -68,7 +72,8 @@ namespace Pitchball.Controllers
             }
         }
 
-        [HttpGet("avatar")]
+        [CustomAuthorize("User")]
+        [HttpGet("me/avatar")]
         public async Task<FileContentResult> GetPictureAsync()
         {
             var id = int.Parse(HttpContext.Session.GetString("Id"));
@@ -87,7 +92,8 @@ namespace Pitchball.Controllers
             }
         }
 
-        [HttpPost("avatar/create")]
+        [CustomAuthorize("User")]
+        [HttpPost("me/avatar/create")]
         public async Task<IActionResult> AddPictureAsync(AccountSettingsViewModel viewModel, IFormFile image = null)
         {
             var id = int.Parse(HttpContext.Session.GetString("Id"));
@@ -113,7 +119,8 @@ namespace Pitchball.Controllers
             }
         }
 
-        [HttpPost("avatar/update")]
+        [CustomAuthorize("User")]
+        [HttpPost("me/avatar/update")]
         public async Task<IActionResult> UpdatePictureAsync(AccountSettingsViewModel viewModel, IFormFile image = null)
         {
             var id = int.Parse(HttpContext.Session.GetString("Id"));

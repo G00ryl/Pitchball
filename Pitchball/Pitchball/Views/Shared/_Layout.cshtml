@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -35,9 +37,20 @@
 
                 <li class="nav-item dropdown">
 
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>Konto</b><img src="~/images/Account.png" />
-                    </a>
+                    @if (Context.Session.GetString("Role") == null)
+                    {
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <b>Konto</b><img src="~/images/Account.png" />
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <b>@Context.Session.GetString("Login")</b><img src="~/images/Account.png" />
+                        </a>
+                    }
+
+
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
@@ -57,21 +70,21 @@
         @*<partial name="_CookieConsentPartial" />*@
         @if (ViewBag.ShowSuccess == true)
         {
-        <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:rgba(148, 255, 103, 0.57);border-color:rgb(1, 143, 1)">
-            <strong>@ViewBag.SuccessMessage</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color:rgba(148, 255, 103, 0.57);border-color:rgb(1, 143, 1)">
+                <strong>@ViewBag.SuccessMessage</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         }
         @if (ViewBag.ShowError == true)
         {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="background-color:rgba(252, 69, 69, 0.57);border-color:rgb(143, 1, 1)">
-            <strong>@ViewBag.ErrorMessage</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="background-color:rgba(252, 69, 69, 0.57);border-color:rgb(143, 1, 1)">
+                <strong>@ViewBag.ErrorMessage</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         }
 
         @RenderBody()
