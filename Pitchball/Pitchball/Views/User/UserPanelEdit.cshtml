@@ -10,43 +10,57 @@
     <div class="card-header text-success">
         <h1>Ustawienia konta</h1>
     </div>
-        <form method="post" class="col-lg-12" asp-controller="Account">
-            <div class="card-header text-center">
-                <h3> AVATAR  </h3>
-            </div>
-            <br />
-            <div class="form-row">
-                <div class="col-lg-4"></div>
-                <div class="form-group col-lg-4 text-center">
-                    <img src="~/images/Avatar.png" class=" img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
-                    <p><small>Na zdjęciu musi być dobrze widoczna twoja twarz.</small></p>
-                    <input type="file" name="Avatar" value="Wgraj zdjęcie" />
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-3 text-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Zmiana avataru</h4>
+                    </div>
+                    <div class="form-group col-lg-5 text-center">
+                        <form method="post" class="col-lg-12 text-center" asp-controller="Account">
+                            <div class="form-row">
+                                <div class="form-group text-center">
+                                    <img src="~/images/Avatar.png" class="img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
+                                    <p><small>Na zdjęciu musi być dobrze widoczna twoja twarz.</small></p>
+                                    <input type="file" name="Avatar" value="Wgraj zdjęcie" />
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-info text-center">Aktualizuj avatar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="card-header text-center">
-                <h3>HASŁO</h3>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="oldPassword">Stare hasło</label>
-                    <input type="text" asp-for="Command.OldPassword" class="form-control" id="oldPassword">
-                    <span asp-validation-for="Command.OldPassword" class="text-danger"></span>
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-header text-center"><h4>Zmiana hasła</h4></div>
+                    <form method="post" class="col-lg-12" asp-controller="Account">
+                        <div class="form-row">
+                            <div class="form-group col-lg-7">
+                                <label for="oldPassword">Stare hasło</label>
+                                <input type="text" asp-for="Command.OldPassword" class="form-control" id="oldPassword">
+                                <span asp-validation-for="Command.OldPassword" class="text-danger"></span>
 
-                    <label for="newPassword">Nowe hasło</label>
-                    <input type="text" asp-for="Command.NewPassword" class="form-control" id="newPassword">
-                    <span asp-validation-for="Command.NewPassword" class="text-danger"></span>
+                                <label for="newPassword">Nowe hasło</label>
+                                <input type="text" asp-for="Command.NewPassword" class="form-control" id="newPassword">
+                                <span asp-validation-for="Command.NewPassword" class="text-danger"></span>
 
-                    <label for="confirmNewPassword">Potwierdź nowe hasło</label>
-                    <input type="text" asp-for="Command.ConfirmNewPassword" class="form-control" id="confirmNewPassword">
-                    <span asp-validation-for="Command.ConfirmNewPassword" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-6 text-center ">
-                    <img src="~/images/Question.png" style="max-height:200px; max-width:200px; margin-top:1%" alt="Question" />
-                    <p>Jeśli nie pamiętasz swojego starego hasła i chciałbyś je zmienić możesz to zrobić <a href="@Url.Action("contact", "Home")">TUTAJ</a></p>
+                                <label for="confirmNewPassword">Potwierdź nowe hasło</label>
+                                <input type="text" asp-for="Command.ConfirmNewPassword" class="form-control" id="confirmNewPassword">
+                                <span asp-validation-for="Command.ConfirmNewPassword" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-lg-5 text-center ">
+                                <img src="~/images/Question.png" style="max-height:200px; max-width:200px; margin-top:1%" alt="Question" />
+                                <p>Jeśli nie pamiętasz swojego starego hasła i chciałbyś je zmienić możesz to zrobić <a href="@Url.Action("contact", "Home")">TUTAJ</a></p>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Aktualizuj hasło</button>
+                    </form>
+                    <br />
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Zapisz zmiany</button>
-        </form>
-        <hr />
-        <br />
+        </div>
     </div>
+</div>
+
+

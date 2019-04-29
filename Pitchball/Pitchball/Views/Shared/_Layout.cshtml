@@ -42,25 +42,31 @@
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <b>Konto</b><img src="~/images/Account.png" />
                         </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="@Url.Action("Login", "Account")">Zaloguj</a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" href="@Url.Action("ChooseRegisterType", "Home")">Zarejestruj</a>
+
+                        </div>
                     }
                     else
                     {
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <b>@Context.Session.GetString("Login")</b><img src="~/images/Account.png" />
                         </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="@Url.Action("Profile", "User")">Moje Konto</a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" href="@Url.Action("ChooseRegisterType", "Home")">Wyloguj</a>
+
+                        </div>
                     }
-
-
-
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                        <a class="dropdown-item" href="@Url.Action("Login", "Account")">Zaloguj</a>
-
-                        <div class="dropdown-divider"></div>
-
-                        <a class="dropdown-item" href="@Url.Action("ChooseRegisterType", "Home")">Zarejestruj</a>
-
-                    </div>
                 </li>
             </ul>
         </div>
