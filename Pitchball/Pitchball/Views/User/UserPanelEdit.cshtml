@@ -17,18 +17,18 @@
                     <div class="card-header">
                         <h4>Zmiana avataru</h4>
                     </div>
-                    <div class="form-group col-lg-5 text-center">
-                        <form method="post" class="col-lg-12 text-center" asp-controller="Account">
+                        <form method="post" class="text-center" style="margin:3%" asp-controller="Account">
                             <div class="form-row">
-                                <div class="form-group text-center">
-                                    <img src="~/images/Avatar.png" class="img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
+                                <div class="form-group col-lg-12 text-center">
+                                
+                                        <img src="~/images/Avatar.png" class=" img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
+                                    
                                     <p><small>Na zdjęciu musi być dobrze widoczna twoja twarz.</small></p>
                                     <input type="file" name="Avatar" value="Wgraj zdjęcie" />
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-info text-center">Aktualizuj avatar</button>
-                        </form>
-                    </div>
+                        </form>                  
                 </div>
             </div>
             <div class="col-lg-9">
