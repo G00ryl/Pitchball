@@ -1,5 +1,4 @@
 ﻿using Pitchball.Domain.Models;
-using Pitchball.Infrastructure.Commands.Captain;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Pitchball.Infrastructure.Services.Interfaces
 {
-    public interface ICaptainService
+    public interface IPitchService
     {
-        Task AddWIthTeamAsync(CreateCaptainWithTeam command);
-        Task<Captain> GetAsync(int id);
+        Task<Pitch> GetAsync(int id);
     }
 }

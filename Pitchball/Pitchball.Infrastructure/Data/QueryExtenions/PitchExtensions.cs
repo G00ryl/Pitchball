@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Pitchball.Infrastructure.Data.QueryExtenions
 {
-    public static class CaptainExtensions
+    public static class PitchExtensions
     {
-        public static IQueryable<Captain> GetById(this IQueryable<Captain> value, int id)
+        public static IQueryable<Pitch> GetById(this IQueryable<Pitch> value, int id)
             => value.Where(x => x.Id == id);
     }
 }

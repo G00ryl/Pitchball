@@ -1,4 +1,5 @@
-﻿using Pitchball.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Pitchball.Domain.Models;
 using Pitchball.Infrastructure.Commands.Captain;
 using Pitchball.Infrastructure.Data;
 using Pitchball.Infrastructure.Data.QueryExtenions;
@@ -41,6 +42,16 @@ namespace Pitchball.Infrastructure.Services
 
             await _context.Captains.AddAsync(captain);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Captain> GetAsync(int id)
+        {
+            var captain = await _context.Captains.GetById(id).Include(x => x.AccountImage).Include(x => x.Reservations).SingleOrDefaultAsync();
+
+            if (captain == null)
+                throw new CorruptedOperationException("Captain doesn't exist");
+
+            return captain;
         }
     }
 }
