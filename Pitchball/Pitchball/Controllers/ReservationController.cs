@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Pitchball.Domain.Models;
 using Pitchball.Infrastructure.Commands.Reservation;
 using Pitchball.Infrastructure.Extensions.Exceptions;
 using Pitchball.Infrastructure.Services.Interfaces;
 
 namespace Pitchball.Controllers
 {
-    [Route("reservations")]
+    [Route("reservation-management")]
     public class ReservationController : Controller
     {
         private readonly IReservationService _reservationService;
@@ -24,46 +25,58 @@ namespace Pitchball.Controllers
             _pitchService = pitchService;
         }
 
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateAsync(CreateReservation command)
+        [HttpPost("pitch/{id}/reservations")]
+        public async Task<IActionResult> CreateAsync(int id, CreateReservation command)
         {
             // Validation
             var captainId = int.Parse(HttpContext.Session.GetString("Id"));
 
             try
             {
-                var pitch = await _pitchService.GetAsync(command.PitchId);
+                var pitch = await _pitchService.GetAsync(id);
                 var captain = await _captainService.GetAsync(captainId);
 
                 await _reservationService.AddAsync(command, captain, pitch);
 
-                // return something
+                return Ok();
             }
-            catch (CorruptedOperationException ex)
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("pitch/{id}/reservations")]
+        public async Task<IEnumerable<Reservation>> GetForPitchAsync(int id)
+        {
+            try
+            {
+                var reservations = await _reservationService.GetForPitchAsync(id);
+
+                return reservations;
+            }
+            catch (Exception)
             {
                 throw;
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        [HttpGet("captain/{id}/reservations")]
+        public async Task<IEnumerable<Reservation>> GetForCaptainAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var reservations = await _reservationService.GetForCaptainAsync(id);
+
+                return reservations;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        [HttpGet("pitch/{id}")]
-        public async Task<IActionResult> GetForPitchAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("captain/{id}")]
-        public async Task<IActionResult> GetForCaptainAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("delete/{id}")]
+        [HttpPost("reservations/{id}/delete")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             throw new NotImplementedException();

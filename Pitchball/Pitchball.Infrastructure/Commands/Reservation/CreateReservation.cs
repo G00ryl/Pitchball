@@ -9,6 +9,5 @@ namespace Pitchball.Infrastructure.Commands.Reservation
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int PitchId { get; set; }
     }
 }

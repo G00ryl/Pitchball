@@ -15,10 +15,6 @@ namespace Pitchball.Validators.Reservation
                 .NotEmpty()
                 .MinimumLength(5);
 
-            RuleFor(x => x.PitchId)
-                .NotEmpty()
-                .GreaterThan(0);
-
             RuleFor(x => x.StartDate)
                 .NotEmpty()
                 .GreaterThan(DateTime.UtcNow)
