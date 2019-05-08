@@ -1,6 +1,4 @@
-﻿body {
-}
-
+﻿
 .imges {
     max-height: 300px;
     max-width: 300px;
@@ -13,3 +11,4 @@
     .hidden {
         display: none;
     }
+}
