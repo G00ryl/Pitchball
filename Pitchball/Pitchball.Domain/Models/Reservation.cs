@@ -33,5 +33,11 @@ namespace Pitchball.Domain.Models
             EndDate = endDate;
             Update();
         }
+
+        public bool IsOverpaling(Reservation reservation)
+        {
+            return !(StartDate < reservation.StartDate && EndDate < reservation.StartDate
+                || StartDate > reservation.EndDate && EndDate > reservation.EndDate);
+        }
     }
 }
