@@ -9,12 +9,32 @@ namespace Pitchball.Tests.Models
     [Collection("User Service Tests")]
     public class Reservation
     {
-        [Fact]
+        [Theory]
         [IsOverlapingData]
-        public void IsOverlaping_Should_Return_True()
+        public void IsOverlaping_Should_Return_True(Domain.Models.Reservation inDatabaseReservation, Domain.Models.Reservation newReservation)
         {
             // Arrange
+            bool? isOverlaping = null;
+
+            // Act
+            isOverlaping = newReservation.IsOverpaling(inDatabaseReservation);
+
+            // Assert
+            Assert.True(isOverlaping);
         }
 
+        [Theory]
+        [IsNotOverlapingData]
+        public void IsOverlaping_Should_Return_False(Domain.Models.Reservation inDatabaseReservation, Domain.Models.Reservation newReservation)
+        {
+            // Arrange
+            bool? isOverlaping = null;
+
+            // Act
+            isOverlaping = newReservation.IsOverpaling(inDatabaseReservation);
+
+            // Assert
+            Assert.False(isOverlaping);
+        }
     }
 }
