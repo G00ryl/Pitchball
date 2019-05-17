@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Pitchball.Attributes;
 using Pitchball.Domain.Models;
 using Pitchball.Infrastructure.Commands.Reservation;
 using Pitchball.Infrastructure.Extensions.Exceptions;
@@ -25,6 +26,7 @@ namespace Pitchball.Controllers
             _pitchService = pitchService;
         }
 
+        [CustomAuthorize("Captain")]
         [HttpPost("pitch/{id}/reservations")]
         public async Task<IActionResult> CreateAsync(int id, CreateReservation command)
         {
@@ -46,6 +48,7 @@ namespace Pitchball.Controllers
             }
         }
 
+        [CustomAuthorize("User, Captain, Admin")]
         [HttpGet("pitch/{id}/reservations")]
         public async Task<IEnumerable<Reservation>> GetForPitchAsync(int id)
         {
@@ -54,6 +57,7 @@ namespace Pitchball.Controllers
             return reservations;
         }
 
+        [CustomAuthorize("Captain")]
         [HttpGet("captain/{id}/reservations")]
         public async Task<IEnumerable<Reservation>> GetForCaptainAsync(int id)
         {
@@ -62,6 +66,7 @@ namespace Pitchball.Controllers
             return reservations;
         }
 
+        [CustomAuthorize("Captain")]
         [HttpPost("reservations/{id}/delete")]
         public async Task<IActionResult> DeleteAsync(int id)
         {

@@ -10,7 +10,7 @@ namespace Pitchball.Attributes
 {
     public class CustomAuthorizeAttribute : ActionFilterAttribute, IAuthorizationFilter
     {
-        public string Role { get; set; }
+        private string Role;
 
         public CustomAuthorizeAttribute(string role = null)
         {

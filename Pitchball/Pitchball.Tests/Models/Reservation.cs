@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Pitchball.Tests.Models
 {
-    [Collection("User Service Tests")]
+    [Collection("Reservation Model Tests")]
     public class Reservation
     {
         [Theory]
