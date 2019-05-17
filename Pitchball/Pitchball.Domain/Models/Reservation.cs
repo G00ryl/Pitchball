@@ -34,7 +34,7 @@ namespace Pitchball.Domain.Models
             Update();
         }
 
-        public bool IsOverpaling(Reservation reservation)
+        public bool IsOverlaping(Reservation reservation)
         {
             return !(StartDate < reservation.StartDate && EndDate < reservation.StartDate
                 || StartDate > reservation.EndDate && EndDate > reservation.EndDate);

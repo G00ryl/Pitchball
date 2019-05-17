@@ -17,7 +17,7 @@ namespace Pitchball.Tests.Models
             bool? isOverlaping = null;
 
             // Act
-            isOverlaping = newReservation.IsOverpaling(inDatabaseReservation);
+            isOverlaping = newReservation.IsOverlaping(inDatabaseReservation);
 
             // Assert
             Assert.True(isOverlaping);
@@ -31,7 +31,7 @@ namespace Pitchball.Tests.Models
             bool? isOverlaping = null;
 
             // Act
-            isOverlaping = newReservation.IsOverpaling(inDatabaseReservation);
+            isOverlaping = newReservation.IsOverlaping(inDatabaseReservation);
 
             // Assert
             Assert.False(isOverlaping);

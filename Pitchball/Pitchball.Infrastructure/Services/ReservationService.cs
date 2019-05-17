@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Internal;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Pitchball.Domain.Models;
 using Pitchball.Infrastructure.Commands.Reservation;
 using Pitchball.Infrastructure.Data;
+using Pitchball.Infrastructure.Data.QueryExtenions;
 using Pitchball.Infrastructure.Extensions.Exceptions;
 using Pitchball.Infrastructure.Services.Interfaces;
 using System;
@@ -25,10 +27,8 @@ namespace Pitchball.Infrastructure.Services
         {
             var reservation = new Reservation(command.Name, command.StartDate, command.EndDate);
 
-            if (_context.Reservations.Where(x => x.Pitch.Id == pitch.Id).Any(y => reservation.IsOverpaling(y)) == true)
-            {
+            if (_context.Reservations.Where(x => x.Pitch.Id == pitch.Id).Any(y => reservation.IsOverlaping(y)) == true)
                 throw new CorruptedOperationException("Reservation within this range already exists.");
-            }
 
             reservation.Pitch = pitch;
             reservation.Captain = captain;
@@ -37,24 +37,30 @@ namespace Pitchball.Infrastructure.Services
             await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var reservation = await GetAsync(id);
+
+            _context.Remove(reservation);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Reservation> GetAsync(int id)
+        public async Task<Reservation> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            if (await _context.Reservations.ExistsInDatabaseAsync(id) == false)
+                throw new CorruptedOperationException("Reservation with this id doesn't exist.");
+
+            return await _context.Reservations.GetById(id).SingleOrDefaultAsync();
         }
 
-        public Task<IEnumerable<Reservation>> GetForCaptainAsync(int captainId)
+        public async Task<IEnumerable<Reservation>> GetForCaptainAsync(int captainId)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_context.Reservations.Where(x => x.Captain.Id == captainId).AsEnumerable());
         }
 
-        public Task<IEnumerable<Reservation>> GetForPitchAsync(int pitchId)
+        public async Task<IEnumerable<Reservation>> GetForPitchAsync(int pitchId)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_context.Reservations.Where(x => x.Pitch.Id == pitchId).AsEnumerable());
         }
     }
 }
