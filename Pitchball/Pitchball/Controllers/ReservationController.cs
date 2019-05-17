@@ -49,37 +49,32 @@ namespace Pitchball.Controllers
         [HttpGet("pitch/{id}/reservations")]
         public async Task<IEnumerable<Reservation>> GetForPitchAsync(int id)
         {
-            try
-            {
-                var reservations = await _reservationService.GetForPitchAsync(id);
+            var reservations = await _reservationService.GetForPitchAsync(id);
 
-                return reservations;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return reservations;
         }
 
         [HttpGet("captain/{id}/reservations")]
         public async Task<IEnumerable<Reservation>> GetForCaptainAsync(int id)
         {
-            try
-            {
-                var reservations = await _reservationService.GetForCaptainAsync(id);
+            var reservations = await _reservationService.GetForCaptainAsync(id);
 
-                return reservations;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return reservations;
         }
 
         [HttpPost("reservations/{id}/delete")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _reservationService.DeleteAsync(id);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }
