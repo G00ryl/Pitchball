@@ -1,5 +1,4 @@
-﻿body {
-}
+﻿
 .card{
 	opacity:0.9;
 }
@@ -12,4 +11,34 @@ font-size:22px;
 }
 a {
 	color: black;
+}
+table.no-spacing {
+    border-spacing: 0; /* Removes the cell spacing via CSS */
+    border-collapse: collapse; /* Optional - if you don't want to have double border where cells touch */
+}
+@media screen and (max-width: 1000px) {
+    .table {
+        font-size: 12px;
+    }
+
+    .hidden {
+        display: none;
+    }
+    .smaller{
+        font-size:8px;
+    }
+    .button{
+        font-size:8px;
+    }
+}
+@media screen and (max-width: 800px) {
+    .table {
+        font-size: 9px;
+    }
+    .tabNav {
+        font-size: 13px;
+    }
+    .hidden {
+        display: none;
+    }
 }
