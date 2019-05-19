@@ -120,6 +120,7 @@ namespace Pitchball.Controllers
                 HttpContext.Session.SetString("Login", account.Login);
                 HttpContext.Session.SetString("Email", account.Email);
                 HttpContext.Session.SetString("Role", account.Role);
+                await HttpContext.Session.CommitAsync();
 
                 ViewBag.ShowSuccess = true;
                 ViewBag.SuccessMessage = "Zalogowano pomyślnie";

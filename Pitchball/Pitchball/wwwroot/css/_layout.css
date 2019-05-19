@@ -47,3 +47,6 @@ body {
 .alert {
     margin: 0 3% 0 3%;
 }
+.navbar-toggler{
+    background-color:lightgreen;
+}
