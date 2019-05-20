@@ -1,0 +1,22 @@
+﻿body {
+}
+h1{
+    font-size:100px;
+    color:darkcyan;
+}
+h4{
+    font-size:35px;
+    color:darkslategrey;
+}
+h5{
+    font-size:15px;
+    color:darkgrey;
+}
+.customImage{
+    max-width:250px;
+    max-height:250px;
+}
+.card{
+    margin-left:9%;
+    margin-right:9%;
+}

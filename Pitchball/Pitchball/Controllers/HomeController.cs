@@ -21,7 +21,14 @@ namespace Pitchball.Controllers
             return View();
 		}
 
-		[HttpGet]
+        [HttpGet]
+        public IActionResult PageNotFound()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
 		public IActionResult About()
 		{
 			ViewData["Message"] = "Your application description page.";
