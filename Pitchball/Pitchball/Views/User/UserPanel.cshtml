@@ -1,4 +1,4 @@
-﻿@model Pitchball.Infrastructure.Commands.Account.CreateAccount
+﻿@model Pitchball.Domain.Models.User
 
 @{
 	ViewData["Title"] = "User Panel";
@@ -8,7 +8,6 @@
 
 }
 
-
 <div class="card">
     <div class="card-header text-success">
         <b><h2>Moje Konto</h2></b>
@@ -17,11 +16,21 @@
         <div class="form-row">
 
             <div class="form-group col-lg-2 text-left">
-                <img src="~/images/Avatar.png" class=" img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
+                @{
+                    var image = Url.Action("GetPictureAsync", "User");
+                    if (image == null)
+                    {
+                        <img src="~/images/Avatar.png" class=" img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
+                    }
+                    else
+                    {
+                        <img src="@image" class=" img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
+                    }
+                }
                 <div style="line-height:10%;">
-                    <label for="inputName&SurName"><h4><b><big>Jan Kowalski</big></b></h4></label><br />
+                    <label for="inputName&SurName"><h4><b><big>@Model.Name @Model.Surname</big></b></h4></label><br />
                     <label for="inputLogin">
-                        <p><i><big>JanKol</big></i></p>
+                        <p><i><big>@Model.Login</big></i></p>
                     </label><br />
                 </div>
                 <a href="@Url.Action("EditProfile", "User")" class=" text-center btn-lg btn-block  btn btn-info" style="" role="button">Edytuj profil</a>
@@ -32,9 +41,6 @@
                 <div class="row">
                     <div class="container"> 
                         <ul class="nav nav-tabs " role="tablist">
-                            <li class="nav-item  ">
-                                <a class="nav-link text-dark active" data-toggle="tab" href="#reservations"><big><b>Moje rezerwacje</b></big></a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" data-toggle="tab" href="#comments"><big><b>Moje komentarze</b></big></a>
                             </li>
@@ -42,43 +48,50 @@
 
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div id="reservations" class="container tab-pane active">
+                            <div id="comments" class="container tab-pane active">
                                 <br />
                                 <div class="table-responsive-sm">
-                                    <table class="table table-light">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th scope="col">Lp.</th>
-                                                <th class="hidden" scope="col">Zdjęcie obiektu</th>
-                                                <th scope="col">Nazwa obiektu</th>
-                                                <th scope="col">Adres</th>
-                                                <th scope="col">Dzień</th>
-                                                <th scope="col">Godzina od</th>
-                                                <th scope="col">Godzina do</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="table-row">
-                                                <th scope="row">1</th>
-                                                <td class="hidden"><img src="~/images/BoiskoKresowa.jpg" /></td>
-                                                <td>Boisko Orlik Stadion Ludowy - ul.Kresowa 1</td>
-                                                <td>ul.Kresowa 1</td>
-                                                <td>29.04.2019</td>
-                                                <td>13:30</td>
-                                                <td>15:00</td>
-                                            </tr>
+                                    @if (Model.Comments == null || Model.Comments.Count == 0)
+                                    {
+                                        <p>Nie posiadasz jakichkolwiek komentarzy...</p>
+                                    }
+                                    else
+                                    {
+                                        <table class="table table-light">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th scope="col">Lp.</th>
+                                                    <th class="hidden" scope="col">Zdjęcie obiektu</th>
+                                                    <th scope="col">Nazwa obiektu</th>
+                                                    <th scope="col">Adres</th>
+                                                    <th scope="col">Dzień</th>
+                                                    <th scope="col">Godzina od</th>
+                                                    <th scope="col">Godzina do</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="table-row">
+                                                    <th scope="row">1</th>
+                                                    <td class="hidden"><img src="~/images/BoiskoKresowa.jpg" /></td>
+                                                    <td>Boisko Orlik Stadion Ludowy - ul.Kresowa 1</td>
+                                                    <td>ul.Kresowa 1</td>
+                                                    <td>29.04.2019</td>
+                                                    <td>13:30</td>
+                                                    <td>15:00</td>
+                                                </tr>
 
-                                            <tr class="table-active">
-                                                <th scope="row">2</th>
-                                                <td class="hidden"><img src="~/images/boiskoczarni.jpg" /></td>
-                                                <td>Boisko Orlik KKS Czarni Sosnowiec</td>
-                                                <td>ul.Mireckiego 31</td>
-                                                <td>21.04.2019</td>
-                                                <td>19:30</td>
-                                                <td>21:00</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                <tr class="table-active">
+                                                    <th scope="row">2</th>
+                                                    <td class="hidden"><img src="~/images/boiskoczarni.jpg" /></td>
+                                                    <td>Boisko Orlik KKS Czarni Sosnowiec</td>
+                                                    <td>ul.Mireckiego 31</td>
+                                                    <td>21.04.2019</td>
+                                                    <td>19:30</td>
+                                                    <td>21:00</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    }
                                 </div>
                             </div>
                             <div id="comments" class="container tab-pane fade">

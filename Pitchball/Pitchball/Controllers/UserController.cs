@@ -14,20 +14,39 @@ namespace Pitchball.Controllers
     public class UserController : Controller
     {
         private readonly IAccountService _accountService;
+        private readonly IUserService _userService;
         private readonly IImageService _imageService;
 
-        public UserController(IAccountService accountService, Func<string, IImageService> serviceAccessor)
+        public UserController(IAccountService accountService, Func<string, IImageService> serviceAccessor, IUserService userService)
         {
             _accountService = accountService;
+            _userService = userService;
             _imageService = serviceAccessor("account");
         }
 
         [CustomAuthorize("User")]
         [HttpGet("me")]
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile()
         {
-            // TODO Implement rest of this method!!!
-            return View("UserPanel");
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ShowError = true;
+                ViewBag.ErrorMessage = "Coś poszło nie tak.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            try
+            {
+                var id = int.Parse(HttpContext.Session.GetString("Id"));
+                var user = await _userService.GetAsync(id);
+                return View("UserPanel", user);
+            }
+            catch (Exception)
+            {
+                ViewBag.ShowError = true;
+                ViewBag.ErrorMessage = "Coś poszło nie tak.";
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [CustomAuthorize("User")]

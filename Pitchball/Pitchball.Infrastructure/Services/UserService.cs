@@ -1,4 +1,5 @@
-﻿using Pitchball.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Pitchball.Domain.Models;
 using Pitchball.Infrastructure.Commands.Account;
 using Pitchball.Infrastructure.Data;
 using Pitchball.Infrastructure.Data.QueryExtenions;
@@ -34,6 +35,18 @@ namespace Pitchball.Infrastructure.Services
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<User> GetAsync(int id)
+        {
+            var account = await _context.Users.GetById(id)
+                .Include(x => x.Comments)
+                .SingleOrDefaultAsync();
+
+            if (account == null)
+                throw new CorruptedOperationException("User doesn't exist");
+
+            return account;
         }
     }
 }
