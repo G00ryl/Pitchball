@@ -8,7 +8,7 @@
 
 }
 
-<div class="card">
+<div class="card ">
     <div class="card-header text-success">
         <b><h2>Moje Konto</h2></b>
     </div>
@@ -39,66 +39,38 @@
             </div>
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="container"> 
-                        <ul class="nav nav-tabs " role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" data-toggle="tab" href="#comments"><big><b>Moje komentarze</b></big></a>
-                            </li>
-                        </ul>
+                    <div class="container">
+                        <div class="card " style="border:none ;  background-color:lightgray" id="comment">
+                            <h3 class="text-center" style="color:black"><b>Moje Komentarze:</b></h3>
+                            <hr />
+                            @if (Model.Comments == null || Model.Comments.Count == 0)
+                            {
+                                <div class="card comment" id="comment">
+                                    <div class="card-header text-left">
 
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div id="comments" class="container tab-pane active">
-                                <br />
-                                <div class="table-responsive-sm">
-                                    @if (Model.Comments == null || Model.Comments.Count == 0)
-                                    {
-                                        <p>Nie posiadasz jakichkolwiek komentarzy...</p>
-                                    }
-                                    else
-                                    {
-                                        <table class="table table-light">
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <th scope="col">Lp.</th>
-                                                    <th class="hidden" scope="col">Zdjęcie obiektu</th>
-                                                    <th scope="col">Nazwa obiektu</th>
-                                                    <th scope="col">Adres</th>
-                                                    <th scope="col">Dzień</th>
-                                                    <th scope="col">Godzina od</th>
-                                                    <th scope="col">Godzina do</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="table-row">
-                                                    <th scope="row">1</th>
-                                                    <td class="hidden"><img src="~/images/BoiskoKresowa.jpg" /></td>
-                                                    <td>Boisko Orlik Stadion Ludowy - ul.Kresowa 1</td>
-                                                    <td>ul.Kresowa 1</td>
-                                                    <td>29.04.2019</td>
-                                                    <td>13:30</td>
-                                                    <td>15:00</td>
-                                                </tr>
-
-                                                <tr class="table-active">
-                                                    <th scope="row">2</th>
-                                                    <td class="hidden"><img src="~/images/boiskoczarni.jpg" /></td>
-                                                    <td>Boisko Orlik KKS Czarni Sosnowiec</td>
-                                                    <td>ul.Mireckiego 31</td>
-                                                    <td>21.04.2019</td>
-                                                    <td>19:30</td>
-                                                    <td>21:00</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    }
+                                        <p style="font-size:18px; margin-bottom:0px; margin-top:0px;"><b>Boisko Piłkarskie Stadion Ludowy</b></p> <p style="margin-bottom:0px; font-size:14px;">
+                                            <i>13:44:42 20.07.2019</i>
+                                        </p>
+                                    </div>
+                                    <p style="font-size:16px; margin:1%">Treść komentarza...</p>
                                 </div>
-                            </div>
-                            <div id="comments" class="container tab-pane fade">
-                                <br>
-                            </div>
+                                <div class="card comment" id="comment">
+                                    <div class="card-header text-left">
+
+                                        <p style="font-size:18px; margin-bottom:0px; margin-top:0px;"><b>Boisko Piłkarskie Orlik "Baczyn"</b></p> <p style="margin-bottom:0px; font-size:14px;">
+                                            <i>13:44:42 20.07.2019</i>
+                                        </p>
+                                    </div>
+                                    <p style="font-size:16px; margin:1%">Treść komentarza...</p>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <p>Nie posiadasz jakichkolwiek komentarzy...</p>
+                            }
                         </div>
-                    </div>
+                        </div>
                     <div class="col-md-12 text-center">                         
                     </div>
                 </div>
