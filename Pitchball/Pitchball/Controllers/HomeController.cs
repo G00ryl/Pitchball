@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Couchbase.Extensions.Session;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pitchball.Infrastructure.Commands.Account;
 using Pitchball.Infrastructure.Commands.Captain;
@@ -21,7 +22,7 @@ namespace Pitchball.Controllers
             return View();
 		}
 
-		[HttpGet]
+        [HttpGet]
 		public IActionResult About()
 		{
 			ViewData["Message"] = "Your application description page.";
@@ -58,7 +59,14 @@ namespace Pitchball.Controllers
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
-	}
+
+        [Route("{*url}", Order = 999)]
+        public IActionResult CatchAll()
+        {
+            Response.StatusCode = 404;
+            return View("PageNotFound");
+        }
+    }
 }
