@@ -18,14 +18,7 @@
             <div class="form-group col-lg-2 text-left">
                 @{
                     var image = Url.Action("GetPictureAsync", "User");
-                    if (image == null)
-                    {
-                        <img src="~/images/Avatar.png" class=" img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
-                    }
-                    else
-                    {
-                        <img src="@image" class=" img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
-                    }
+                    <img src="@image" class=" img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
                 }
                 <div style="line-height:10%;">
                     <label for="inputName&SurName"><h4><b><big>@Model.Name @Model.Surname</big></b></h4></label><br />
@@ -45,29 +38,21 @@
                             <hr />
                             @if (Model.Comments == null || Model.Comments.Count == 0)
                             {
-                                <div class="card comment" id="comment">
-                                    <div class="card-header text-left">
-
-                                        <p style="font-size:18px; margin-bottom:0px; margin-top:0px;"><b>Boisko Piłkarskie Stadion Ludowy</b></p> <p style="margin-bottom:0px; font-size:14px;">
-                                            <i>13:44:42 20.07.2019</i>
-                                        </p>
-                                    </div>
-                                    <p style="font-size:16px; margin:1%">Treść komentarza...</p>
-                                </div>
-                                <div class="card comment" id="comment">
-                                    <div class="card-header text-left">
-
-                                        <p style="font-size:18px; margin-bottom:0px; margin-top:0px;"><b>Boisko Piłkarskie Orlik "Baczyn"</b></p> <p style="margin-bottom:0px; font-size:14px;">
-                                            <i>13:44:42 20.07.2019</i>
-                                        </p>
-                                    </div>
-                                    <p style="font-size:16px; margin:1%">Treść komentarza...</p>
-                                </div>
-
+                                <p>Nie posiadasz jakichkolwiek komentarzy...</p>
                             }
                             else
                             {
-                                <p>Nie posiadasz jakichkolwiek komentarzy...</p>
+                                @foreach (var comment in Model.Comments)
+                                {
+                                    <div class="card comment" id="comment">
+                                        <div class="card-header text-left">
+
+                                            <p style="font-size:18px; margin-bottom:0px; margin-top:0px;"><b>@comment.Pitch.Name</b></p>
+                                            <p style="margin-bottom:0px; font-size:14px;"><i>@comment.CreatedAt.ToShortTimeString() @comment.CreatedAt.ToShortDateString()</i></p>
+                                        </div>
+                                        <p style="font-size:16px; margin:1%">@comment.Content</p>
+                                    </div>
+                                }
                             }
                         </div>
                         </div>

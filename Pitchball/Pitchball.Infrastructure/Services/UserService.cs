@@ -41,6 +41,7 @@ namespace Pitchball.Infrastructure.Services
         {
             var account = await _context.Users.GetById(id)
                 .Include(x => x.Comments)
+                .ThenInclude(y => y.Pitch)
                 .SingleOrDefaultAsync();
 
             if (account == null)
