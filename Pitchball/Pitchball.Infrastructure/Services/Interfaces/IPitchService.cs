@@ -9,5 +9,6 @@ namespace Pitchball.Infrastructure.Services.Interfaces
     public interface IPitchService
     {
         Task<Pitch> GetAsync(int id);
+        Task<IEnumerable<Pitch>> GetAllAsync();
     }
 }
