@@ -6,6 +6,7 @@ using Pitchball.Infrastructure.Extensions.Exceptions;
 using Pitchball.Infrastructure.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,5 +30,8 @@ namespace Pitchball.Infrastructure.Services
 
             return pitch;
         }
+
+        public async Task<IEnumerable<Pitch>> GetAllAsync()
+            => await Task.FromResult(_context.Pitches.OrderBy(x => x.Id));
     }
 }
