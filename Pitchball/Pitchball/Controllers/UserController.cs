@@ -120,8 +120,8 @@ namespace Pitchball.Controllers
         }
 
         [CustomAuthorize("User")]
-        [HttpPost("me/avatar/create")]
-        public async Task<IActionResult> AddPictureAsync(AccountSettingsViewModel viewModel, IFormFile image = null)
+        [HttpPost("me/avatar/addOrUpdate")]
+        public async Task<IActionResult> AddOrUpdatePictureAsync(AccountSettingsViewModel viewModel, IFormFile image = null)
         {
             var id = int.Parse(HttpContext.Session.GetString("Id"));
 
@@ -134,34 +134,15 @@ namespace Pitchball.Controllers
 
             try
             {
-                await _imageService.AddAsync(id, image);
-                return RedirectToAction("Profile");
-            }
-            catch (Exception)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = "Coś poszło nie tak.";
+                if (await _imageService.ExistsForParentAsync(id) == false)
+                {
+                    await _imageService.AddAsync(id, image);
+                }
+                else
+                {
+                    await _imageService.UpdateAsync(id, image);
+                }
 
-                return RedirectToAction("EditProfile");
-            }
-        }
-
-        [CustomAuthorize("User")]
-        [HttpPost("me/avatar/update")]
-        public async Task<IActionResult> UpdatePictureAsync(AccountSettingsViewModel viewModel, IFormFile image = null)
-        {
-            var id = int.Parse(HttpContext.Session.GetString("Id"));
-
-            if (!ModelState.IsValid || image == null)
-            {
-                viewModel.Account = await _accountService.GetAsync(id);
-
-                return View("UserPanelEdit", viewModel);
-            }
-
-            try
-            {
-                await _imageService.UpdateAsync(id, image);
                 return RedirectToAction("Profile");
             }
             catch (Exception)

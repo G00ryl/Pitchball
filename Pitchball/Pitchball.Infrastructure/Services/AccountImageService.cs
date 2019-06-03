@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Pitchball.Domain.Models;
 using Pitchball.Domain.Models.Base;
 using Pitchball.Infrastructure.Data;
+using Pitchball.Infrastructure.Data.QueryExtenions;
 using Pitchball.Infrastructure.Extensions.Exceptions;
 using Pitchball.Infrastructure.Services.Interfaces;
 using System;
@@ -58,5 +59,7 @@ namespace Pitchball.Infrastructure.Services
 
             return image;
         }
+
+        public async Task<bool> ExistsForParentAsync(int parentId) => await _context.AccountImages.ExistsInDatabaseAsync(parentId);
     }
 }

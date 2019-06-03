@@ -56,6 +56,8 @@ namespace Pitchball.Infrastructure.Services
             _passwordManager.CalculatePasswordHash(command.NewPassword, out byte[] passwordHash, account.Salt);
 
             account.Update(account.Name, account.Surname, passwordHash);
+
+            await _context.SaveChangesAsync();
         }
     }
 }
