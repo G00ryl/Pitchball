@@ -12,5 +12,6 @@ namespace Pitchball.Infrastructure.Services.Interfaces
         Task AddAsync(int parentId, IFormFile image);
         Task UpdateAsync(int parentId, IFormFile image);
         Task<Image> GetAsync(int parentId);
+        Task<bool> ExistsForParentAsync(int parentId);
     }
 }

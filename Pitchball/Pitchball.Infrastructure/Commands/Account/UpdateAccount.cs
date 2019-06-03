@@ -9,7 +9,5 @@ namespace Pitchball.Infrastructure.Commands.Account
         public string NewPassword { get; set; }
         public string ConfirmNewPassword { get; set; }
         public string OldPassword { get; set; }
-        public byte[] ImageContent { get; set; }
-        public string ImageType { get; set; }
     }
 }
