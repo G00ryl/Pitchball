@@ -86,6 +86,7 @@ namespace Pitchball
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITeamService, TeamService>();
             services.AddScoped<ICaptainService, CaptainService>();
+            services.AddScoped<IPitchService,PitchService>();
             services.AddScoped<IReservationService, ReservationService>();
             services.AddScoped<AccountImageService>();
 

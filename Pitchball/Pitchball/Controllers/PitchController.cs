@@ -4,16 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Pitchball.Attributes;
+using Pitchball.Infrastructure.Services;
+using Pitchball.Infrastructure.Services.Interfaces;
 
 namespace Pitchball.Controllers
 {
     [Route("pitches")]
     public class PitchController : Controller
     {
-        [HttpGet("all")]
-        public IActionResult Pitches()
+        private readonly IPitchService _pitchservice;
+
+        public PitchController(IPitchService pitchservice)
         {
-            return View();
+            _pitchservice = pitchservice;  
+        }
+        [HttpGet("all")]
+        public async  Task<IActionResult> Pitches()
+        {
+            var pitches = await _pitchservice.GetAllAsync();
+            return View(pitches);
         }
 
         [HttpGet("{id}")]
