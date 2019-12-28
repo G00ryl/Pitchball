@@ -14,41 +14,41 @@ using Pitchball.Models;
 
 namespace Pitchball.Controllers
 {
-	public class HomeController : Controller
-	{
-		[HttpGet]
-		public IActionResult Index()
-		{
+    public class HomeController : Controller
+    {
+        [HttpGet]
+        public IActionResult Index()
+        {
             return View();
-		}
+        }
 
         [HttpGet]
-		public IActionResult About()
-		{
-			ViewData["Message"] = "Your application description page.";
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
 
-			return View();
-		}
+            return View();
+        }
 
-		[HttpGet]
-		public IActionResult Contact()
-		{
-			ViewData["Message"] = "Your contact page.";
+        [HttpGet]
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = "Your contact page.";
 
-			return View();
-		}
+            return View();
+        }
 
-		[HttpGet]
-		public IActionResult Privacy()
-		{
-			return View();
-		}
+        [HttpGet]
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
-		[HttpGet]
-		public IActionResult Regulations()
-		{
-			return View();
-		}
+        [HttpGet]
+        public IActionResult Regulations()
+        {
+            return View();
+        }
 
         [HttpGet("register/type")]
         public IActionResult ChooseRegisterType()
@@ -56,17 +56,11 @@ namespace Pitchball.Controllers
             return View();
         }
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
-
-        [Route("{*url}", Order = 999)]
-        public IActionResult CatchAll()
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
         {
-            Response.StatusCode = 404;
-            return View("PageNotFound");
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

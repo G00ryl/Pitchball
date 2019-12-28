@@ -26,9 +26,21 @@ namespace Pitchball.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Pitch(int id)
+        public async Task<IActionResult> Pitch(string id)
         {
-            return View();
+            try
+            {
+                var pitchId = int.Parse(id);
+                var pitch = await _pitchservice.GetAsync(pitchId);
+                var pitchViewModel = new Infrastructure.ViewModels.Pitch.PitchViewModel(pitch);
+
+                return View(pitchViewModel);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
+
     }
 }

@@ -10,7 +10,7 @@ namespace Pitchball.Domain.Models
     /// </summary>
     public class PitchImage : Image
     {
-        public int? PitchRef { get; private set; }
+        public int PitchRef { get; private set; }
         public virtual Pitch Pitch { get; set; }
 
         public PitchImage() : base() { }
