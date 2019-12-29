@@ -1,31 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pitchball.Domain.Models;
 using Pitchball.Domain.Models.Base;
-using System;
-using System.Collections.Generic;
+using Pitchball.Infrastructure.Extensions;
 using System.Linq;
-using System.Text;
 
 namespace Pitchball.Infrastructure.Data
 {
     public class PitchContext : DbContext
     {
+        public PitchContext(DbContextOptions<PitchContext> options) : base(options)
+        {
+        }
+
+        public DbSet<AccountImage> AccountImages { get; set; }
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<Captain> Captains { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<Captain> Captains { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Pitch> Pitches { get; set; }
+        public DbSet<PitchImage> PitchImages { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<TeamImage> TeamImages { get; set; }
+        public DbSet<Team> Teams { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Image> Images { get; set; }
-        public DbSet<TeamImage> TeamImages { get; set; }
-        public DbSet<PitchImage> PitchImages { get; set; }
-        public DbSet<AccountImage> AccountImages { get; set; }
-
-        public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-        public DbSet<Pitch> Pitches { get; set; }
-        public DbSet<Team> Teams { get; set; }
-
-        public PitchContext(DbContextOptions<PitchContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
@@ -33,8 +32,8 @@ namespace Pitchball.Infrastructure.Data
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
-
             #region Accounts
+
             modelBuilder.Entity<Account>()
                 .HasMany(x => x.Comments)
                 .WithOne(y => y.Creator)
@@ -50,9 +49,14 @@ namespace Pitchball.Infrastructure.Data
                 .HasMany(x => x.Reservations)
                 .WithOne(y => y.Captain)
                 .IsRequired(false);
-            #endregion
+
+            modelBuilder.Entity<Admin>()
+                .HasData(CreateDefaultAdmin());
+
+            #endregion Accounts
 
             #region Team
+
             modelBuilder.Entity<Team>()
                 .HasMany(x => x.Members)
                 .WithOne(y => y.Team)
@@ -68,9 +72,11 @@ namespace Pitchball.Infrastructure.Data
                 .WithOne(y => y.Team)
                 .HasForeignKey<TeamImage>(y => y.TeamRef)
                 .IsRequired(false);
-            #endregion
+
+            #endregion Team
 
             #region Pitch
+
             modelBuilder.Entity<Pitch>()
                 .HasMany(x => x.Comments)
                 .WithOne(y => y.Pitch)
@@ -86,7 +92,17 @@ namespace Pitchball.Infrastructure.Data
                 .WithOne(y => y.Pitch)
                 .HasForeignKey<PitchImage>(y => y.PitchRef)
                 .IsRequired(false);
-            #endregion
+
+            #endregion Pitch
+        }
+
+        private Admin CreateDefaultAdmin()
+        {
+            var _passwordManager = new PasswordManager();
+            _passwordManager.CalculatePasswordHash("@dmin68$%", out var passwordHash, out var passwordSalt);
+            var id = Accounts.Count() + 1;
+
+            return new Admin(id, "Jan", "Nowak", "Admin", "admin@callme.com", passwordSalt, passwordHash);
         }
     }
 }
