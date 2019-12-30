@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pitchball.Infrastructure.Data;
 
 namespace Pitchball.Migrations
 {
     [DbContext(typeof(PitchContext))]
-    partial class PitchContextModelSnapshot : ModelSnapshot
+    [Migration("20191229163119_HasDataCheck")]
+    partial class HasDataCheck
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,7 +187,7 @@ namespace Pitchball.Migrations
                     b.HasDiscriminator().HasValue("Admin");
 
                     b.HasData(
-                        new { Id = 1, CreatedAt = new DateTime(2019, 12, 29, 16, 34, 52, 250, DateTimeKind.Utc), Email = "admin@callme.com", Login = "Admin", Name = "Jan", PasswordHash = new byte[] { 151, 247, 27, 71, 95, 23, 234, 7, 16, 73, 78, 98, 162, 169, 85, 114, 122, 43, 122, 191, 48, 38, 69, 30, 205, 123, 198, 89, 132, 198, 177, 68, 145, 30, 235, 161, 74, 2, 121, 130, 185, 174, 196, 22, 143, 251, 233, 105, 199, 21, 181, 46, 80, 149, 70, 76, 167, 129, 43, 184, 6, 181, 61, 198 }, Role = "Admin", Salt = new byte[] { 36, 27, 137, 21, 177, 245, 191, 140, 118, 84, 66, 4, 49, 59, 159, 72, 4, 204, 47, 172, 155, 233, 115, 232, 210, 20, 139, 174, 110, 45, 215, 11, 80, 237, 215, 32, 20, 144, 6, 209, 90, 173, 196, 129, 15, 112, 179, 145, 232, 88, 195, 199, 255, 70, 13, 84, 85, 222, 201, 123, 205, 157, 107, 55, 63, 59, 220, 18, 101, 52, 43, 102, 143, 23, 162, 248, 229, 166, 173, 14, 152, 100, 50, 155, 0, 116, 170, 73, 23, 84, 63, 45, 199, 111, 6, 168, 134, 245, 181, 24, 22, 4, 170, 166, 94, 130, 86, 14, 215, 179, 37, 80, 180, 233, 183, 238, 8, 198, 47, 71, 164, 218, 220, 71, 194, 144, 20, 89 }, Surname = "Nowak", UpdatedAt = new DateTime(2019, 12, 29, 16, 34, 52, 250, DateTimeKind.Utc) }
+                        new { Id = 1, CreatedAt = new DateTime(2019, 12, 29, 16, 31, 19, 137, DateTimeKind.Utc), Email = "admin@callme.com", Login = "Admin", Name = "Jan", PasswordHash = new byte[] { 183, 134, 117, 106, 149, 118, 212, 28, 41, 52, 73, 34, 36, 135, 216, 115, 174, 155, 144, 224, 42, 89, 172, 193, 118, 174, 180, 203, 219, 55, 108, 106, 96, 14, 95, 36, 204, 60, 89, 223, 56, 80, 46, 204, 71, 238, 89, 232, 45, 27, 232, 93, 41, 24, 187, 251, 156, 145, 77, 80, 147, 229, 94, 77 }, Role = "Admin", Salt = new byte[] { 84, 226, 85, 27, 113, 144, 224, 10, 114, 52, 57, 7, 142, 215, 188, 110, 120, 231, 193, 21, 183, 68, 51, 92, 245, 47, 109, 20, 119, 84, 241, 124, 212, 158, 56, 148, 239, 231, 74, 198, 251, 187, 99, 244, 164, 17, 198, 219, 121, 163, 2, 97, 167, 26, 29, 250, 161, 130, 86, 30, 99, 183, 6, 23, 195, 192, 138, 208, 149, 195, 23, 254, 97, 112, 229, 95, 151, 54, 121, 128, 81, 88, 141, 180, 72, 249, 169, 174, 175, 9, 38, 87, 9, 205, 34, 112, 80, 66, 251, 2, 93, 39, 225, 53, 237, 224, 90, 119, 130, 194, 31, 240, 104, 196, 50, 227, 155, 128, 28, 70, 136, 69, 48, 201, 234, 49, 179, 86 }, Surname = "Nowak", UpdatedAt = new DateTime(2019, 12, 29, 16, 31, 19, 137, DateTimeKind.Utc) }
                     );
                 });
 

@@ -52,7 +52,7 @@
 
                         </div>
                     }
-                    else
+                    else if (Context.Session.GetString("Role") == "User")
                     {
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <b>@Context.Session.GetString("Login")</b><img src="~/images/Account.png" />
@@ -60,6 +60,36 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                             <a class="dropdown-item" href="@Url.Action("Profile", "User")">Moje Konto</a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" href="@Url.Action("ChooseRegisterType", "Home")">Wyloguj</a>
+
+                        </div>
+                    }
+                    else if (Context.Session.GetString("Role") == "Captain")
+                    {
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <b>@Context.Session.GetString("Login")</b><img src="~/images/Account.png" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="@Url.Action("Profile", "User")">Moje Konto</a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" href="@Url.Action("ChooseRegisterType", "Home")">Wyloguj</a>
+
+                        </div>
+                    }
+                    else if (Context.Session.GetString("Role") == "Admin")
+                    {
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <b>@Context.Session.GetString("Login")</b><img src="~/images/Account.png" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="@Url.Action("Profile", "User")">Panel Admina</a>
 
                             <div class="dropdown-divider"></div>
 
