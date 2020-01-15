@@ -1,9 +1,19 @@
 ﻿@model IEnumerable<Pitchball.Domain.Models.Pitch>
-
+@using Microsoft.AspNetCore.Http;
 @section Styles{
     <link rel="stylesheet" href="~/css/Pitches.css" />
 
 }
+
+@if (Context.Session.GetString("Role") == "Admin")
+{
+    <div class="card">
+        <button type="button" class="btn btn-success">
+            Dodaj nowe boisko
+        </button>
+    </div>
+}
+
 <table class="table-responsive-sm table table-striped table-light">
     <thead class="thead-dark">
         <tr>
@@ -11,7 +21,12 @@
             <th class="hidden" scope="col">Zdjęcie obiektu</th>
             <th scope="col">Nazwa obiektu</th>
             <th scope="col">Adres</th>
+            @if (Context.Session.GetString("Role") == "Admin")
+            {
+                <th scope="col">Usuwanie boiska</th>
+            }
         </tr>
+
     </thead>
     <tbody>
         @if (Model != null && Model.Count() > 0)
@@ -19,17 +34,24 @@
 
             foreach (var pitch in Model)
             {
-            <tr class="table-row ">
-                <th scope="row">@pitch.Id</th>
-                <td class="hidden"> @pitch.PitchImage</td>
-                <td><a asp-action="Pitch" asp-route-id="@pitch.Id">@pitch.Name</a></td>
-                <td>@pitch.Street</td>
-            </tr>
-                }
-            }
-            else
+        <tr class="table-row ">
+            <th scope="row">@pitch.Id</th>
+            <td class="hidden"> @pitch.PitchImage</td>
+            <td><a asp-action="Pitch" asp-route-id="@pitch.Id">@pitch.Name</a></td>
+            <td>@pitch.Street</td>
+            @if (Context.Session.GetString("Role") == "Admin")
             {
-            <p>Nie ma tutaj żadnych boisk.</p>
+                <td>
+                    <button type="button" class="btn btn-danger">Usuń boisko</button>
+                </td>
             }
+                
+            </tr>
+            }
+        }
+        else
+        {
+            <p>Nie ma tutaj żadnych boisk.</p>
+        }
     </tbody>
 </table>

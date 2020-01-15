@@ -81,5 +81,18 @@ namespace Pitchball.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet("reservations")]
+        public async Task<IActionResult> Reservations()
+        {
+            try
+            {
+                var reservations = await _reservationService.GetAllReservations();
+                return View(reservations);
+            }catch(Exception)
+            { 
+                return RedirectToAction("Index", "Home");
+            }
+            
+        }
     }
 }

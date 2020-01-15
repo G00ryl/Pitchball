@@ -20,8 +20,11 @@
                     var image = Url.Action("GetPictureAsync", "User");
                     <img src="@image" class=" img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
                 }
-                <div style="line-height:10%;">
-                    <label for="inputName&SurName"><b><big>@Model.Name @Model.Surname</big></b></label><br />
+                <br />
+                <div style="line-height:70%;">
+                    <label for="inputName&SurName"><b><big>@Model.Name @Model.Surname</big></b></label>
+                    <br />
+                    <br />
                     <label for="inputLogin">
                         <p><i><big>@Model.Login</big></i></p>
                     </label><br />

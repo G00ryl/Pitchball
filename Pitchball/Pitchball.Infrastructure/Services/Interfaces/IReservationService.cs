@@ -14,5 +14,6 @@ namespace Pitchball.Infrastructure.Services.Interfaces
         Task<IEnumerable<Reservation>> GetForPitchAsync(int pitchId);
         Task<IEnumerable<Reservation>> GetForCaptainAsync(int captainId);
         Task DeleteAsync(int id);
+        Task<IEnumerable<Reservation>> GetAllReservations();
     }
 }

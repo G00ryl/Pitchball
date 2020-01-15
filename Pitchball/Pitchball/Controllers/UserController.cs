@@ -28,7 +28,6 @@ namespace Pitchball.Controllers
             _imageService = serviceAccessor("account");
             _environment = environment;
         }
-
         [CustomAuthorize("User")]
         [HttpGet("me")]
         public async Task<IActionResult> Profile()

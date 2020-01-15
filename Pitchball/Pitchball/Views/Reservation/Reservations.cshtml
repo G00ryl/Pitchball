@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Pitchball.Domain.Models.Reservation>
+@using Microsoft.AspNetCore.Http;
+@section Styles{
+    <link rel="stylesheet" href="~/css/Pitches.css" />
+
+}
+<table class="table-responsive-sm table table-striped table-light">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Lp.</th>
+            <th scope="col">Data utworzenia</th>
+            <th scope="col">Nazwa</th>
+            <th scope="col">Początek rezerwacji</th>
+            <th scope="col">Koniec Rezerwacji</th>
+            <th scope="col">Nazwa boiska</th>
+            @if (Context.Session.GetString("Role") == "Admin")
+            {
+                <th scope="col">Usuwanie rezerwacji</th>
+            }
+        </tr>
+
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count() > 0)
+        {
+
+            foreach (var reservation in Model)
+            {
+        <tr class="table-row ">
+            <th scope="row"></th>
+            <td> @reservation.Id </td>
+            <td>@reservation.StartDate</td>
+            <td>@reservation.CreatedAt</td>
+            <td>@reservation.Name</td>
+            <td>@reservation.StartDate</td>
+            <td>@reservation.EndDate</td>
+
+            <td>
+                @if (Context.Session.GetString("Role") == "Admin")
+                {
+                    <button type="button" class="btn btn-danger">Usuń rezerwację.</button>
+                }
+            </td>
+        </tr>
+            }
+        }
+        else
+        {
+            <p>Nie ma jeszcze żadnych rezerwacji</p>
+        }
+    </tbody>
+</table>

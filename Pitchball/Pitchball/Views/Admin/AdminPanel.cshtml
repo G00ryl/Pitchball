@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Admin Panel";
+}
+<link rel="stylesheet" href="~/css/ChooseRegisterType.css" />
+<div class=" text-white text-center ">
+    <h1>Witamy w panelu admina.</h1>
+    <h2>Możesz tutaj przegląć wszystkie rezerwacje, lub ewentualnie je usnąć, a także dodawać nowe boisko. Jest również możliwość usunięcia go z systemu.</h2>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card image">
+            <div>
+                <a class="nav-link text-dark text-center " href="@Url.Action("Reservations", "Reservation")">
+                    <big><big></big><b><h1>REZERWACJE BOISK</h1></b></big></big><br />
+                    
+                    <div>
+                        <ul>
+                            <h2>Tutaj zobaczysz wszystkie rezerwacje z każdego boiska</h2>
+                            <li>Możesz znaleźć informacje o konkretnej rezerwacji na danym boisku</li>
+                            <li>Kontrola tego czy rezerwacja jest prawdziwa</li>
+                            <li>W razie rezerwacji utworzonej błędnie, możesz usunąć ją z systemu</li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card image  ">
+            <div>
+                <a class="nav-link text-dark text-center" href="@Url.Action("Pitches", "Pitch")">
+                    <big><b><h1>BOISKA</h1></b></big><br />
+                    
+                    <div>
+                        <ul>
+                            <h2>Tutaj znajdziesz wszystkie boiska które aktualnie są zarejestrowane w systemie</h2>
+                            <li>Zobaczysz informacje o danym boisku</li>
+                            <li>Możesz je usunąć w razie gdyby mecze na nim się już nie odbywały</li>
+                            <li>Istnieje tutaj również możliwość dodania nowego boiska</li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

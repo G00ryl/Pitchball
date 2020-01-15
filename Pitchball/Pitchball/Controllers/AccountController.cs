@@ -53,7 +53,7 @@ namespace Pitchball.Controllers
                 ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
                 ModelState.Clear();
 
-                return View("RegisterUser");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception)
             {
@@ -135,5 +135,13 @@ namespace Pitchball.Controllers
                 return View("Login");
             }
         }
-	}
+
+        [HttpGet("logout")]
+        public async Task<IActionResult> LogOut()
+        {
+            HttpContext.Session.Clear();
+
+            return await Task.FromResult(RedirectToAction("Index", "Home"));
+        }
+    }
 }

@@ -62,5 +62,10 @@ namespace Pitchball.Infrastructure.Services
         {
             return await Task.FromResult(_context.Reservations.Where(x => x.Pitch.Id == pitchId).AsEnumerable());
         }
+       
+        public async Task<IEnumerable<Reservation>> GetAllReservations()
+            => await Task.FromResult(_context.Reservations.OrderBy(x => x.StartDate));
+        }
+
     }
-}
+
