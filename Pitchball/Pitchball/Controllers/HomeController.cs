@@ -29,25 +29,12 @@ namespace Pitchball.Controllers
             return View(viewModel);
         }
         
-        [HttpGet]
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
+       
         [HttpGet]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
 
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Privacy()
-        {
             return View();
         }
 
