@@ -1,0 +1,70 @@
+﻿@model Pitchball.Domain.Models.Captain
+
+@{
+    ViewData["Title"] = "Captain Panel";
+}
+@section Styles{
+    <link rel="stylesheet" href="~/css/UserPanel.css" />
+
+}
+
+<div class="card ">
+    <div class="card-header text-success">
+        <b><h2>Moje Konto</h2></b>
+    </div>
+    <div class="card-body">
+        <div class="form-row">
+
+            <div class="form-group col-lg-2 text-left">
+                @{
+                    var image = Url.Action("GetPictureAsync", "Captain");
+                    <img src="@image" class=" img-responsive img-fluid img-thumbnail" alt="Alternate Text" /><br />
+                }
+                <br />
+                <div style="line-height:70%;">
+                    <label for="inputName&SurName"><b><big>@Model.Name @Model.Surname</big></b></label>
+                    <br />
+                    <br />
+                    <label for="inputLogin">
+                        <p><i><big>@Model.Login</big></i></p>
+                    </label><br />
+                </div>
+                <a href="@Url.Action("EditProfile", "Captain")" class=" text-center btn-lg btn-block  btn btn-info" style="" role="button">Edytuj profil</a>
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="container">
+                        <div class="card " style="border:none ;  background-color:lightgray" id="comment">
+                            <h3 class="text-center" style="color:black"><b>Moje Komentarze:</b></h3>
+                            <hr />
+                            @if (Model.Comments == null || Model.Comments.Count == 0)
+                            {
+                                <p>Nie posiadasz jakichkolwiek komentarzy...</p>
+                            }
+                            else
+                            {
+                                @foreach (var comment in Model.Comments)
+                                {
+                                    <div class="card comment" id="comment">
+                                        <div class="card-header text-left">
+
+                                            <p style="font-size:18px; margin-bottom:0px; margin-top:0px;"><b>@comment.Pitch.Name</b></p>
+                                            <p style="margin-bottom:0px; font-size:14px;"><i>@comment.CreatedAt.ToShortTimeString() @comment.CreatedAt.ToShortDateString()</i></p>
+                                        </div>
+                                        <p style="font-size:16px; margin:1%">@comment.Content</p>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <br>
+</div>

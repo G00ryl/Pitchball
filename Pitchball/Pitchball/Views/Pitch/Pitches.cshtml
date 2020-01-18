@@ -18,7 +18,6 @@
     <thead class="thead-dark">
         <tr>
             <th scope="col">Lp.</th>
-            <th class="hidden" scope="col">Zdjęcie obiektu</th>
             <th scope="col">Nazwa obiektu</th>
             <th scope="col">Adres</th>
             @if (Context.Session.GetString("Role") == "Admin")
@@ -36,7 +35,6 @@
             {
         <tr class="table-row ">
             <th scope="row">@pitch.Id</th>
-            <td class="hidden"> @pitch.PitchImage</td>
             <td><a asp-action="Pitch" asp-route-id="@pitch.Id">@pitch.Name</a></td>
             <td>@pitch.Street</td>
             @if (Context.Session.GetString("Role") == "Admin")
