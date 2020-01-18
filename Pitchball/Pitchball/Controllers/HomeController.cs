@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pitchball.Infrastructure.Commands.Account;
 using Pitchball.Infrastructure.Commands.Captain;
+using Pitchball.Infrastructure.Commands.Message;
 using Pitchball.Infrastructure.Extensions.Exceptions;
 using Pitchball.Infrastructure.Services.Interfaces;
 using Pitchball.Models;
@@ -16,12 +17,31 @@ namespace Pitchball.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IAccountService _accountService;
+        private readonly IUserService _userService;
+        private readonly ICaptainService _captainService;
+        private readonly IMessageService _messageService;
+        public HomeController(IAccountService accountService, IUserService userService, ICaptainService captainService, IMessageService messageService)
+        {
+            _userService = _userService;
+            _accountService = accountService;
+            _captainService = captainService;
+            _messageService = messageService;
+        }
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+       
+        [HttpGet("chat")]
+        public async Task<IActionResult> Chat()
+        {
+            var posts = await _messageService.GetMessagesAsync();
 
+            return View(posts);
+        }
+        
         [HttpGet]
         public IActionResult About()
         {

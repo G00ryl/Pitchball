@@ -90,6 +90,7 @@ namespace Pitchball
             services.AddScoped<IReservationService, ReservationService>();
             services.AddScoped<AccountImageService>();
             services.AddScoped<IPitchImage, PitchImageService>();
+            services.AddScoped<IMessageService, MessageService>();
 
             services.AddScoped<Func<string, IImageService>>(serviceProvider => key =>
             {

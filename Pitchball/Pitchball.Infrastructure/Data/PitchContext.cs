@@ -24,6 +24,7 @@ namespace Pitchball.Infrastructure.Data
         public DbSet<TeamImage> TeamImages { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -92,7 +93,8 @@ namespace Pitchball.Infrastructure.Data
                 .WithOne(y => y.Pitch)
                 .HasForeignKey<PitchImage>(y => y.PitchRef)
                 .IsRequired(false);
-
+            modelBuilder.Entity<Message>()
+               .HasKey(x => x.Id);
             #endregion Pitch
         }
 

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Pitchball.Domain.Models.Message>
+@if (Model != null && Model.Any())
+{
+    foreach (var message in Model.OrderByDescending(x => x.CreatedAt))
+    {
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex w-100 justify-content-between">
+                    <h4 class="card-title">@message.Content</h4>
+                    <h4 class="card-title">@message.User.Name @message.User.Surname</h4>
+                    <small class="text-muted">@message.CreatedAt.ToShortDateString()</small>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-primary" role="alert">
+        Nie ma jeszcze wiadomości? Bądź pierwszy i napisz coś!
+    </div>
+}
