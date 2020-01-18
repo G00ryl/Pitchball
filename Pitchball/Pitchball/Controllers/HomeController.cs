@@ -1,31 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
-using Couchbase.Extensions.Session;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pitchball.Infrastructure.Commands.Account;
-using Pitchball.Infrastructure.Commands.Captain;
-using Pitchball.Infrastructure.Commands.Message;
-using Pitchball.Infrastructure.Extensions.Exceptions;
 using Pitchball.Infrastructure.Services.Interfaces;
+using Pitchball.Infrastructure.ViewModels.Messages;
 using Pitchball.Models;
 
 namespace Pitchball.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IAccountService _accountService;
-        private readonly IUserService _userService;
-        private readonly ICaptainService _captainService;
         private readonly IMessageService _messageService;
-        public HomeController(IAccountService accountService, IUserService userService, ICaptainService captainService, IMessageService messageService)
+        public HomeController(IMessageService messageService)
         {
-            _userService = _userService;
-            _accountService = accountService;
-            _captainService = captainService;
             _messageService = messageService;
         }
         [HttpGet]
@@ -38,8 +24,9 @@ namespace Pitchball.Controllers
         public async Task<IActionResult> Chat()
         {
             var messages = await _messageService.GetMessagesAsync();
+            var viewModel = new MessagesViewModel(messages);
 
-            return View(messages);
+            return View(viewModel);
         }
         
         [HttpGet]
