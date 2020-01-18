@@ -37,9 +37,9 @@ namespace Pitchball.Controllers
         [HttpGet("chat")]
         public async Task<IActionResult> Chat()
         {
-            var posts = await _messageService.GetMessagesAsync();
+            var messages = await _messageService.GetMessagesAsync();
 
-            return View(posts);
+            return View(messages);
         }
         
         [HttpGet]

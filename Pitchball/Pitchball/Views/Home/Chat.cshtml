@@ -1,22 +1,50 @@
-﻿@model IEnumerable<Pitchball.Domain.Models.Message>
-@if (Model != null && Model.Any())
-{
-    foreach (var message in Model.OrderByDescending(x => x.CreatedAt))
-    {
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex w-100 justify-content-between">
-                    <h4 class="card-title">@message.Content</h4>
-                    <h4 class="card-title">@message.User.Name @message.User.Surname</h4>
-                    <small class="text-muted">@message.CreatedAt.ToShortDateString()</small>
+﻿@model Pitchball.Infrastructure.ViewModels.Messages.MessagesViewModel
+
+    <div class="card border-secondary mb-3">
+        <div class="card-body bg-dark">
+            <h5 class="card-title">New message</h5>
+            <hr>
+            <form action="../new-message" method="post">
+                <div class="form-group">
+                    <label for="title">Title</label>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="postContent">Content</label>
+                    @Html.TextAreaFor(model => model.NewMessage.Content, new
+               {
+                   @type = "text",
+                   @class = "form-control bg-dark",
+                   @id = "postContent",
+                   @placeholder = "Enter post's content",
+                   @pattern = @"^[A-Za-z-0-9\.\-\!\?]+( [A-Za-z-0-9\.\-\!\?]+)*$",
+                   @minlength = "10",
+                   @maxlength = "2000",
+                   @rows = "5",
+                   @required = "true"
+               })
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
         </div>
-    }
-}
-else
-{
-    <div class="alert alert-primary" role="alert">
-        Nie ma jeszcze wiadomości? Bądź pierwszy i napisz coś!
-    </div>
-}
+        @if (Model.Messages != null && Model.Messages.Any())
+        {
+            foreach (var message in Model.Messages.OrderByDescending(x => x.CreatedAt))
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="card-title">@message.Content</h4>
+                            <h4 class="card-title">(@message.User.Name @message.User.Surname) || (@message.Captain.Name @message.Captain.Surname)</h4>
+                            <small class="text-muted">@message.CreatedAt.ToShortDateString()</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="alert alert-primary" role="alert">
+                Nie ma jeszcze wiadomości? Bądź pierwszy i napisz coś!
+            </div>
+        }
