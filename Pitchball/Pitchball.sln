@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pitchball", "Pitchball\Pitchball.csproj", "{0F18B54B-1364-4B1C-8E41-49CF44792703}"
 EndProject
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pitchball.Infrastructure", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pitchball.Domain", "Pitchball.Domain\Pitchball.Domain.csproj", "{B92BB0F2-44DB-4819-AB86-F2067CE749E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pitchball.Tests", "Pitchball.Tests\Pitchball.Tests.csproj", "{4C6F0A95-B66C-4BAC-BBDB-66E262F07B98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pitchball.Tests", "Pitchball.Tests\Pitchball.Tests.csproj", "{4C6F0A95-B66C-4BAC-BBDB-66E262F07B98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
