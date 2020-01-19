@@ -27,7 +27,7 @@ namespace Pitchball.Infrastructure.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ContactMessage>> GetMessagessAsync()
+        public async Task<IEnumerable<ContactMessage>> GetMessagesAsync()
             => await Task.FromResult(_context.ContactMessages.OrderByDescending(x => x.CreatedAt).AsEnumerable());
     }
 }

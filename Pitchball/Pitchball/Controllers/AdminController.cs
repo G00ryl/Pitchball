@@ -15,12 +15,24 @@ namespace Pitchball.Controllers
  
     public class AdminController : Controller
     {
-        [Route("admin")]
+        private readonly IContactMessageService _contactMessageSerivce;
+        public AdminController(IContactMessageService contactMessageService)
+        {
+            _contactMessageSerivce = contactMessageService;
+        }
+       
         [HttpGet("AdminPanel")]
         public IActionResult AdminPanel()
         {
             return View();
         }
 
+        [HttpGet("ContactMessages")]
+        public async Task<IActionResult> ContactMessages()
+        {
+            var contactMessages = await _contactMessageSerivce.GetMessagesAsync();
+
+            return View(contactMessages);
+        }
     }
 }

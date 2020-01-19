@@ -96,6 +96,8 @@ namespace Pitchball.Infrastructure.Data
                 .IsRequired(false);
             modelBuilder.Entity<Message>()
                .HasKey(x => x.Id);
+            modelBuilder.Entity<ContactMessage>()
+                .HasKey(x => x.Id);
             #endregion Pitch
         }
 

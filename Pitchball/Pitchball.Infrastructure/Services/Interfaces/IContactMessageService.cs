@@ -10,6 +10,6 @@ namespace Pitchball.Infrastructure.Services.Interfaces
     public interface IContactMessageService 
     {
         Task AddContactMessageAsync(CreateContactMessageCommand command);
-        Task<IEnumerable<ContactMessage>> GetMessagessAsync();
+        Task<IEnumerable<ContactMessage>> GetMessagesAsync();
     }
 }

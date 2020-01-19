@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Pitchball.Domain.Models.ContactMessage>
+    @{
+        ViewData["Title"] = "Contact Messages";
+      
+    }
+    @section Styles{
+        <link rel="stylesheet" href="~/css/sites/messages.css" />
+    }
+
+    <div class="card border-secondary mb-3">
+        <div class="card-body bg-light">
+            <h3 class="card-title">Wiadomości od użytkowników:</h3>
+            <hr>
+
+            @if (Model != null && Model.Any())
+            {
+                <div class="list-group">
+
+                    @foreach (var contactmessage in Model)
+                    {
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start bg-light" style="border-width:5px; border-radius:5px;">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">@contactmessage.Email</h5>
+                                <small class="text-muted">@contactmessage.CreatedAt.ToShortDateString()</small>
+                            </div>
+                            <p class="mb-1">@contactmessage.Text</p>
+                            <small class="text-muted">@contactmessage.Name</small>
+                        </a>
+                        <br />
+                    }
+                </div>
+              
+
+            }
+            else
+            {
+                <p class="card-text">Nie ma żadnych wiadomości od użytkowników.</p>
+            }
+        </div>
+    </div>

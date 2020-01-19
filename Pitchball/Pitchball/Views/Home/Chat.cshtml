@@ -2,7 +2,7 @@
 
     <div class="card border-secondary mb-3">
         <div class="card-body bg-light">
-            <h5 class="card-title">New message</h5>
+            <h4 class="card-title">Nowa wiadomość</h4>
             <hr>
             <form action="../new-message" method="post">
                 <div class="form-group">
@@ -25,26 +25,29 @@
             </form>
         </div>
         </hr>
-        <br />
-        @if (Model.Messages != null && Model.Messages.Any())
-        {
-            foreach (var message in Model.Messages.OrderByDescending(x => x.CreatedAt))
+        <div class="card">
+            <div class="card-header text-center"><h1>CZAT</h1></div>
+            @if (Model.Messages != null && Model.Messages.Any())
             {
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="card-title">@message.Content</h4>
-                            <h4 class="card-title">(@message.User.Name @message.User.Surname) || (@message.Captain.Name @message.Captain.Surname)</h4>
-                            <small class="text-muted">@message.CreatedAt.ToShortDateString()</small>
+                foreach (var message in Model.Messages.OrderByDescending(x => x.CreatedAt))
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h4 class="card-title">@message.Content</h4>
+                                <h4 class="card-title">(@message.User.Name @message.User.Surname) || (@message.Captain.Name @message.Captain.Surname)</h4>
+                                <small class="text-muted">@message.CreatedAt.ToShortDateString()</small>
+                            </div>
                         </div>
                     </div>
+
+                }
+            }
+            else
+            {
+                <div class="alert alert-primary" style="margin:10px;" role="alert">
+                    Nie ma jeszcze wiadomości? Bądź pierwszy i napisz coś!
                 </div>
             }
-        }
-        else
-        {
-            <div class="alert alert-primary" role="alert">
-                Nie ma jeszcze wiadomości? Bądź pierwszy i napisz coś!
-            </div>
-        }
+        </div>
         <br />
