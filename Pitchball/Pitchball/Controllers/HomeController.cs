@@ -1,19 +1,25 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Pitchball.Infrastructure.Commands.Message;
 using Pitchball.Infrastructure.Services.Interfaces;
 using Pitchball.Infrastructure.ViewModels.Messages;
 using Pitchball.Models;
+using SimpleBlog.Commands.Validation.Message;
 
 namespace Pitchball.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMessageService _messageService;
-        public HomeController(IMessageService messageService)
+        private IMessageService _messageService;
+        private IContactMessageService _contactMessageService;
+        public HomeController(IMessageService messageService, IContactMessageService contactMessageService)
         {
             _messageService = messageService;
+            _contactMessageService = contactMessageService;
         }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -28,9 +34,39 @@ namespace Pitchball.Controllers
 
             return View(viewModel);
         }
-        
-       
-        [HttpGet]
+        [HttpPost("contact")]
+        public async Task<IActionResult> Contact(CreateContactMessageCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ShowMessage = true;
+                ViewBag.Message = "Something went wrong";
+                return View();
+            }
+
+            try
+            {
+                CreateContactMessageValidator.CommandValidation(command);
+
+                await _contactMessageService.AddContactMessageAsync(command);
+                ViewBag.Added = true;
+                return View();
+            }
+            catch (InternalSystemException ex)
+            {
+                ViewBag.ShowMessage = true;
+                ViewBag.Message = ex.Message;
+                return View();
+            }
+            catch (Exception)
+            {
+                ViewBag.ShowMessage = true;
+                ViewBag.Message = "Something went wrong!";
+                return View();
+            }
+        }
+
+        [HttpGet("contact")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

@@ -21,7 +21,7 @@ namespace Pitchball.Infrastructure.Services
 
         //public async Task AddMessageAsync(CreateMessage command)
         //{
-        //    var message = new Message(command.Content);
+        //    var message = new ContactMessage(command.Content);
         //    await _context.SaveChangesAsync();
         //}
         public async Task<IEnumerable<Message>> GetMessagesAsync()
