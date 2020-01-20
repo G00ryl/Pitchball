@@ -9,7 +9,7 @@ namespace Pitchball.Infrastructure.Services.Interfaces
 {
     public interface IMessageService
     {
-        //Task AddMessageAsync(CreateMessage command );
+        Task CreateMessageAsync(CreateMessage command );
         Task<IEnumerable<Message>> GetMessagesAsync();    
     }
 }

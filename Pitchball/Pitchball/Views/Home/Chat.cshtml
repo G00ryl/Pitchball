@@ -1,12 +1,11 @@
 ﻿@model Pitchball.Infrastructure.ViewModels.Messages.MessagesViewModel
 
-    <div class="card border-secondary mb-3">
-        <div class="card-body bg-light">
+    <div class="card border-dark mb-3">
+        <div class="card-body bg-light border-bottom">
             <h4 class="card-title">Nowa wiadomość</h4>
             <hr>
             <form action="../new-message" method="post">
                 <div class="form-group">
-                    <label for="messageContent">Treść wiadomości:</label>
                     @Html.TextAreaFor(model => model.NewMessage.Content, new
                {
                    @type = "text",
@@ -17,37 +16,39 @@
                    @minlength = "2",
                    @maxlength = "2000",
                    @rows = "3",
-                   @required = "true"
+                   @cols = "10",
+                   @required = "true",
                })
                 </div>
-
                 <button type="submit" class="btn btn-primary">Napisz</button>
             </form>
         </div>
         </hr>
-        <div class="card">
-            <div class="card-header text-center"><h1>CZAT</h1></div>
+        <div class="card" style="border-width:5px;">
+            <div class="card-header text-center bg-dark"><h1 style="color:white"><b><i>CZAT</i></b></h1></div>
             @if (Model.Messages != null && Model.Messages.Any())
             {
                 foreach (var message in Model.Messages.OrderByDescending(x => x.CreatedAt))
                 {
-                    <div class="card">
+                    <div class="card" style="margin:6px; border-width:4px; border-radius:5px;" >
                         <div class="card-body">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h4 class="card-title">@message.Content</h4>
-                                <h4 class="card-title">(@message.User.Name @message.User.Surname) || (@message.Captain.Name @message.Captain.Surname)</h4>
-                                <small class="text-muted">@message.CreatedAt.ToShortDateString()</small>
+                            <div class="d-flex w-100 justify-content-between " style="height:auto">
+                                @if (message.Creator != null)
+                                {
+                                    <p class="card-title">@message.Creator.Login  </p>
+                                }
+                                <p class="card-title" style="margin-top:auto; margin-bottom:auto;">@message.Content</p>
+                                <small class="text-muted" style="margin-top:auto; margin-bottom:auto;">@message.CreatedAt.ToShortDateString()</small>
                             </div>
                         </div>
                     </div>
-
                 }
             }
             else
             {
-                <div class="alert alert-primary" style="margin:10px;" role="alert">
+                <div class="alert alert-primary" role="alert">
                     Nie ma jeszcze wiadomości? Bądź pierwszy i napisz coś!
                 </div>
             }
         </div>
-        <br />
+        

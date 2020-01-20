@@ -47,9 +47,9 @@ namespace Pitchball.Infrastructure.Data
                 .HasForeignKey<AccountImage>(y => y.AccountRef)
                 .IsRequired(false);
 
-            modelBuilder.Entity<Captain>()
-                .HasMany(x => x.Reservations)
-                .WithOne(y => y.Captain)
+            modelBuilder.Entity<Account>()
+                .HasMany(x => x.Messages)
+                .WithOne(y => y.Creator)
                 .IsRequired(false);
 
             modelBuilder.Entity<Admin>()

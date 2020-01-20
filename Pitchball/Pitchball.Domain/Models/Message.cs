@@ -8,8 +8,7 @@ namespace Pitchball.Domain.Models
     public class Message : Entity 
     {
         public string Content { get; set; }
-        public User User { get; set;  }
-        public Captain Captain { get; set; }
+        public Account Creator { get; set; }
 
         public Message() : base() { }
         

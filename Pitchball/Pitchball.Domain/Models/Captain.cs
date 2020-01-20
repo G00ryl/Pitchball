@@ -14,6 +14,7 @@ namespace Pitchball.Domain.Models
 
         public virtual Team Team { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
+        
 
         public Captain() : base() { }
 
