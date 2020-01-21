@@ -70,13 +70,16 @@ namespace Pitchball.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.ShowMessage = true;
+                ViewBag.Message = "Something went wrong";
                 return RedirectToAction("Pitches");
             }
 
             try
             {
                 await _pitchservice.DeleteAsync(id);
-                return RedirectToAction("Pitches");
+                ViewBag.Added = true;
+                return RedirectToAction("Pitches", "Pitch");
             }
             catch (Exception)
             {

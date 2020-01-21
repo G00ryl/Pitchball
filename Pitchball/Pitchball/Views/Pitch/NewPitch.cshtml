@@ -10,7 +10,7 @@
 @if (ViewBag.Added == true)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        Post has been <strong>successfully</strong> added.
+        Pitch has been <strong>successfully</strong> added.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -27,9 +27,9 @@
     </div>
 }
 
-<div class="card border-secondary mb-3">
+<div class="card  mb-3" style="border-width:10px;">
     <div class="card-body bg-light">
-        <h5 class="card-title">New pitch</h5>
+        <h2 class="card-title text-center" style="color:forestgreen">Nowe boisko</h2>
         <hr>
         <form action="newpitch" method="post">
             <div class="form-group">
@@ -37,11 +37,11 @@
                 @Html.TextAreaFor(model => model.Name, new
            {
                @type = "text",
-               @class = "form-control bg-dark",
+               @class = "form-control bg-light",
                @id = "description",
-               @placeholder = "Enter post's description",
+               @placeholder = "Nazwa boiska",
                @pattern = @"^[A-Za-z-0-9\.\-\!\?]+( [A-Za-z-0-9\.\-\!\?]+)*$",
-               @minlength = "10",
+               @minlength = "5",
                @maxlength = "250",
                @required = "true"
            })
@@ -52,11 +52,11 @@
                 @Html.TextBoxFor(model => model.Surface, new
            {
                @type = "text",
-               @class = "form-control bg-dark",
+               @class = "form-control bg-light",
                @id = "tags",
-               @placeholder = "Enter post's tags",
+               @placeholder = "Sztuczna trawa / Beton/Asfalt / Tartan / Naturalna trawa",
                @pattern = @"^[a-z\-\;]+([a-z\-\;]+)*$",
-               @minlength = "3",
+               @minlength = "5",
                @maxlength = "200",
                @required = "true"
            })
@@ -66,11 +66,11 @@
                 @Html.TextBoxFor(model => model.Lightning, new
            {
                @type = "text",
-               @class = "form-control bg-dark",
+               @class = "form-control bg-light",
                @id = "tags",
-               @placeholder = "Enter post's tags",
+               @placeholder = "Płatne / Darmowe / Brak",
                @pattern = @"^[a-z\-\;]+([a-z\-\;]+)*$",
-               @minlength = "3",
+               @minlength = "4",
                @maxlength = "200",
                @required = "true"
            })
@@ -80,9 +80,9 @@
                 @Html.TextBoxFor(model => model.Street, new
            {
                @type = "text",
-               @class = "form-control bg-dark",
+               @class = "form-control bg-light",
                @id = "tags",
-               @placeholder = "Enter post's tags",
+               @placeholder = "Wpisz ulice",
                @pattern = @"^[a-z\-\;]+([a-z\-\;]+)*$",
                @minlength = "3",
                @maxlength = "200",
@@ -94,9 +94,9 @@
                 @Html.TextBoxFor(model => model.City, new
            {
                @type = "text",
-               @class = "form-control bg-dark",
+               @class = "form-control bg-light",
                @id = "tags",
-               @placeholder = "Enter post's tags",
+               @placeholder = "Wpisz miasto",
                @pattern = @"^[a-z\-\;]+([a-z\-\;]+)*$",
                @minlength = "3",
                @maxlength = "200",

@@ -4,6 +4,25 @@
     <link rel="stylesheet" href="~/css/Pitches.css" />
 
 }
+@if (ViewBag.Added == true)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Pitch has been <strong>successfully</strong> deleted.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (ViewBag.ShowMessage == true)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Message
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
 
 @if (Context.Session.GetString("Role") == "Admin")
 {
@@ -31,18 +50,18 @@
 
             foreach (var pitch in Model)
             {
-        <tr class="table-row ">
-            <th scope="row">@pitch.Id</th>
-            <td><a asp-action="Pitch" asp-route-id="@pitch.Id">@pitch.Name</a></td>
-            <td>@pitch.Street</td>
-            @if (Context.Session.GetString("Role") == "Admin")
-            {
-                <td>
-                    <a href="@Url.Action("DeletePitch", "Pitch", new { id = pitch.Id.ToString()})" class="btn btn-danger">Delete</a>
-                </td>
-            }
-                
-            </tr>
+                <tr class="table-row ">
+                    <th scope="row">@pitch.Id</th>
+                    <td><a asp-action="Pitch" asp-route-id="@pitch.Id">@pitch.Name</a></td>
+                    <td>@pitch.Street</td>
+                    @if (Context.Session.GetString("Role") == "Admin")
+                    {
+                        <td>
+                            <a href="@Url.Action("DeletePitch", "Pitch", new { id = pitch.Id.ToString()})" class="btn btn-danger">Delete</a>
+                        </td>
+                    }
+
+                </tr>
             }
         }
         else
