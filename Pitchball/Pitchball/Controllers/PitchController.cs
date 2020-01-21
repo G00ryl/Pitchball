@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Pitchball.Attributes;
+using Pitchball.Infrastructure.Commands.Pitch;
 using Pitchball.Infrastructure.Services;
 using Pitchball.Infrastructure.Services.Interfaces;
 
@@ -62,6 +63,56 @@ namespace Pitchball.Controllers
             catch (Exception e)
             {
                 return RedirectToAction("Index", "Home");
+            }
+        }
+        [HttpGet("delete-pitch/{id}")]
+        public async Task<IActionResult> DeletePitch(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Pitches");
+            }
+
+            try
+            {
+                await _pitchservice.DeleteAsync(id);
+                return RedirectToAction("Pitches");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Pitches");
+            }
+        }
+        [HttpGet("newpitch")]
+        public async Task<IActionResult> NewPitch() => await Task.FromResult(View());
+        [HttpPost("newpitch")]
+        public async Task<IActionResult> NewPitch(CreatePitchCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ShowMessage = true;
+                ViewBag.Message = "Something went wrong";
+                return View();
+            }
+
+            try
+            {
+                await _pitchservice.AddPitchAsync(command);
+
+                ViewBag.Added = true;
+                return View();
+            }
+            catch (InternalSystemException ex)
+            {
+                ViewBag.ShowMessage = true;
+                ViewBag.Message = ex.Message;
+                return View();
+            }
+            catch (Exception)
+            {
+                ViewBag.ShowMessage = true;
+                ViewBag.Message = "Something went wrong!";
+                return View();
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pitchball.Domain.Models;
+using Pitchball.Infrastructure.Commands.Pitch;
 using Pitchball.Infrastructure.Data;
 using Pitchball.Infrastructure.Data.QueryExtenions;
 using Pitchball.Infrastructure.Extensions.Exceptions;
@@ -20,7 +21,19 @@ namespace Pitchball.Infrastructure.Services
         {
             _context = context;
         }
+        public async Task AddPitchAsync(CreatePitchCommand command)
+        {
+            var pitch = new Pitch(command.Name, command.Surface, command.Lightning, command.Street, command.City);
+            await _context.Pitches.AddAsync(pitch);
+            await _context.SaveChangesAsync();
+        }
+        public async Task DeleteAsync(int id)
+        {
+            var pitch = await _context.Pitches.SingleOrDefaultAsync(x => x.Id == id);
+            _context.Pitches.Remove(pitch);
 
+            await _context.SaveChangesAsync();
+        }
         public async Task<Pitch> GetAsync(int id)
         {
             var pitch = await _context.Pitches.GetById(id).Include(x => x.Reservations).SingleOrDefaultAsync();
@@ -34,4 +47,5 @@ namespace Pitchball.Infrastructure.Services
         public async Task<IEnumerable<Pitch>> GetAllAsync()
             => await Task.FromResult(_context.Pitches.OrderBy(x => x.Id));
     }
+
 }

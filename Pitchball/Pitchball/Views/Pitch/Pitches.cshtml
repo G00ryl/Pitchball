@@ -8,9 +8,7 @@
 @if (Context.Session.GetString("Role") == "Admin")
 {
     <div class="card">
-        <button type="button" class="btn btn-success">
-            Dodaj nowe boisko
-        </button>
+        <a href="@Url.Action("NewPitch", "Pitch")" class="btn btn-success">Dodaj nowe boisko!</a>
     </div>
 }
 
@@ -40,7 +38,7 @@
             @if (Context.Session.GetString("Role") == "Admin")
             {
                 <td>
-                    <button type="button" class="btn btn-danger">Usuń boisko</button>
+                    <a href="@Url.Action("DeletePitch", "Pitch", new { id = pitch.Id.ToString()})" class="btn btn-danger">Delete</a>
                 </td>
             }
                 

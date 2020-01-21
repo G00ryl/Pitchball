@@ -32,6 +32,14 @@ namespace Pitchball.Domain.Models
             Street = street;
             City = city;
         }
+        public Pitch(string name, string surface, string lighting, string street, string city) : base()
+        {
+            Name = name;
+            Surface = surface;
+            Lighting = lighting;
+            Street = street;
+            City = city;
+        }
 
         public void Update(string name, bool isActive, string surface, string lighting, string street, string city)
         {
