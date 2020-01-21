@@ -9,6 +9,7 @@ namespace Pitchball.Infrastructure.ViewModels.Messages
 {
     public class MessagesViewModel
     {
+        public Message message;
         public IEnumerable<Message> Messages { get; protected set; }
         public CreateMessage NewMessage { get; set; }
 

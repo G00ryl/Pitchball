@@ -42,27 +42,39 @@ namespace Pitchball.Controllers
         {
             if (string.IsNullOrWhiteSpace(command.NewMessage.Content))
             {
-                TempData["CommentFlag"] = true;
-                TempData["CommentMessage"] = "Comment can't be empty!";
-                return RedirectToAction("Chat","Home");
+                TempData["MessageFlag"] = true;
+                TempData["MessageMessage"] = "Message can't be empty!";
+                return RedirectToAction("Chat", "Home");
             }
 
-            try
-            {
-                var userId = int.Parse(HttpContext.Session.GetString("Id"));
-                var id = await _accountService.GetAsync(userId);
-                
-
-                await _messageService.CreateMessageAsync(command.NewMessage);
-
-                return RedirectToAction("Index", "Home");
-            }
-            
-            catch (Exception)
+            if(HttpContext.Session.GetString("Id") == null)
             {
                 ViewBag.ShowMessage = true;
                 ViewBag.Message = "Something went wrong!";
-                return View();
+                return RedirectToAction("Chat", "Home");
+            }
+            else
+            {
+                try
+                {
+                    var userId = int.Parse(HttpContext.Session.GetString("Id"));
+                    var account = await _accountService.GetAsync(userId);
+                    
+                    await _messageService.CreateMessageAsync(command.NewMessage, account);
+                    ViewBag.ShowMessage = true;
+                    ViewBag.Message = "NICE!";
+                    return RedirectToAction("Chat", "Home");
+
+                }
+
+                catch (Exception)
+                {
+                    ViewBag.ShowMessage = true;
+                    ViewBag.Message = "Something went wrong!";
+                    return RedirectToAction("Chat", "Home");
+
+                }
+
             }
         }
         [HttpPost("contact")]
