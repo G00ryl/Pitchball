@@ -58,7 +58,7 @@ namespace Pitchball.Controllers
             catch (Exception)
             {
                 ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = "Coś poszło nie tak.";
+                ViewBag.ErrorMessage = "Podany login, lub email znajduje się już u nas bazie.";
 
                 return View("RegisterUser");
             }
@@ -85,7 +85,7 @@ namespace Pitchball.Controllers
             catch (Exception)
             {
                 ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = "Coś poszło nie tak.";
+                ViewBag.ErrorMessage = "Podany login, lub email znajduje się już u nas bazie.";
 
                 return View("RegisterCaptainWithTeam");
             }
@@ -141,7 +141,11 @@ namespace Pitchball.Controllers
         {
             HttpContext.Session.Clear();
 
-            return await Task.FromResult(RedirectToAction("Index", "Home"));
+            await HttpContext.Session.CommitAsync();
+            ViewBag.ShowSuccess = true;
+            ViewBag.SuccessMessage = "Wylogowano pomyślnie";
+
+            return View("Login");
         }
     }
 }

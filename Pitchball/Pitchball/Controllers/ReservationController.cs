@@ -9,6 +9,7 @@ using Pitchball.Domain.Models;
 using Pitchball.Infrastructure.Commands.Reservation;
 using Pitchball.Infrastructure.Extensions.Exceptions;
 using Pitchball.Infrastructure.Services.Interfaces;
+using Pitchball.Infrastructure.ViewModels.Pitch;
 
 namespace Pitchball.Controllers
 {
@@ -25,12 +26,19 @@ namespace Pitchball.Controllers
             _captainService = captainService;
             _pitchService = pitchService;
         }
+        
 
         [CustomAuthorize("Captain")]
         [HttpPost("pitch/{id}/reservations")]
-        public async Task<IActionResult> CreateAsync(int id, CreateReservation command)
+        public async Task<IActionResult> CreateReservation(CreateReservation command, int id )
         {
-            // Validation
+            if (! ModelState.IsValid)
+            {
+                ViewBag.ShowError = true;
+                ViewBag.ErrorMessage = "Something went wrong";
+                return View("CreateReservation", command); ;
+            }
+
             var captainId = int.Parse(HttpContext.Session.GetString("Id"));
 
             try
@@ -39,8 +47,9 @@ namespace Pitchball.Controllers
                 var captain = await _captainService.GetAsync(captainId);
 
                 await _reservationService.AddAsync(command, captain, pitch);
-
-                return Ok();
+                ViewBag.ShowSuccess = true;
+                ViewBag.SuccessMessage = "Dodawanie rezerwacji zakończone pomyślnie";
+                return View();
             }
             catch (Exception)
             {
@@ -48,8 +57,15 @@ namespace Pitchball.Controllers
             }
         }
 
-        [CustomAuthorize("User, Captain, Admin")]
+        [CustomAuthorize("Captain")]
         [HttpGet("pitch/{id}/reservations")]
+        public IActionResult CreateReservation()
+        {
+            return View();
+        }
+
+        [CustomAuthorize("User, Captain, Admin")]
+        [HttpGet("pitch/{id}/allreservations")]
         public async Task<IEnumerable<Reservation>> GetForPitchAsync(int id)
         {
             var reservations = await _reservationService.GetForPitchAsync(id);

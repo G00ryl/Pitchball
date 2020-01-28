@@ -46,7 +46,7 @@ namespace Pitchball.Infrastructure.Services
 
         public async Task<Captain> GetAsync(int id)
         {
-            var captain = await _context.Captains.GetById(id).Include(x => x.AccountImage).Include(x => x.Reservations).SingleOrDefaultAsync();
+            var captain = await _context.Captains.GetById(id).Include(x => x.AccountImage).Include(x => x.Reservations).Include(x => x.Team).SingleOrDefaultAsync();
 
             if (captain == null)
                 throw new CorruptedOperationException("Captain doesn't exist");

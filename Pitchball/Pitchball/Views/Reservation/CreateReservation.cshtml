@@ -1,0 +1,42 @@
+﻿@model Pitchball.Infrastructure.Commands.Reservation.CreateReservation
+@{
+    ViewData["Title"] = "Create Resertvation";
+}
+
+<div class="card" style="padding:10px;">
+    <form method="post" asp-action="CreateReservation" asp-controller="Reservation">
+        <div class="container-fluid text-center">
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1 col-md-4"> <h5>Nazwa rezerwacji:</h5></label>
+                <input type="text" asp-for="Name" class="form-control form-control-sm" id="login" placeholder="Mecz ligowy..">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group ">
+                        <label for="example-datetime-local-input" class="col-lg-6 col-form-label">Początek rezerwacji</label>
+                        <div class="col-10">
+                            <input type="datetime-local" asp-for="StartDate" value="2011-08-19T13:45:00" class="form-control" id="login" placeholder="Początek rezerwacji">
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group ">
+                        <label for="example-datetime-local-input" class="col-lg-6">Koniec rezerwacji</label>
+                        <div class="col-10">
+                            <input type="datetime-local" asp-for="EndDate" value="2011-08-19T13:45:00" class="form-control" id="login" placeholder="Koniec rezerwacji">
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5"></div>
+            <div class="col-lg-2">
+                <button type="submit" class="btn btn-success text-center">Dodaj rezerwację</button>
+            </div>
+        </div>
+    </form>
+</div>

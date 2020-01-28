@@ -1,5 +1,6 @@
 ﻿using Pitchball.Domain.Models;
 using Pitchball.Infrastructure.Commands.Reservation;
+using Pitchball.Infrastructure.ViewModels.Pitch;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -6,6 +6,7 @@ using Pitchball.Infrastructure.Data;
 using Pitchball.Infrastructure.Data.QueryExtenions;
 using Pitchball.Infrastructure.Extensions.Exceptions;
 using Pitchball.Infrastructure.Services.Interfaces;
+using Pitchball.Infrastructure.ViewModels.Pitch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
