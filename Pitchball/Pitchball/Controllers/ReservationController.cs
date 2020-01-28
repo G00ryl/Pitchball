@@ -30,30 +30,31 @@ namespace Pitchball.Controllers
 
         [CustomAuthorize("Captain")]
         [HttpPost("pitch/{id}/reservations")]
-        public async Task<IActionResult> CreateReservation(CreateReservation command, int id )
+        public async Task<IActionResult> CreateReservation(int id ,CreateReservation command )
         {
             if (! ModelState.IsValid)
             {
                 ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = "Something went wrong";
+                ViewBag.ErrorMessage = "Popraw wymagane błędy";
                 return View("CreateReservation", command); ;
             }
-
-            var captainId = int.Parse(HttpContext.Session.GetString("Id"));
-
             try
             {
+                var captainId = int.Parse(HttpContext.Session.GetString("Id"));
                 var pitch = await _pitchService.GetAsync(id);
                 var captain = await _captainService.GetAsync(captainId);
 
                 await _reservationService.AddAsync(command, captain, pitch);
+                ModelState.Clear();
                 ViewBag.ShowSuccess = true;
                 ViewBag.SuccessMessage = "Dodawanie rezerwacji zakończone pomyślnie";
                 return View();
             }
             catch (Exception)
             {
-                return BadRequest();
+                ViewBag.ShowError = true;
+                ViewBag.ErrorMessage = "Rezerwacja na tym boisku w podanym okresie już istnieje!";
+                return View();
             }
         }
 

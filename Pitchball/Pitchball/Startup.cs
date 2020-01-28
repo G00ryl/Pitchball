@@ -18,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Pitchball.Infrastructure.Commands.Account;
 using Pitchball.Infrastructure.Commands.Captain;
 using Pitchball.Infrastructure.Commands.Team;
+using Pitchball.Infrastructure.Commands.Reservation;
 using Pitchball.Infrastructure.Data;
 using Pitchball.Infrastructure.Extensions;
 using Pitchball.Infrastructure.Extensions.Interfaces;
@@ -26,6 +27,7 @@ using Pitchball.Infrastructure.Services.Interfaces;
 using Pitchball.Validators.Account;
 using Pitchball.Validators.Captain;
 using Pitchball.Validators.Team;
+using Pitchball.Validators.Reservation;
 
 namespace Pitchball
 {
@@ -110,12 +112,13 @@ namespace Pitchball
             services.AddScoped<IPasswordManager, PasswordManager>();
             #endregion
 
-            #region Validators
+            #region 
             services.AddTransient<IValidator<CreateAccount>, CreateAccountValidator>();
             services.AddTransient<IValidator<CreateCaptainWithTeam>, CreateCaptainWithTeamValidator>();
             services.AddTransient<IValidator<CreateTeam>, CreateTeamValidator>();
             services.AddTransient<IValidator<LoginAccount>, LoginAccountValidator>();
             services.AddTransient<IValidator<UpdateAccount>, UpdateAccountValidator>();
+             services.AddTransient<IValidator<CreateReservation>, CreateReservationValidator>();
             #endregion
         }
 
