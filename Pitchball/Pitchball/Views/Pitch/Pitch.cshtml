@@ -67,8 +67,34 @@
             </div>
         </div>
     </div>
-
-
+    <div class="card" style=" border-width:2px;">
+        <div class="card-body">
+            <div class="card-title"style="color:black"><h4>Nowy komentarz</h4></div>
+            <hr />
+            @if (Context.Session.GetString("Login") != null)
+            {
+                <form action="../pitches/@Model.Pitch.Id.ToString()/" method="post">
+                    <div class="form-group">
+                        <label for="commentContent">Content</label>
+                        @Html.TextAreaFor(model => model.NewComment.Content, new
+                   {
+                       @type = "text",
+                       @class = "form-control",
+                       @id = "ommentContent",
+                       @placeholder = "Enter your comment.",
+                       @minlength = "3",
+                       @rows = "6"
+                   })
+                    </div>
+                    <button type="submit" class="btn btn-primary">Comment</button>
+                </form>
+            }
+            else
+            {
+                <p class="card-text" style="color:black">Tylko <strong>zalogowani</strong> użytkownicy mogą pisać komentarze!</p>
+            }
+        </div>
+    </div>
 
 
 
@@ -89,7 +115,6 @@
                 <table class="table table-light">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Lp.</th>
                             <th scope="col">Nazwa rezerwacji</th>
                             <th scope="col">Początek rezerwacji</th>
                             <th scope="col">Koniec Rezerwacji</th>
@@ -108,10 +133,7 @@
                                 {
 
                                     <tr class="table-row">
-                                        <th scope="row">@for (int i = 1; i <= Model.Pitch.Reservations.Count(); i++)
-                                        {
-                                            @i;
-                                        }</th>
+
                                         <td>@reservation.Name </td>
                                         <td>@reservation.StartDate</td>
                                         <td>@reservation.EndDate</td>
@@ -120,15 +142,35 @@
                                 }
                             </div>
                         }
-                </div>
+            </div>
             </tbody>
             </table>
         </div>
-        </div>
-        <div id="comments" class="container tab-pane fade">
-            <br>
-        </div>
     </div>
+    <div id="comments" class="container tab-pane fade">
+        <br>
+        @if (Model.Pitch.Comments == null || !Model.Pitch.Comments.Any())
+        {
+            <p class="card-text">Nie ma jeszcze żadnych komentarzy</p>
+        }
+        else
+        {
+            <div class="list-group">
+                @foreach (var comment in Model.Pitch.Comments.OrderByDescending(x => x.CreatedAt))
+                {
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">@comment.Creator.Login</h5>
+                            <small class="text-muted">@comment.CreatedAt.ToShortDateString()</small>
+                        </div>
+                        <p class="mb-1">@comment.Content</p>
+                    </a>
+                }
+            </div>
+        }
+        </div>
+    <br />
 </div>
+
 
 

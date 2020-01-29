@@ -36,7 +36,7 @@ namespace Pitchball.Infrastructure.Services
         }
         public async Task<Pitch> GetAsync(int id)
         {
-            var pitch = await _context.Pitches.GetById(id).Include(x =>x.Comments).Include(x => x.Reservations).ThenInclude(y => y.Captain).Include(x => x.PitchImage).SingleOrDefaultAsync();
+            var pitch = await _context.Pitches.GetById(id).Include(x =>x.Comments).ThenInclude(y => y.Creator).Include(x => x.Reservations).ThenInclude(y => y.Captain).Include(x => x.PitchImage).SingleOrDefaultAsync();
 
             if (pitch == null)
                 throw new CorruptedOperationException("Pitch doesn't exist");

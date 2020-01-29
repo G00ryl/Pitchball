@@ -10,7 +10,7 @@ namespace Pitchball.Domain.Models
     /// </summary>
     public class Comment : Entity
     {
-        public string Content { get; private set; }
+        public string Content { get;  set; }
         public virtual Pitch Pitch { get; set; }
         public virtual Account Creator { get; set; }
 
