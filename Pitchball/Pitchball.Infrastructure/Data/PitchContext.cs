@@ -94,11 +94,26 @@ namespace Pitchball.Infrastructure.Data
                 .WithOne(y => y.Pitch)
                 .HasForeignKey<PitchImage>(y => y.PitchRef)
                 .IsRequired(false);
+            #endregion Pitch
+
             modelBuilder.Entity<Message>()
                .HasKey(x => x.Id);
             modelBuilder.Entity<ContactMessage>()
                 .HasKey(x => x.Id);
-            #endregion Pitch
+
+            modelBuilder.Entity<Captain>()
+                .HasMany(x => x.Reservations);
+
+            #region Reservation
+            modelBuilder.Entity<Reservation>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Reservation>()
+               .HasOne(x => x.Captain)
+               .WithMany(y => y.Reservations)
+               .IsRequired(false);
+            #endregion
+
         }
 
         private Admin CreateDefaultAdmin()
