@@ -31,6 +31,9 @@ namespace Pitchball.Infrastructure.Services
             if (_context.Reservations.Where(x => x.Pitch.Id == pitch.Id).Any(y => reservation.IsOverlaping(y)) == true)
                 throw new CorruptedOperationException("Reservation within this range already exists.");
 
+            if (captain.Reservations.Where(x => x.Pitch.Id == pitch.Id && x.StartDate.Date == command.StartDate.Date).Count() >= 2)
+                throw new CorruptedOperationException("You can't have more than 2 reservations per day for this pitch.");
+
             reservation.Pitch = pitch;
             reservation.Captain = captain;
 
@@ -51,7 +54,7 @@ namespace Pitchball.Infrastructure.Services
             if (await _context.Reservations.ExistsInDatabaseAsync(id) == false)
                 throw new CorruptedOperationException("Reservation with this id doesn't exist.");
 
-            return await _context.Reservations.Include(x =>x.Captain).GetById(id).SingleOrDefaultAsync();
+            return await _context.Reservations.Include(x => x.Captain).GetById(id).SingleOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Reservation>> GetForCaptainAsync(int captainId)
@@ -63,10 +66,8 @@ namespace Pitchball.Infrastructure.Services
         {
             return await Task.FromResult(_context.Reservations.Where(x => x.Pitch.Id == pitchId).AsEnumerable());
         }
-       
+
         public async Task<IEnumerable<Reservation>> GetAllReservations()
             => await Task.FromResult(_context.Reservations.OrderBy(x => x.StartDate));
-        }
-
     }
-
+}
