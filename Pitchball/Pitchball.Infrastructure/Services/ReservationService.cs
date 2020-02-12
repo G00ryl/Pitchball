@@ -31,7 +31,7 @@ namespace Pitchball.Infrastructure.Services
             if (_context.Reservations.Where(x => x.Pitch.Id == pitch.Id).Any(y => reservation.IsOverlaping(y)) == true)
                 throw new CorruptedOperationException("Reservation within this range already exists.");
 
-            if (captain.Reservations.Where(x => x.Pitch.Id == pitch.Id && x.StartDate.Date == command.StartDate.Date).Count() >= 2)
+            if (captain.Reservations.Where(x => x.StartDate.Date == command.StartDate.Date).Count() >= 2)
                 throw new CorruptedOperationException("You can't have more than 2 reservations per day for this pitch.");
 
             reservation.Pitch = pitch;
