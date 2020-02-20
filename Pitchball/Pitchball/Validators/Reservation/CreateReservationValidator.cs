@@ -23,6 +23,14 @@ namespace Pitchball.Validators.Reservation
             RuleFor(x => x.EndDate)
                 .NotEmpty()
                 .GreaterThan(x => x.StartDate);
+
+            RuleFor(x => x)
+                .Must(x => IsDifferenceLessThanTwoHours(x.StartDate, x.EndDate));
         }
+
+        private Func<DateTime, DateTime, bool> IsDifferenceLessThanTwoHours = (DateTime startDate, DateTime endDate) =>
+        {
+            return (endDate.TimeOfDay - startDate.TimeOfDay) <= TimeSpan.FromHours(2) ? true : false;
+        };
     }
 }
