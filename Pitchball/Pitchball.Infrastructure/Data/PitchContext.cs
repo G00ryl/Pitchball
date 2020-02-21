@@ -148,7 +148,7 @@ namespace Pitchball.Infrastructure.Data
         {
             var _passwordManager = new PasswordManager();
             _passwordManager.CalculatePasswordHash("@dmin68$%", out var passwordHash, out var passwordSalt);
-            var id = 1;
+            var id = 27;
 
             return new Admin(id, "Jan", "Nowak", "Admin", "admin@callme.com", passwordSalt, passwordHash);
         }

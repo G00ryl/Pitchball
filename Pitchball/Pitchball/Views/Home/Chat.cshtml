@@ -1,4 +1,5 @@
 ﻿@model Pitchball.Infrastructure.ViewModels.Messages.MessagesViewModel
+@using Microsoft.AspNetCore.Http;
 @if (ViewBag.Added == true)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -12,24 +13,32 @@
     <div class="card-body bg-light border-bottom">
         <h3 class="card-title">Nowa wiadomość</h3>
         <hr>
-        <form action="../new-message" method="post">
-            <div class="form-group">
-                @Html.TextAreaFor(model => model.NewMessage.Content, new
-           {
-               @type = "text",
-               @class = "form-control bg-light",
-               @id = "message content",
-               @placeholder = "Wprowadź treść wiadomości..",
-               @pattern = @"^[A-Za-z-0-9\.\-\!\?]+( [A-Za-z-0-9\.\-\!\?]+)*$",
-               @minlength = "2",
-               @maxlength = "2000",
-               @rows = "3",
-               @cols = "10",
-               @required = "true",
-           })
-            </div>
-            <button type="submit" class="btn btn-primary">Napisz</button>
-        </form>
+        @if (Context.Session.GetString("Login") != null)
+        {
+            <form action="../new-message" method="post">
+                <div class="form-group">
+                    @Html.TextAreaFor(model => model.NewMessage.Content, new
+               {
+                   @type = "text",
+                   @class = "form-control bg-light",
+                   @id = "message content",
+                   @placeholder = "Wprowadź treść wiadomości..",
+                   @pattern = @"^[A-Za-z-0-9\.\-\!\?]+( [A-Za-z-0-9\.\-\!\?]+)*$",
+                   @minlength = "2",
+                   @maxlength = "2000",
+                   @rows = "3",
+                   @cols = "10",
+                   @required = "true",
+               })
+
+                </div>
+                <button type="submit" class="btn btn-primary">Napisz</button>
+            </form>
+        }
+        else
+        {
+            <p class="card-text" style="color:black">Tylko <strong>zalogowani</strong> użytkownicy mogą pisać wiadomości!</p>
+        }
     </div>
     </hr>
     <div class="card" style="border-width:5px;">
@@ -40,12 +49,12 @@
             {
                 <div class="card" style="margin:6px; border-width:4px; border-radius:5px;">
                     <div class="card-body">
-                        <div class="d-flex mx-auto"  style="line-height:0%;">
+                        <div class="d-flex mx-auto" style="line-height:0%;">
                             @if (message.Creator != null)
                             {
-                                <div class=" p-2" style="color:crimson; margin:0 " ><b><big> @message.Creator.Name @message.Creator.Surname :</big></b> </div>
+                                <div class=" p-2" style="color:crimson; margin:0 "><b><big> @message.Creator.Name @message.Creator.Surname :</big></b> </div>
                             }
-                            <p class=" p-2" >@message.Content</p>
+                            <p class=" p-2">@message.Content</p>
                             <small class="text-muted ml-auto p-2">@message.CreatedAt.ToShortDateString()</small>
                         </div>
                     </div>
@@ -54,9 +63,11 @@
         }
         else
         {
+            <br />
             <div class="alert alert-primary" role="alert">
                 Nie ma jeszcze wiadomości? Bądź pierwszy i napisz coś!
             </div>
+            <br />
         }
     </div>
 
