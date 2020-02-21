@@ -26,17 +26,17 @@ namespace Pitchball.Controllers
             _captainService = captainService;
             _pitchService = pitchService;
         }
-        
 
         [CustomAuthorize("Captain")]
         [HttpPost("pitch/{id}/reservations")]
-        public async Task<IActionResult> CreateReservation(int id ,CreateReservation command )
+        public async Task<IActionResult> CreateReservation(int id, CreateReservation command)
         {
-            if (! ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 ViewBag.ShowError = true;
                 ViewBag.ErrorMessage = "Popraw wymagane błędy";
-                return View("CreateReservation", command); ;
+
+                return View("CreateReservation", command);
             }
             try
             {
@@ -48,6 +48,14 @@ namespace Pitchball.Controllers
                 ModelState.Clear();
                 ViewBag.ShowSuccess = true;
                 ViewBag.SuccessMessage = "Dodawanie rezerwacji zakończone pomyślnie";
+
+                return View();
+            }
+            catch (CorruptedOperationException ex)
+            {
+                ViewBag.ShowError = true;
+                ViewBag.ErrorMessage = ex.Message;
+
                 return View();
             }
             catch (CorruptedOperationException ex)
@@ -60,6 +68,7 @@ namespace Pitchball.Controllers
             {
                 ViewBag.ShowError = true;
                 ViewBag.ErrorMessage = "Rezerwacja na tym boisku w podanym okresie już istnieje!";
+
                 return View();
             }
         }
@@ -104,6 +113,7 @@ namespace Pitchball.Controllers
                 return BadRequest();
             }
         }
+
         [HttpGet("reservations")]
         public async Task<IActionResult> Reservations()
         {
@@ -111,11 +121,11 @@ namespace Pitchball.Controllers
             {
                 var reservations = await _reservationService.GetAllReservations();
                 return View(reservations);
-            }catch(Exception)
-            { 
+            }
+            catch (Exception)
+            {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
     }
 }
