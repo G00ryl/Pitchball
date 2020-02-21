@@ -50,6 +50,12 @@ namespace Pitchball.Controllers
                 ViewBag.SuccessMessage = "Dodawanie rezerwacji zakończone pomyślnie";
                 return View();
             }
+            catch (CorruptedOperationException ex)
+            {
+                ViewBag.ShowError = true;
+                ViewBag.ErrorMessage = ex.Message;
+                return View();
+            }
             catch (Exception)
             {
                 ViewBag.ShowError = true;

@@ -29,10 +29,10 @@ namespace Pitchball.Infrastructure.Services
             var reservation = new Reservation(command.Name, command.StartDate, command.EndDate);
 
             if (_context.Reservations.Where(x => x.Pitch.Id == pitch.Id).Any(y => reservation.IsOverlaping(y)) == true)
-                throw new CorruptedOperationException("Reservation within this range already exists.");
+                throw new CorruptedOperationException("Rezerwacja na tym boisku w podanym okresie już istnieje! Sprawdź wszystkie rezerwacje w widoku boiska.");
 
             if (captain.Reservations.Where(x => x.StartDate.Date == command.StartDate.Date).Count() >= 2)
-                throw new CorruptedOperationException("You can't have more than 2 reservations per day for this pitch.");
+                throw new CorruptedOperationException("Maksymalna ilość rezerwacji na dzień to: 2.");
 
             reservation.Pitch = pitch;
             reservation.Captain = captain;
