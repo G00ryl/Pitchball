@@ -31,24 +31,24 @@ using Pitchball.Validators.Reservation;
 
 namespace Pitchball
 {
-	public class Startup
-	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-		public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.Configure<CookiePolicyOptions>(options =>
-			{
-				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
-				options.CheckConsentNeeded = context => true;
-				options.MinimumSameSitePolicy = SameSiteMode.None;
-			});
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
@@ -58,37 +58,43 @@ namespace Pitchball
                 });
 
             #region Couchbase
-            services.AddCouchbase(opt =>
-            {
-                opt.Servers = new List<Uri> { new Uri("http://localhost:8091") };
-                opt.UseSsl = false;
-                opt.Username = "PitchballSession";
-                opt.Password = "Pitchball1234!";
-                opt.Buckets = new List<Couchbase.Configuration.Client.BucketDefinition> { new Couchbase.Configuration.Client.BucketDefinition() { Name = "PitchballSession" } };
-            });
 
-            services.AddDistributedCouchbaseCache("PitchballSession", opt => { });
+            //services.AddCouchbase(opt =>
+            //{
+            //    opt.Servers = new List<Uri> { new Uri("http://localhost:8091") };
+            //    opt.UseSsl = false;
+            //    opt.Username = "PitchballSession";
+            //    opt.Password = "Pitchball1234!";
+            //    opt.Buckets = new List<Couchbase.Configuration.Client.BucketDefinition> { new Couchbase.Configuration.Client.BucketDefinition() { Name = "PitchballSession" } };
+            //});
 
-            services.AddCouchbaseSession(opt =>
-            {
-                opt.Cookie.Name = ".Pitchball";
-                opt.Cookie.MaxAge = new TimeSpan(5, 0, 0, 0);
-                opt.IdleTimeout = new TimeSpan(6, 0, 0);
-            });
-            #endregion
+            //services.AddDistributedCouchbaseCache("PitchballSession", opt => { });
+
+            //services.AddCouchbaseSession(opt =>
+            //{
+            //    opt.Cookie.Name = ".Pitchball";
+            //    opt.Cookie.MaxAge = new TimeSpan(5, 0, 0, 0);
+            //    opt.IdleTimeout = new TimeSpan(6, 0, 0);
+            //});
+            services.AddSession();
+
+            #endregion Couchbase
 
             #region DatabaseSettings
+
             services.AddDbContext<PitchContext>(options => options
                 .UseSqlServer(Configuration.GetConnectionString("PitchballDatabase"),
                     c => c.MigrationsAssembly("Pitchball")).EnableSensitiveDataLogging(false));
-            #endregion
+
+            #endregion DatabaseSettings
 
             #region Services
+
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITeamService, TeamService>();
             services.AddScoped<ICaptainService, CaptainService>();
-            services.AddScoped<IPitchService,PitchService>();
+            services.AddScoped<IPitchService, PitchService>();
             services.AddScoped<IReservationService, ReservationService>();
             services.AddScoped<AccountImageService>();
             services.AddScoped<IPitchImage, PitchImageService>();
@@ -107,46 +113,51 @@ namespace Pitchball
                         return null;
                 }
             });
-            #endregion
+
+            #endregion Services
 
             #region Extensions
-            services.AddScoped<IPasswordManager, PasswordManager>();
-            #endregion
 
-            #region 
+            services.AddScoped<IPasswordManager, PasswordManager>();
+
+            #endregion Extensions
+
+            #region Validators
+
             services.AddTransient<IValidator<CreateAccount>, CreateAccountValidator>();
             services.AddTransient<IValidator<CreateCaptainWithTeam>, CreateCaptainWithTeamValidator>();
             services.AddTransient<IValidator<CreateTeam>, CreateTeamValidator>();
             services.AddTransient<IValidator<LoginAccount>, LoginAccountValidator>();
             services.AddTransient<IValidator<UpdateAccount>, UpdateAccountValidator>();
-             services.AddTransient<IValidator<CreateReservation>, CreateReservationValidator>();
-            #endregion
+            services.AddTransient<IValidator<CreateReservation>, CreateReservationValidator>();
+
+            #endregion Validators
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-		{
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseExceptionHandler("/Home/Error");
-				app.UseHsts();
-			}
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
 
-			app.UseHttpsRedirection();
-			app.UseStaticFiles();
-			//app.UseCookiePolicy();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            //app.UseCookiePolicy();
             app.UseSession();
 
             app.UseMvc(routes =>
-			{
-				routes.MapRoute(
-					name: "default",
-					template: "{controller=Home}/{action=Index}/{id?}");
-			});
-		}
-	}
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+        }
+    }
 }
