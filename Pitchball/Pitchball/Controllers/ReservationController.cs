@@ -58,6 +58,12 @@ namespace Pitchball.Controllers
 
                 return View();
             }
+            catch (CorruptedOperationException ex)
+            {
+                ViewBag.ShowError = true;
+                ViewBag.ErrorMessage = ex.Message;
+                return View();
+            }
             catch (Exception)
             {
                 ViewBag.ShowError = true;
