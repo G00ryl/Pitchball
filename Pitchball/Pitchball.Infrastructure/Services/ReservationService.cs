@@ -54,7 +54,7 @@ namespace Pitchball.Infrastructure.Services
             if (await _context.Reservations.ExistsInDatabaseAsync(id) == false)
                 throw new CorruptedOperationException("Reservation with this id doesn't exist.");
 
-            return await _context.Reservations.Include(x => x.Captain).GetById(id).SingleOrDefaultAsync();
+            return await _context.Reservations.Include(x => x.Captain).Include( x => x.Pitch).GetById(id).SingleOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Reservation>> GetForCaptainAsync(int captainId)
@@ -68,6 +68,6 @@ namespace Pitchball.Infrastructure.Services
         }
 
         public async Task<IEnumerable<Reservation>> GetAllReservations()
-            => await Task.FromResult(_context.Reservations.OrderBy(x => x.StartDate));
+            => await Task.FromResult(_context.Reservations.Include(x => x.Pitch).OrderBy(x => x.StartDate));
     }
 }

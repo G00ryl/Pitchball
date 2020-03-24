@@ -58,16 +58,10 @@ namespace Pitchball.Controllers
 
                 return View();
             }
-            catch (CorruptedOperationException ex)
-            {
-                ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = ex.Message;
-                return View();
-            }
             catch (Exception)
             {
                 ViewBag.ShowError = true;
-                ViewBag.ErrorMessage = "Rezerwacja na tym boisku w podanym okresie już istnieje!";
+                ViewBag.ErrorMessage = "Coś poszło nie tak";
 
                 return View();
             }

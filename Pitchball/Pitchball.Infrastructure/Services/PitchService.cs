@@ -45,7 +45,7 @@ namespace Pitchball.Infrastructure.Services
         }
 
         public async Task<IEnumerable<Pitch>> GetAllAsync()
-            => await Task.FromResult(_context.Pitches.OrderBy(x => x.Id));
+            => await Task.FromResult(_context.Pitches.Include(x => x.Reservations).OrderBy(x => x.Id));
     }
 
 }

@@ -53,7 +53,7 @@ namespace Pitchball.Controllers
                 ViewBag.SuccessMessage = "Rejestracja zakończona pomyślnie";
                 ModelState.Clear();
 
-                return RedirectToAction("Index", "Home");
+                return View("RegisterUser");
             }
             catch (Exception)
             {

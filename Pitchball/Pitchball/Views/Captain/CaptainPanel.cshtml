@@ -56,6 +56,7 @@
                                                 <th scope="col">Początek rezerwacji</th>
                                                 <th scope="col">Koniec Rezerwacji</th>
                                                 <th scope="col">Nazwa boiska</th>
+                                                <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -69,12 +70,13 @@
                                                     @foreach (var reservation in Model.Reservations.OrderByDescending(x => x.CreatedAt))
                                                     {
 
-                                                        <tr class="table-row">
-                                                            <td>@reservation.Name </td>
-                                                            <td>@reservation.StartDate</td>
-                                                            <td>@reservation.EndDate</td>
-                                                            <td>@reservation.Pitch.Name</td>
-                                                        </tr>
+                                                    <tr class="table-row">
+                                                        <td>@reservation.Name </td>
+                                                        <td>@reservation.StartDate</td>
+                                                        <td>@reservation.EndDate</td>
+                                                        <td>@reservation.Pitch.Name</td>
+                                                        <td><a class=" text-center  btn-block  btn btn-danger" style="" role="button">Usuń</a></td>
+                                                    </tr>
                                                     }
                                                 </div>
                                             }
@@ -84,13 +86,13 @@
                             </div>
                                 <hr />
                                 <div id="comments" class="container tab-pane fade">
-                                    @if (Model.Comments == null || Model.Comments.Count == 0)
+                                    @if (Model.Comments == null || !Model.Comments.Any())
                                     {
                                         <p>Nie posiadasz jakichkolwiek komentarzy...</p>
                                     }
                                     else
                                     {
-                                        @foreach (var comment in Model.Comments)
+                                        @foreach (var comment in Model.Comments.OrderByDescending(x => x.CreatedAt))
                                         {
                                             <div class="card comment" id="comment">
                                                 <div class="card-header text-left">

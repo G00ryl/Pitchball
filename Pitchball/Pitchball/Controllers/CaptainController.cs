@@ -43,6 +43,7 @@ namespace Pitchball.Controllers
             {
                 var id = int.Parse(HttpContext.Session.GetString("Id"));
                 var captain = await _captainService.GetAsync(id);
+
                 return View("CaptainPanel",captain);
             }
             catch (Exception)
