@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="~/css/Pitches.css" />
 
 }
+@{
+    ViewData["Title"] = "Boiska";
+}
 @if (ViewBag.Added == true)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -33,7 +36,7 @@
 
 <table class="table-responsive-sm table table-striped table-light">
     <thead class="thead-dark">
-        <tr >
+        <tr>
             <th scope="col">Lp.</th>
             <th scope="col">Nazwa obiektu</th>
             <th scope="col">Adres</th>
@@ -57,7 +60,7 @@
                     @if (Context.Session.GetString("Role") == "Admin")
                     {
                         <td>
-                            <a href="@Url.Action("DeletePitch", "Pitch", new { id = pitch.Id.ToString()})" class="btn btn-danger">Delete</a>
+                            <a href="@Url.Action("DeletePitch", "Pitch", new { id = pitch.Id.ToString()})" class="btn btn-danger">Usuń</a>
                         </td>
                     }
 

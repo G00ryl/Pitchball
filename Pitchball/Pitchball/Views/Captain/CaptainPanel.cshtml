@@ -75,7 +75,9 @@
                                                         <td>@reservation.StartDate</td>
                                                         <td>@reservation.EndDate</td>
                                                         <td>@reservation.Pitch.Name</td>
-                                                        <td><a class=" text-center  btn-block  btn btn-danger" style="" role="button">Usuń</a></td>
+                                                        <td>
+                                                            <a href="@Url.Action("DeleteReservation", "Reservation", new { id = reservation.Id.ToString()})" class="btn btn-danger">Usuń</a>
+                                                        </td>
                                                     </tr>
                                                     }
                                                 </div>

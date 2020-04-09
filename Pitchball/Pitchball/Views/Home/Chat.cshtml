@@ -1,5 +1,8 @@
 ﻿@model Pitchball.Infrastructure.ViewModels.Messages.MessagesViewModel
 @using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Czat";
+}
 @if (ViewBag.Added == true)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">

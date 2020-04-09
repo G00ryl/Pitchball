@@ -93,18 +93,25 @@ namespace Pitchball.Controllers
         }
 
         [CustomAuthorize("Captain")]
-        [HttpPost("reservations/{id}/delete")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        [HttpGet("delete-reservation/{id}")]
+        public async Task<IActionResult> DeleteReservation(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ShowMessage = true;
+                ViewBag.Message = "Something went wrong";
+                return RedirectToAction("Pitches");
+            }
+
             try
             {
                 await _reservationService.DeleteAsync(id);
-
-                return Ok();
+                ViewBag.Added = true;
+                return RedirectToAction("Profile", "Captain");
             }
             catch (Exception)
             {
-                return BadRequest();
+                return RedirectToAction("Profile","Captain");
             }
         }
 

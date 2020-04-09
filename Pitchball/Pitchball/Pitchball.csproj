@@ -9,10 +9,19 @@
   <ItemGroup>
     <Compile Remove="Migrations\20191229152917_Test.cs" />
     <Compile Remove="Migrations\20191229152917_Test.Designer.cs" />
+    <Compile Remove="Migrations\20200409160727_number1.cs" />
+    <Compile Remove="Migrations\20200409160727_number1.Designer.cs" />
+    <Compile Remove="Migrations\20200409161044_test.cs" />
+    <Compile Remove="Migrations\20200409161044_test.Designer.cs" />
+    <Compile Remove="Migrations\20200409161256_test2.cs" />
+    <Compile Remove="Migrations\20200409161256_test2.Designer.cs" />
+    <Compile Remove="Migrations\20200409161644_Test.cs" />
+    <Compile Remove="Migrations\20200409161644_Test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Couchbase.Extensions.Session" Version="1.0.2" />
+    <PackageReference Include="CouchbaseNetClient" Version="2.7.16" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />

@@ -18,14 +18,15 @@
 
                     @foreach (var contactmessage in Model)
                     {
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start bg-light" style="border-width:5px; border-radius:5px;">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">@contactmessage.Email</h5>
-                                <small class="text-muted">@contactmessage.CreatedAt.ToShortDateString()</small>
-                            </div>
-                            <p class="mb-1">@contactmessage.Text</p>
-                            <small class="text-muted">@contactmessage.Name</small>
-                        </a>
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start bg-light" style="border-width:5px; border-radius:5px;">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">@contactmessage.Email</h5>
+                            <small class="text-muted">@contactmessage.CreatedAt.ToShortDateString()</small>
+                        </div>
+                        <p class="mb-1">@contactmessage.Text</p>
+                        <small class="text-muted">@contactmessage.Name</small>
+                        <td><a class=" text-center  btn-block  btn btn-danger" style="" role="button">Usuń</a></td>
+                    </a>
                         <br />
                     }
                 </div>
