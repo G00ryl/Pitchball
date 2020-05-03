@@ -31,14 +31,15 @@ namespace Pitchball.Infrastructure.Services
         }
         public async Task DeleteAsync(int id)
         {
-            var pitch = await GetAsync(id);
+            var pitch = await GetAsync(id); 
+
             _context.Pitches.Remove(pitch);
            
             await _context.SaveChangesAsync();
         }
         public async Task<Pitch> GetAsync(int id)
         {
-            return await _context.Pitches.GetById(id).Include(x => x.Comments).ThenInclude(y => y.Creator).Include(x => x.Reservations).ThenInclude(y => y.Captain).Include(x => x.PitchImage).SingleOrDefaultAsync(x => x.PitchImage.Id == id);
+            return await _context.Pitches.GetById(id).Include(x => x.Comments).ThenInclude(y => y.Creator).Include(x => x.Reservations).ThenInclude(y => y.Captain).Include(x => x.PitchImage).SingleOrDefaultAsync();
 
         }
         public async Task<IEnumerable<Pitch>> GetAllAsync()

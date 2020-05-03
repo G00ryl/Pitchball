@@ -60,9 +60,11 @@ namespace Pitchball.Controllers
 
                 return File(image.ImageContent, image.ImageType);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return RedirectToAction("Index", "Home");
+                var filePath = _environment.WebRootPath + "\\images\\arena.jpg";
+                var imageFileStream = System.IO.File.OpenRead(filePath);
+                return File(imageFileStream, "image/jpg");
             }
         }
         [CustomAuthorize("Admin")]
@@ -78,9 +80,7 @@ namespace Pitchball.Controllers
 
             try
             {
-                await _pitchImage.DeleteImageAsync(id);
-                await _pitchservice.DeleteAsync(id);
-                
+                await _pitchImage.DeleteImageAsync(id);   
                 ViewBag.Added = true;
                 return RedirectToAction("Pitches");
             }
