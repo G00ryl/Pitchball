@@ -80,7 +80,7 @@ namespace Pitchball.Controllers
 
             try
             {
-                await _pitchImage.DeleteImageAsync(id);   
+                await _pitchservice.DeleteAsync(id);  
                 ViewBag.Added = true;
                 return RedirectToAction("Pitches");
             }
