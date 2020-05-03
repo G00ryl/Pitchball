@@ -9,5 +9,6 @@ namespace Pitchball.Infrastructure.Services.Interfaces
     public interface IPitchImage
     {
         Task<Image> GetPictureAsync(int parentId);
+        Task<Image> DeleteImageAsync(int imageId);
     }
 }

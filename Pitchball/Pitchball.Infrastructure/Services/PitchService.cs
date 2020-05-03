@@ -16,10 +16,12 @@ namespace Pitchball.Infrastructure.Services
     public class PitchService : IPitchService
     {
         private readonly PitchContext _context;
+        
 
         public PitchService(PitchContext context)
         {
             _context = context;
+       
         }
         public async Task AddPitchAsync(CreatePitchCommand command)
         {
@@ -29,21 +31,16 @@ namespace Pitchball.Infrastructure.Services
         }
         public async Task DeleteAsync(int id)
         {
-            var pitch = await _context.Pitches.SingleOrDefaultAsync(x => x.Id == id);
+            var pitch = await GetAsync(id);
             _context.Pitches.Remove(pitch);
-
+           
             await _context.SaveChangesAsync();
         }
         public async Task<Pitch> GetAsync(int id)
         {
-            var pitch = await _context.Pitches.GetById(id).Include(x =>x.Comments).ThenInclude(y => y.Creator).Include(x => x.Reservations).ThenInclude(y => y.Captain).Include(x => x.PitchImage).SingleOrDefaultAsync();
+            return await _context.Pitches.GetById(id).Include(x => x.Comments).ThenInclude(y => y.Creator).Include(x => x.Reservations).ThenInclude(y => y.Captain).Include(x => x.PitchImage).SingleOrDefaultAsync(x => x.PitchImage.Id == id);
 
-            if (pitch == null)
-                throw new CorruptedOperationException("Pitch doesn't exist");
-
-            return pitch;
         }
-
         public async Task<IEnumerable<Pitch>> GetAllAsync()
             => await Task.FromResult(_context.Pitches.Include(x => x.Reservations).OrderBy(x => x.Id));
     }

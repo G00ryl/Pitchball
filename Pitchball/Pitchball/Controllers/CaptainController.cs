@@ -129,7 +129,7 @@ namespace Pitchball.Controllers
             {
                 viewModel.Account = await _accountService.GetAsync(id);
 
-                return View("UserPanelEdit", viewModel);
+                return View("CaptainPanelEdit", viewModel);
             }
 
             try

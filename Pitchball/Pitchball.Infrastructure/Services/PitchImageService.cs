@@ -30,5 +30,12 @@ namespace Pitchball.Infrastructure.Services
 
             return image;
         }
+        public async Task<Image> DeleteImageAsync(int imageId)
+        {
+            var image = await GetPictureAsync(imageId);
+            _context.Images.Remove(image);
+            await _context.SaveChangesAsync();
+            return image;
+        }
     }
 }

@@ -65,6 +65,7 @@ namespace Pitchball.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        [CustomAuthorize("Admin")]
         [HttpGet("delete-pitch/{id}")]
         public async Task<IActionResult> DeletePitch(int id)
         {
@@ -77,9 +78,11 @@ namespace Pitchball.Controllers
 
             try
             {
+                await _pitchImage.DeleteImageAsync(id);
                 await _pitchservice.DeleteAsync(id);
+                
                 ViewBag.Added = true;
-                return RedirectToAction("Pitches", "Pitch");
+                return RedirectToAction("Pitches");
             }
             catch (Exception)
             {

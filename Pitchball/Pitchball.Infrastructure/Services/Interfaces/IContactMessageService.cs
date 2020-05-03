@@ -11,5 +11,8 @@ namespace Pitchball.Infrastructure.Services.Interfaces
     {
         Task AddContactMessageAsync(CreateContactMessageCommand command);
         Task<IEnumerable<ContactMessage>> GetMessagesAsync();
+        Task<ContactMessage> GetContactMessage(int id);
+        Task DeleteContactMessageAsync(int id);
+
     }
 }

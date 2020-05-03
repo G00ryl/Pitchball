@@ -34,5 +34,27 @@ namespace Pitchball.Controllers
 
             return View(contactMessages);
         }
+        [CustomAuthorize("Admin")]
+        [HttpGet("delete-contactMessage/{id}")]
+        public async Task<IActionResult> DeleteContactMessage(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ShowMessage = true;
+                ViewBag.Message = "Something went wrong";
+                return RedirectToAction("ContactMessages");
+            }
+
+            try
+            {
+                await _contactMessageSerivce.DeleteContactMessageAsync(id);
+                ViewBag.Added = true;
+                return RedirectToAction("ContactMessages", "Admin");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ContactMessages", "Admin");
+            }
+        }
     }
 }

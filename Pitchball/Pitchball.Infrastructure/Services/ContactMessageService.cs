@@ -1,7 +1,10 @@
-﻿using Pitchball.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Pitchball.Domain.Models;
 using Pitchball.Infrastructure.Commands;
 using Pitchball.Infrastructure.Commands.Message;
 using Pitchball.Infrastructure.Data;
+using Pitchball.Infrastructure.Data.QueryExtenions;
+using Pitchball.Infrastructure.Extensions.Exceptions;
 using Pitchball.Infrastructure.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -29,6 +32,22 @@ namespace Pitchball.Infrastructure.Services
 
         public async Task<IEnumerable<ContactMessage>> GetMessagesAsync()
             => await Task.FromResult(_context.ContactMessages.OrderByDescending(x => x.CreatedAt).AsEnumerable());
+        public async Task<ContactMessage> GetContactMessage(int id)
+        {
+                var contactMessage = await _context.ContactMessages.SingleOrDefaultAsync();
+
+                if (contactMessage == null)
+                    throw new CorruptedOperationException("Pitch doesn't exist");
+
+                return contactMessage;
+            }
+
+            public async Task DeleteContactMessageAsync(int id)
+        {
+            var contactmessage = await GetContactMessage(id);
+            _context.Remove(contactmessage);
+            await _context.SaveChangesAsync();
+        }
     }
 }
 
