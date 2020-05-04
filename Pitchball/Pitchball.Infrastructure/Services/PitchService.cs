@@ -34,8 +34,10 @@ namespace Pitchball.Infrastructure.Services
         public async Task DeleteAsync(int id)
         {
             var pitch = await GetAsync(id);
-            await _imageService.DeleteAsync(pitch.PitchImage);
-
+            if(pitch.PitchImage != null)
+            { 
+                await _imageService.DeleteAsync(pitch.PitchImage);
+            }
             _context.Pitches.Remove(pitch);
 
             await _context.SaveChangesAsync();

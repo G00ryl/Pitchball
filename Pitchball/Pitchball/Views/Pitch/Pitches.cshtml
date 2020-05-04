@@ -60,7 +60,7 @@
                     @if (Context.Session.GetString("Role") == "Admin")
                     {
                         <td>
-                            <a href="@Url.Action("DeleteReservationbyAdmin", "Admin", new { id = pitch.Id.ToString()})" class="btn btn-danger">Usuń</a>
+                            <a href="@Url.Action("DeletePitch", "Pitch", new { id = pitch.Id.ToString()})" class="btn btn-danger">Usuń</a>
                         </td>
                     }
 
