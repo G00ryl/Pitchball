@@ -16,9 +16,11 @@ namespace Pitchball.Controllers
     public class AdminController : Controller
     {
         private readonly IContactMessageService _contactMessageSerivce;
-        public AdminController(IContactMessageService contactMessageService)
+        private readonly IReservationService _reservationService;
+        public AdminController(IContactMessageService contactMessageService, IReservationService reservationService)
         {
             _contactMessageSerivce = contactMessageService;
+            _reservationService = reservationService;
         }
        
         [HttpGet("AdminPanel")]
@@ -54,6 +56,28 @@ namespace Pitchball.Controllers
             catch (Exception)
             {
                 return RedirectToAction("ContactMessages", "Admin");
+            }
+        }
+        [CustomAuthorize("Admin")]
+        [HttpGet("delete-reservation/{id}")]
+        public async Task<IActionResult> DeleteReservationbyAdmin(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ShowMessage = true;
+                ViewBag.Message = "Something went wrong";
+                return RedirectToAction("Reservations","Reservation");
+            }
+
+            try
+            {
+                await _reservationService.DeleteAsync(id);
+                ViewBag.Added = true;
+                return RedirectToAction("Reservations", "Reservation");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Reservations", "Reservation");
             }
         }
     }

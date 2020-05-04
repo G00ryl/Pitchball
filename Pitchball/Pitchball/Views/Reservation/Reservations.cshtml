@@ -38,7 +38,7 @@
                 @if (Context.Session.GetString("Role") == "Admin")
                 { 
                 <td>
-                    <a href="@Url.Action("DeleteAsync", "Reservation", new { id = reservation.Id.ToString()})" class="btn btn-danger">Usuń</a>
+                    <a href="@Url.Action("DeleteReservationbyAdmin", "Admin", new { id = reservation.Id.ToString()})" class="btn btn-danger">Usuń</a>
                 </td>
                 }
             </tr>
