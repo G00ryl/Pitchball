@@ -10,12 +10,14 @@ namespace Pitchball.Domain.Models
     /// </summary>
     public class Captain : Account
     {
-        public int TeamRef { get; private set; }
+        public int TeamId { get; private set; }
 
         public virtual Team Team { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
 
-        public Captain() : base() { }
+        public Captain() : base()
+        {
+        }
 
         public Captain(string name, string surname, string login, string email, byte[] salt, byte[] passwordHash)
             : base(name, surname, login, email, salt, passwordHash)

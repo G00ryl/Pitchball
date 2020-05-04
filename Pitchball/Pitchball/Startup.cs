@@ -57,8 +57,6 @@ namespace Pitchball
                     fv.ImplicitlyValidateChildProperties = true;
                 });
 
-            #region Couchbase
-
             services.AddCouchbase(opt =>
             {
                 opt.Servers = new List<Uri> { new Uri("http://localhost:8091") };
@@ -77,17 +75,9 @@ namespace Pitchball
                 opt.IdleTimeout = new TimeSpan(6, 0, 0);
             });
 
-            #endregion Couchbase
-
-            #region DatabaseSettings
-
             services.AddDbContext<PitchContext>(options => options
                 .UseSqlServer(Configuration.GetConnectionString("PitchballDatabase"),
                     c => c.MigrationsAssembly("Pitchball")).EnableSensitiveDataLogging(false));
-
-            #endregion DatabaseSettings
-
-            #region Services
 
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserService, UserService>();
@@ -113,15 +103,7 @@ namespace Pitchball
                 }
             });
 
-            #endregion Services
-
-            #region Extensions
-
             services.AddScoped<IPasswordManager, PasswordManager>();
-
-            #endregion Extensions
-
-            #region Validators
 
             services.AddTransient<IValidator<CreateAccount>, CreateAccountValidator>();
             services.AddTransient<IValidator<CreateCaptainWithTeam>, CreateCaptainWithTeamValidator>();
@@ -129,8 +111,6 @@ namespace Pitchball
             services.AddTransient<IValidator<LoginAccount>, LoginAccountValidator>();
             services.AddTransient<IValidator<UpdateAccount>, UpdateAccountValidator>();
             services.AddTransient<IValidator<CreateReservation>, CreateReservationValidator>();
-
-            #endregion Validators
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

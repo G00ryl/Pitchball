@@ -13,20 +13,19 @@ namespace Pitchball.Infrastructure.Data
         {
         }
 
-        public DbSet<AccountImage> AccountImages { get; set; }
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<Admin> Admins { get; set; }
-        public DbSet<Captain> Captains { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-        public DbSet<Image> Images { get; set; }
-        public DbSet<Pitch> Pitches { get; set; }
-        public DbSet<PitchImage> PitchImages { get; set; }
-        public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<TeamImage> TeamImages { get; set; }
-        public DbSet<Team> Teams { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<ContactMessage> ContactMessages { get; set; }
+        public virtual DbSet<AccountImage> AccountImages { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Captain> Captains { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Pitch> Pitches { get; set; }
+        public virtual DbSet<PitchImage> PitchImages { get; set; }
+        public virtual DbSet<Reservation> Reservations { get; set; }
+        public virtual DbSet<TeamImage> TeamImages { get; set; }
+        public virtual DbSet<Team> Teams { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<ContactMessage> ContactMessages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,17 +34,9 @@ namespace Pitchball.Infrastructure.Data
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
-            #region Accounts
-
             modelBuilder.Entity<Account>()
                 .HasMany(x => x.Comments)
                 .WithOne(y => y.Creator)
-                .IsRequired(false);
-
-            modelBuilder.Entity<Account>()
-                .HasOne(x => x.AccountImage)
-                .WithOne(y => y.Account)
-                .HasForeignKey<AccountImage>(y => y.AccountRef)
                 .IsRequired(false);
 
             modelBuilder.Entity<Account>()
@@ -56,10 +47,6 @@ namespace Pitchball.Infrastructure.Data
             modelBuilder.Entity<Admin>()
                 .HasData(CreateDefaultAdmin());
 
-            #endregion Accounts
-
-            #region Team
-
             modelBuilder.Entity<Team>()
                 .HasMany(x => x.Members)
                 .WithOne(y => y.Team)
@@ -68,17 +55,13 @@ namespace Pitchball.Infrastructure.Data
             modelBuilder.Entity<Team>()
                 .HasOne(x => x.Captain)
                 .WithOne(x => x.Team)
-                .HasForeignKey<Captain>(y => y.TeamRef);
+                .HasForeignKey<Captain>(y => y.TeamId);
 
             modelBuilder.Entity<Team>()
                 .HasOne(x => x.TeamImage)
                 .WithOne(y => y.Team)
-                .HasForeignKey<TeamImage>(y => y.TeamRef)
+                .HasForeignKey<TeamImage>(y => y.TeamId)
                 .IsRequired(false);
-
-            #endregion Team
-
-            #region Pitch
 
             modelBuilder.Entity<Pitch>()
                 .HasMany(x => x.Comments)
@@ -93,7 +76,7 @@ namespace Pitchball.Infrastructure.Data
             modelBuilder.Entity<Pitch>()
                 .HasOne(x => x.PitchImage)
                 .WithOne(y => y.Pitch)
-                .HasForeignKey<PitchImage>(y => y.PitchRef)
+                .HasForeignKey<PitchImage>(y => y.PitchId)
                 .IsRequired(false);
 
             modelBuilder.Entity<Pitch>()
@@ -350,8 +333,6 @@ namespace Pitchball.Infrastructure.Data
                                Lighting = "Darmowe"
                            });
 
-            #endregion Pitch
-
             modelBuilder.Entity<Message>()
                .HasKey(x => x.Id);
             modelBuilder.Entity<ContactMessage>()
@@ -359,8 +340,6 @@ namespace Pitchball.Infrastructure.Data
 
             modelBuilder.Entity<Captain>()
                 .HasMany(x => x.Reservations);
-
-            #region Reservation
 
             modelBuilder.Entity<Reservation>()
                 .HasKey(x => x.Id);
@@ -370,14 +349,12 @@ namespace Pitchball.Infrastructure.Data
                .WithMany(y => y.Reservations)
                .IsRequired(false);
 
-            #endregion Reservation
-            #region Pitches
             modelBuilder.Entity<PitchImage>()
                 .HasData(
                 new
                 {
                     Id = 1,
-                    PitchRef = 1,
+                    PitchId = 1,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -386,7 +363,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 2,
-                    PitchRef = 2,
+                    PitchId = 2,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -395,7 +372,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 3,
-                    PitchRef = 3,
+                    PitchId = 3,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -404,7 +381,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 4,
-                    PitchRef = 4,
+                    PitchId = 4,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -413,7 +390,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 5,
-                    PitchRef = 5,
+                    PitchId = 5,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -422,7 +399,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 6,
-                    PitchRef = 6,
+                    PitchId = 6,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -431,7 +408,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 7,
-                    PitchRef = 7,
+                    PitchId = 7,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -440,7 +417,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 8,
-                    PitchRef = 8,
+                    PitchId = 8,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -449,7 +426,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 9,
-                    PitchRef = 9,
+                    PitchId = 9,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -458,7 +435,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 10,
-                    PitchRef = 10,
+                    PitchId = 10,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -467,7 +444,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 11,
-                    PitchRef = 11,
+                    PitchId = 11,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -476,7 +453,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 12,
-                    PitchRef = 12,
+                    PitchId = 12,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -485,7 +462,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 13,
-                    PitchRef = 13,
+                    PitchId = 13,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -494,7 +471,7 @@ namespace Pitchball.Infrastructure.Data
                 new
                 {
                     Id = 14,
-                    PitchRef = 14,
+                    PitchId = 14,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     ImageType = "image/jpeg",
@@ -503,7 +480,7 @@ namespace Pitchball.Infrastructure.Data
                     new
                     {
                         Id = 15,
-                        PitchRef = 15,
+                        PitchId = 15,
                         CreatedAt = DateTime.UtcNow,
                         UpdatedAt = DateTime.UtcNow,
                         ImageType = "image/jpeg",
@@ -512,7 +489,7 @@ namespace Pitchball.Infrastructure.Data
                      new
                      {
                          Id = 16,
-                         PitchRef = 16,
+                         PitchId = 16,
                          CreatedAt = DateTime.UtcNow,
                          UpdatedAt = DateTime.UtcNow,
                          ImageType = "image/jpeg",
@@ -521,7 +498,7 @@ namespace Pitchball.Infrastructure.Data
                      new
                      {
                          Id = 17,
-                         PitchRef = 17,
+                         PitchId = 17,
                          CreatedAt = DateTime.UtcNow,
                          UpdatedAt = DateTime.UtcNow,
                          ImageType = "image/jpeg",
@@ -530,7 +507,7 @@ namespace Pitchball.Infrastructure.Data
                      new
                      {
                          Id = 18,
-                         PitchRef = 18,
+                         PitchId = 18,
                          CreatedAt = DateTime.UtcNow,
                          UpdatedAt = DateTime.UtcNow,
                          ImageType = "image/jpeg",
@@ -539,7 +516,7 @@ namespace Pitchball.Infrastructure.Data
                      new
                      {
                          Id = 19,
-                         PitchRef = 19,
+                         PitchId = 19,
                          CreatedAt = DateTime.UtcNow,
                          UpdatedAt = DateTime.UtcNow,
                          ImageType = "image/jpeg",
@@ -548,7 +525,7 @@ namespace Pitchball.Infrastructure.Data
                      new
                      {
                          Id = 20,
-                         PitchRef = 20,
+                         PitchId = 20,
                          CreatedAt = DateTime.UtcNow,
                          UpdatedAt = DateTime.UtcNow,
                          ImageType = "image/jpeg",
@@ -556,7 +533,7 @@ namespace Pitchball.Infrastructure.Data
                      }, new
                      {
                          Id = 21,
-                         PitchRef = 21,
+                         PitchId = 21,
                          CreatedAt = DateTime.UtcNow,
                          UpdatedAt = DateTime.UtcNow,
                          ImageType = "image/jpeg",
@@ -566,8 +543,6 @@ namespace Pitchball.Infrastructure.Data
                 );
         }
 
-               
-        #endregion
         private Admin CreateDefaultAdmin()
         {
             var _passwordManager = new PasswordManager();

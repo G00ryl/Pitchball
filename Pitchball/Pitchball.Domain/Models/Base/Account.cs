@@ -7,7 +7,7 @@ namespace Pitchball.Domain.Models.Base
     /// <summary>
     /// Represends an account base (container-like) model for Entity Framework.
     /// </summary>
-    public abstract class Account : Entity
+    public class Account : Entity
     {
         public string Name { get; protected set; }
         public string Surname { get; protected set; }
@@ -20,7 +20,9 @@ namespace Pitchball.Domain.Models.Base
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
 
-        public Account() : base() { }
+        public Account() : base()
+        {
+        }
 
         public Account(string name, string surname, string login, string email, byte[] salt, byte[] passwordHash) : base()
         {

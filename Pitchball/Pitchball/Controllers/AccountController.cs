@@ -24,7 +24,6 @@ namespace Pitchball.Controllers
             _captainService = captainService;
         }
 
-        #region Registration
         [HttpGet("register/type/player")]
         public IActionResult RegisterUser()
         {
@@ -90,7 +89,6 @@ namespace Pitchball.Controllers
                 return View("RegisterCaptainWithTeam");
             }
         }
-        #endregion
 
         [HttpGet("login")]
         public IActionResult Login()

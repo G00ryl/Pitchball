@@ -12,7 +12,9 @@ namespace Pitchball.Domain.Models.Base
         public byte[] ImageContent { get; protected set; }
         public string ImageType { get; protected set; }
 
-        public Image() : base() { }
+        public Image() : base()
+        {
+        }
 
         public Image(byte[] content, string type) : base()
         {

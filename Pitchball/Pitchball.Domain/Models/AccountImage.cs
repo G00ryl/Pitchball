@@ -10,11 +10,15 @@ namespace Pitchball.Domain.Models
     /// </summary>
     public class AccountImage : Image
     {
-        public int? AccountRef { get; private set; }
+        public int? AccountId { get; private set; }
         public virtual Account Account { get; set; }
 
-        public AccountImage() : base() { }
+        public AccountImage() : base()
+        {
+        }
 
-        public AccountImage(byte[] content, string type) : base(content, type) { }
+        public AccountImage(byte[] content, string type) : base(content, type)
+        {
+        }
     }
 }

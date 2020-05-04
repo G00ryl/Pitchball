@@ -41,7 +41,7 @@ namespace Pitchball.Infrastructure.Services
 
         public async Task<Account> GetAsync(int id)
         {
-            var account = await _context.Accounts.GetById(id).Include(x=>x.Messages).Include(x => x.Comments).ThenInclude(y => y.Creator).SingleOrDefaultAsync();
+            var account = await _context.Accounts.GetById(id).Include(x => x.Messages).Include(x => x.Comments).ThenInclude(y => y.Creator).SingleOrDefaultAsync();
 
             if (account == null)
                 throw new CorruptedOperationException("Account doesn't exist");

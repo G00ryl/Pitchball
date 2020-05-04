@@ -32,7 +32,7 @@ namespace Pitchball.Infrastructure.Services
 
             var team = await _teamService.AddAsync(command.Team);
 
-            if (await _context.Accounts.ExistsInDatabaseAsync(command.Login, command.Email))
+            if (await _context.Captains.ExistsInDatabaseAsync(command.Login, command.Email))
                 throw new CorruptedOperationException("Captain already exists.");
 
             _passwordManager.CalculatePasswordHash(command.Password, out passwordHash, out salt);

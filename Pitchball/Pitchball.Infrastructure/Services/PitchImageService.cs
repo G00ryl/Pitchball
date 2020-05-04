@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Pitchball.Domain.Models;
 using Pitchball.Domain.Models.Base;
 using Pitchball.Infrastructure.Data;
 using Pitchball.Infrastructure.Extensions.Exceptions;
@@ -13,15 +14,32 @@ namespace Pitchball.Infrastructure.Services
     public class PitchImageService : IPitchImage
     {
         private readonly PitchContext _context;
-        private readonly IPitchService _pitchService;
 
-        public PitchImageService(PitchContext context, IPitchService pitchService)
+        public PitchImageService(PitchContext context)
         {
             _context = context;
-            _pitchService = pitchService;
         }
 
-        public async Task<Image> GetPictureAsync(int parentId)
+        public async Task DeleteAsync(int id)
+        {
+            var image = await _context.PitchImages.SingleOrDefaultAsync(x => x.Id == id);
+
+            if (image == null)
+                throw new CorruptedOperationException("Image doesn't exist.");
+
+            _context.PitchImages.Remove(image);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(PitchImage image)
+        {
+            _context.PitchImages.Remove(image);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<PitchImage> GetPictureAsync(int parentId)
         {
             var image = await _context.PitchImages.SingleOrDefaultAsync(x => x.Pitch.Id == parentId);
 
@@ -30,6 +48,5 @@ namespace Pitchball.Infrastructure.Services
 
             return image;
         }
-        
     }
 }

@@ -10,11 +10,15 @@ namespace Pitchball.Domain.Models
     /// </summary>
     public class TeamImage : Image
     {
-        public int? TeamRef { get; private set; }
+        public int? TeamId { get; private set; }
         public virtual Team Team { get; set; }
 
-        public TeamImage() : base() { }
+        public TeamImage() : base()
+        {
+        }
 
-        public TeamImage(byte[] content, string type) : base(content, type) { }
+        public TeamImage(byte[] content, string type) : base(content, type)
+        {
+        }
     }
 }
